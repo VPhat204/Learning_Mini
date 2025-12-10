@@ -26,7 +26,7 @@ function RegisterPage() {
         if (fileList[0]) formData.append("proof_file", fileList[0].originFileObj);
       }
 
-      await axios.post("http://localhost:5001/register", formData, {
+      await axios.post("https://learning-mini-be.onrender.com/register", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

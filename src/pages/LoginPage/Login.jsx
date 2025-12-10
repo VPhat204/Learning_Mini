@@ -16,7 +16,7 @@ function LoginPage() {
 
   const onFinish = async (values) => {
     try {
-      const res = await axios.post("http://localhost:5001/login", values, {
+      const res = await axios.post("https://learning-mini-be.onrender.com/login", values, {
         headers: { "Content-Type": "application/json" },
       });
 
