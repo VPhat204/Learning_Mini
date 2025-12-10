@@ -1,0 +1,138 @@
+.my-courses-container {
+  padding: 20px 32px;
+  background-color: var(--student-list-bg);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.my-courses-container h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--student-list-text-primary);
+}
+
+.course-teacher-select {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.course-select label {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--student-list-text-primary);
+}
+
+.course-select select {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid var(--student-list-border-color);
+  font-size: 16px;
+  background: var(--student-list-input-bg);
+  color: var(--student-list-text-primary);
+  transition: all 0.3s ease;
+}
+
+.course-select select:focus {
+  outline: none;
+  border-color: var(--student-list-primary-color);
+  box-shadow: 0 0 0 2px var(--student-list-primary-shadow);
+}
+
+.course-teacher-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: var(--student-list-primary-color);
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--student-list-card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--student-list-shadow);
+  transition: all 0.3s ease;
+}
+
+.students-table th,
+.students-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--student-list-border-light);
+}
+
+.students-table th {
+  background-color: var(--student-list-primary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+.students-table tr:nth-child(even) {
+  background-color: var(--student-list-bg-light);
+}
+
+.students-table tr:hover {
+  background-color: var(--student-list-hover-bg);
+  transition: background-color 0.3s ease;
+}
+
+.students-table td {
+  color: var(--student-list-text-primary);
+}
+
+[data-theme="dark"] {
+  --student-list-bg: #141414;
+  --student-list-bg-light: #334155;
+  --student-list-card-bg: #334155;
+  --student-list-text-primary: #f1f5f9;
+  --student-list-text-secondary: #94a3b8;
+  --student-list-border-color: #475569;
+  --student-list-border-light: #64748b;
+  --student-list-primary-color: #3b82f6;
+  --student-list-primary-shadow: rgba(59, 130, 246, 0.3);
+  --student-list-input-bg: #334155;
+  --student-list-hover-bg: #475569;
+  --student-list-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+  --student-list-bg: #ffffff;
+  --student-list-bg-light: #f9f9f9;
+  --student-list-card-bg: #ffffff;
+  --student-list-text-primary: #333333;
+  --student-list-text-secondary: #666666;
+  --student-list-border-color: #cccccc;
+  --student-list-border-light: #e8e8e8;
+  --student-list-primary-color: #1a73e8;
+  --student-list-primary-shadow: rgba(26, 115, 232, 0.3);
+  --student-list-input-bg: #ffffff;
+  --student-list-hover-bg: #e8f0fe;
+  --student-list-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .my-courses-container {
+    padding: 16px 20px;
+  }
+  
+  .course-teacher-select {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .course-select select {
+    width: 100%;
+  }
+  
+  .students-table {
+    font-size: 14px;
+  }
+  
+  .students-table th,
+  .students-table td {
+    padding: 8px 10px;
+  }
+}

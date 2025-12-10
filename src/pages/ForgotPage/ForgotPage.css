@@ -1,0 +1,174 @@
+.forgot-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  min-height: 100vh;
+  background: var(--forgot-bg);
+  transition: all 0.3s ease;
+}
+
+.forgot-container {
+  background: var(--forgot-card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--forgot-shadow);
+  width: 500px;
+  border: 1px solid var(--forgot-border-color);
+  transition: all 0.3s ease;
+}
+
+.forgot-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--forgot-text-primary);
+}
+
+.forgot-inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.forgot-button {
+  width: 120px;
+}
+
+.forgot-form-item {
+  width: 100%;
+}
+
+.ant-form-item-label > label {
+  color: var(--forgot-text-primary) !important;
+}
+
+.ant-input {
+  background: var(--forgot-input-bg) !important;
+  border-color: var(--forgot-border-color) !important;
+  color: var(--forgot-text-primary) !important;
+}
+
+.ant-input::placeholder {
+  color: var(--forgot-text-secondary) !important;
+}
+
+.ant-input:focus,
+.ant-input-focused {
+  border-color: var(--forgot-primary-color) !important;
+  box-shadow: 0 0 0 2px var(--forgot-primary-shadow) !important;
+}
+
+.ant-input:disabled {
+  background: var(--forgot-disabled-bg) !important;
+  color: var(--forgot-text-disabled) !important;
+  border-color: var(--forgot-border-light) !important;
+}
+
+.ant-input-password .ant-input {
+  background: transparent !important;
+}
+
+.ant-input-password {
+  background: var(--forgot-input-bg) !important;
+  border-color: var(--forgot-border-color) !important;
+}
+
+.ant-input-password:focus,
+.ant-input-password-focused {
+  border-color: var(--forgot-primary-color) !important;
+  box-shadow: 0 0 0 2px var(--forgot-primary-shadow) !important;
+}
+
+.ant-input-password:disabled {
+  background: var(--forgot-disabled-bg) !important;
+  border-color: var(--forgot-border-light) !important;
+}
+
+.ant-input-password:disabled .ant-input {
+  color: var(--forgot-text-disabled) !important;
+}
+
+.ant-btn {
+  border-color: var(--forgot-primary-color) !important;
+}
+
+.ant-btn-primary {
+  background: var(--forgot-primary-color) !important;
+  border-color: var(--forgot-primary-color) !important;
+}
+
+.ant-btn-primary:hover {
+  background: var(--forgot-primary-hover) !important;
+  border-color: var(--forgot-primary-hover) !important;
+}
+
+.ant-btn-primary:disabled {
+  background: var(--forgot-disabled-bg) !important;
+  border-color: var(--forgot-border-light) !important;
+  color: var(--forgot-text-disabled) !important;
+}
+
+.ant-btn:disabled {
+  background: var(--forgot-disabled-bg) !important;
+  border-color: var(--forgot-border-light) !important;
+  color: var(--forgot-text-disabled) !important;
+}
+
+[data-theme="dark"] {
+  --forgot-bg: #141414;
+  --forgot-card-bg: #1f1f1f;
+  --forgot-input-bg: #141414;
+  --forgot-disabled-bg: #2a2a2a;
+  --forgot-text-primary: rgba(255, 255, 255, 0.85);
+  --forgot-text-secondary: rgba(255, 255, 255, 0.45);
+  --forgot-text-disabled: rgba(255, 255, 255, 0.25);
+  --forgot-primary-color: #1890ff;
+  --forgot-primary-hover: #40a9ff;
+  --forgot-primary-shadow: rgba(24, 144, 255, 0.2);
+  --forgot-border-color: #434343;
+  --forgot-border-light: #595959;
+  --forgot-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+  --forgot-bg: #f5f5f5;
+  --forgot-card-bg: #ffffff;
+  --forgot-input-bg: #ffffff;
+  --forgot-disabled-bg: #f5f5f5;
+  --forgot-text-primary: rgba(0, 0, 0, 0.85);
+  --forgot-text-secondary: rgba(0, 0, 0, 0.45);
+  --forgot-text-disabled: rgba(0, 0, 0, 0.25);
+  --forgot-primary-color: #1677ff;
+  --forgot-primary-hover: #4096ff;
+  --forgot-primary-shadow: rgba(22, 119, 255, 0.2);
+  --forgot-border-color: #d9d9d9;
+  --forgot-border-light: #f0f0f0;
+  --forgot-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 576px) {
+  .forgot-wrapper {
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .forgot-container {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .forgot-inline {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .forgot-button {
+    width: 100%;
+  }
+  
+  .forgot-title {
+    font-size: 20px;
+  }
+}

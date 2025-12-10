@@ -1,0 +1,927 @@
+{
+  "welcome": "Chào mừng đến E-learning Platform",
+  "description": "Đây là hệ thống học trực tuyến mini. Bạn có thể đăng ký tài khoản, chọn khóa học và bắt đầu học ngay hôm nay.",
+  "courses": "Khóa học",
+  "teachers": "Giảng viên",
+  "profile": "Hồ sơ",
+  "editName": "Đổi tên",
+  "footerText": "Hệ thống E_Study Platform @2025",
+  "about": "Giới thiệu",
+  "contact": "Liên hệ",
+  "privacy": "Chính sách bảo mật",
+  "lang": { "vi": "Tiếng Việt", "en": "English" },
+  "searchPlaceholder": "Tìm kiếm khóa học...",
+  "updateNameSuccess": "Cập nhật tên thành công!",
+  "updateNameFail": "Cập nhật tên thất bại!",
+  "profileInfo": "Thông tin hồ sơ",
+  "changeName": "Đổi tên",
+  "logout": "Đăng xuất",
+  "account": "Tài khoản",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "notifications": "Thông báo",
+  "update": "Cập nhật",
+  "newName": "Tên mới",
+  "enterNewName": "Nhập tên mới",
+  "save": "Lưu",
+  "edit": "Chỉnh sửa",
+  "close": "Đóng",
+  "uploadNewAvatar": "Tải ảnh mới",
+  "name": "Tên",
+  "birthdate": "Ngày sinh",
+  "chooseBirthdate": "Chọn ngày sinh",
+  "gender": "Giới tính",
+  "chooseGender": "Chọn giới tính",
+  "male": "Nam",
+  "female": "Nữ",
+  "other": "Khác",
+  "phone": "Số điện thoại",
+  "enterPhone": "Nhập số điện thoại",
+  "role": "Vai trò",
+  "email": "Email",
+  "address": "Địa chỉ",
+  "enterAddress": "Nhập địa chỉ",
+  "proofInfo": "Thông tin minh chứng",
+  "enterProofInfo": "Nhập thông tin chứng minh",
+  "proofFiles": "File minh chứng",
+  "uploadProofFiles": "Tải lên file chứng minh",
+  "fileTypes": "(PDF, ảnh, DOC - tối đa 5MB)",
+  "uploadedFiles": "File đã tải lên",
+  "delete": "Xóa",
+  "profileUpdateSuccess": "Cập nhật profile thành công!",
+  "profileUpdateFail": "Cập nhật thất bại!",
+  "welcomeAdmin": "Chào mừng Admin!",
+  "totalUsers": "Tổng số người dùng",
+  "students": "Học sinh",
+  "admins": "Quản trị viên",
+  "monthlyAccounts": "Số lượng tài khoản học viên và giảng viên theo tháng",
+  "barChart": "Biểu đồ cột",
+  "lineChart": "Biểu đồ đường",
+  "pageNotFound": "Không tìm thấy trang",
+  "dashboard": "Tổng quan",
+  "userManagement": "Quản lý tài khoản",
+  "courseManagement": "Quản lý khóa học",
+  "scheduleManagement": "Quản lý lịch học",
+  "videoManagement": "Quản lý video",
+  "common": {
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "edit": "Chỉnh sửa",
+    "apply": "Áp dụng",
+    "processing": "Đang xử lý...",
+    "delete": "Xóa"
+  },
+  "schedule": {
+    "title": "Lịch học – Lịch thi theo tuần",
+    "print": "In lịch",
+    "addCourse": "Click để thêm khóa học",
+    "slot": "Slot",
+    "selectCourse": "Chọn khóa học",
+    "deleteSchedule": "Xóa lịch học",
+    "teacher": "GV",
+    "noTeacher": "Chưa có GV",
+    "noClass": "Chưa có lớp",
+    "noLesson": "Chưa có tiết",
+    "period": "Ca học",
+    "previous": "Trở về",
+    "today": "Hôm nay",
+    "next": "Tiếp",
+    "defaultLesson": "Tiết {{count}}",
+    "teacherId": "Giáo viên {{id}}",
+    
+    "filters": {
+      "all": "Tất cả",
+      "study": "Lịch học",
+      "exam": "Lịch thi"
+    },
+    
+    "days": {
+      "0": "Thứ 2",
+      "1": "Thứ 3",
+      "2": "Thứ 4",
+      "3": "Thứ 5",
+      "4": "Thứ 6",
+      "5": "Thứ 7",
+      "6": "Chủ nhật"
+    },
+    
+    "periods": {
+      "morning": "Sáng",
+      "afternoon": "Chiều",
+      "evening": "Tối"
+    },
+    
+    "types": {
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Thi",
+      "pause": "Tạm ngưng",
+      "unknown": "Chưa xác định"
+    },
+    
+    "legend": {
+      "title": "Chú thích",
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Lịch thi",
+      "pause": "Tạm ngưng"
+    },
+    
+    "form": {
+      "class": "Lớp học",
+      "lesson": "Tiết học",
+      "type": "Loại lớp",
+      "enterClass": "Nhập lớp học",
+      "enterLesson": "Nhập tiết học"
+    },
+    
+    "alert": {
+      "enterClass": "Vui lòng nhập lớp học",
+      "enterLesson": "Vui lòng nhập tiết học",
+      "updateSuccess": "Cập nhật thành công!",
+      "updateError": "Lỗi khi cập nhật: ",
+      "deleteError": "Lỗi khi xóa lịch học",
+      "addSuccess": "Đã thêm khóa học vào lịch thành công!",
+      "error": "Lỗi: "
+    },
+    
+    "confirm": {
+      "deleteSchedule": "Bạn có chắc muốn xóa lịch học này?"
+    },
+    
+    "datePicker": {
+      "title": "Chọn ngày"
+    }
+  },
+  "commons": {
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "edit": "Chỉnh sửa",
+    "apply": "Áp dụng",
+    "processing": "Đang xử lý...",
+    "delete": "Xóa",
+    "add": "Thêm",
+    "yes": "Có",
+    "no": "Không",
+    "close": "Đóng"
+  },
+  "userManagements": {
+    "title": "Quản lý người dùng",
+    "columns": {
+      "id": "ID",
+      "name": "Tên",
+      "email": "Email",
+      "role": "Vai trò",
+      "approval": "Duyệt",
+      "status": "Trạng thái",
+      "verificationInfo": "Thông tin xác minh",
+      "actions": "Hành động"
+    },
+    "roles": {
+      "admin": "ADMIN",
+      "teacher": "GIẢNG VIÊN",
+      "student": "HỌC VIÊN"
+    },
+    "approval": {
+      "approved": "Đã duyệt (Hủy)",
+      "pending": "Chưa duyệt",
+      "notRequired": "Không cần"
+    },
+    "status": {
+      "locked": "Đã khóa (Mở)",
+      "active": "Hoạt động (Khóa)"
+    },
+    "verification": {
+      "none": "Không có"
+    },
+    "actions": {
+      "view": "Xem",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "resetPassword": "Reset mật khẩu",
+      "addUser": "Thêm người dùng",
+      "selectImages": "Chọn ảnh",
+      "download": "Tải về",
+      "downloadFile": "Tải file về",
+      "reset": "Đặt lại"
+    },
+    "form": {
+      "name": "Tên",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "newPassword": "Mật khẩu mới",
+      "role": "Vai trò",
+      "verificationInfo": "Thông tin xác minh",
+      "proofFiles": "Tập tin minh chứng",
+      "enterName": "Nhập tên người dùng",
+      "enterEmail": "Nhập email",
+      "enterPassword": "Mật khẩu",
+      "enterNewPassword": "Nhập mật khẩu mới",
+      "selectRole": "Chọn vai trò",
+      "enterVerificationInfo": "Nhập thông tin chứng minh giảng viên..."
+    },
+    "validation": {
+      "enterName": "Nhập tên",
+      "enterEmail": "Nhập email",
+      "enterPassword": "Nhập mật khẩu",
+      "enterNewPassword": "Nhập mật khẩu mới",
+      "selectRole": "Chọn vai trò",
+      "enterVerificationInfo": "Nhập thông tin xác minh",
+      "imageOnly": "Chỉ cho phép file ảnh (jpg, jpeg, png, gif)!"
+    },
+    "messages": {
+      "loadError": "Không thể tải danh sách người dùng",
+      "updateSuccess": "Cập nhật thành công!",
+      "teacherRegisterSuccess": "Đăng ký giảng viên, chờ admin duyệt!",
+      "addSuccess": "Thêm người dùng thành công!",
+      "saveError": "Lỗi khi lưu người dùng",
+      "deleteSuccess": "Đã xóa người dùng",
+      "deleteError": "Không thể xóa người dùng",
+      "approveError": "Lỗi khi phê duyệt",
+      "lockError": "Lỗi khi khóa/mở tài khoản",
+      "resetPasswordSuccess": "Đặt lại mật khẩu thành công!",
+      "resetPasswordError": "Lỗi khi reset mật khẩu"
+    },
+    "confirm": {
+      "delete": "Xóa người dùng này?"
+    },
+    "modal": {
+      "addTitle": "Thêm người dùng",
+      "editTitle": "Cập nhật người dùng",
+      "resetPasswordTitle": "Reset mật khẩu",
+      "verificationInfoTitle": "Thông tin chứng minh giảng viên"
+    }
+  },
+  "assignments": {
+    "title": "Bài Tập Của Tôi",
+    "subtitle": "Quản lý và hoàn thành tất cả bài tập được giao",
+    "loading": "Đang tải bài tập...",
+    "maxScore": "Điểm tối đa",
+    "yourScore": "Điểm của bạn",
+    "points": "điểm",
+    "status": {
+      "graded": "Đã chấm điểm",
+      "submitted": "Đã nộp bài",
+      "pending": "Chưa nộp"
+    },
+    "stats": {
+      "total": "Tổng bài tập",
+      "graded": "Đã chấm điểm"
+    },
+    "progress": {
+      "completion": "Tiến độ hoàn thành",
+      "answered": "đã trả lời"
+    },
+    "actions": {
+      "submit": "Nộp Bài Tập",
+      "exploreCourses": "Khám phá khóa học"
+    },
+    "messages": {
+      "loadError": "Không thể tải danh sách bài tập",
+      "submitSuccess": "Nộp bài thành công!",
+      "submitError": "Nộp bài thất bại!",
+      "answerRequired": "Vui lòng trả lời ít nhất một câu hỏi trước khi nộp bài."
+    },
+    "empty": {
+      "noAssignments": "Chưa có bài tập nào",
+      "noQuestions": "Chưa có câu hỏi nào"
+    },
+    "placeholder": {
+      "enterAnswer": "Nhập câu trả lời của bạn..."
+    }
+  },
+  "courseDetail": {
+    "teacher": "Giảng viên",
+    "videos": "video",
+    "students": "học viên",
+    "notAvailable": "N/A",
+    "user": "Người dùng",
+    "send": "Gửi",
+    "tabs": {
+      "overview": "Tổng quan",
+      "content": "Nội dung khóa học",
+      "comments": "Bình luận"
+    },
+    "courseDescription": "Mô tả khóa học",
+    "noDescription": "Chưa có mô tả chi tiết",
+    "lessonList": "Danh sách bài học",
+    "noVideos": "Chưa có video nào trong khóa học này.",
+    "studentComments": "Bình luận của học viên",
+    "noComments": "Chưa có bình luận nào.",
+    "placeholder": {
+      "writeComment": "Viết bình luận..."
+    },
+    "messages": {
+      "videosLoadError": "Không thể tải danh sách video",
+      "commentsLoadError": "Không thể tải bình luận",
+      "studentCountError": "Không thể tải số lượng học viên",
+      "commentRequired": "Vui lòng nhập nội dung bình luận",
+      "commentSuccess": "Đã gửi bình luận!",
+      "commentError": "Gửi bình luận thất bại"
+    }
+  },
+  "enrolledCourses": {
+    "title": "Khóa học đã đăng ký",
+    "noCourses": "Bạn chưa đăng ký khóa học nào.",
+    "teacher": "Giảng viên",
+    "teacherEmail": "Email GV",
+    "lessons": "Số buổi",
+    "hours": "Số giờ",
+    "status": {
+      "confirmed": "Đã xác nhận",
+      "pending": "Chưa xác nhận"
+    },
+    "sort": {
+      "aToZ": "Tên A-Z",
+      "zToA": "Tên Z-A"
+    },
+    "actions": {
+      "cancel": "Hủy đăng ký",
+      "confirmAll": "Xác nhận tất cả khóa học"
+    },
+    "messages": {
+      "loadError": "Lỗi khi tải khóa học",
+      "emailRequired": "Vui lòng nhập email xác nhận",
+      "confirmAllSuccess": "Đã xác nhận tất cả khóa học và gửi email thành công",
+      "confirmAllError": "Lỗi khi xác nhận đăng ký",
+      "cancelSuccess": "Đã hủy đăng ký khóa học",
+      "cancelError": "Lỗi khi hủy đăng ký"
+    },
+    "modal": {
+      "title": "Xác nhận tất cả khóa học",
+      "description": "Nhập email của bạn để xác nhận đăng ký khóa học:",
+      "placeholder": "Nhập email...",
+      "confirm": "Xác nhận",
+      "cancel": "Hủy"
+    }
+  },
+  "mycourses": {
+    "title": "Khóa học của tôi",
+    "loading": "Đang tải khóa học...",
+    "noCourses": "Bạn chưa đăng ký khóa học nào",
+    "teacher": "Giảng viên",
+    "progress": "Tiến độ",
+    "enrolledDate": "Đăng ký",
+    "actions": {
+      "back": "Quay lại",
+      "unenroll": "Hủy đăng ký",
+      "viewDetail": "Xem chi tiết"
+    },
+    "messages": {
+      "unenrollSuccess": "Đã hủy đăng ký khóa học: {{courseTitle}}",
+      "unenrollError": "Có lỗi xảy ra khi hủy đăng ký"
+    }
+  },
+  "studentdashboard": {
+    "loading": "Đang tải lịch học...",
+    "student": "Student",
+    "welcome": "Hi {{name}}!",
+    "lessonsCompleted": "You have completed {{count}} lessons in the last day.",
+    "enrolledCourses": "Đang theo học {{count}} khóa học",
+    "myCourses": "My Courses",
+    "unknown": "Unknown",
+    "monthlySchedule": "Lịch học tháng {{month}}",
+    "classesThisMonth": "Có {{count}} lớp học trong tháng này",
+    "scheduleForDate": "Lịch học ngày {{date}}",
+    "selectDateToView": "Chọn một ngày để xem lịch học",
+    "lessonNumber": "Tiết {{number}}",
+    "notAvailable": "N/A",
+    "teacher": "GV",
+    "noTeacher": "Chưa có",
+    "class": "Lớp",
+    "noClass": "Chưa có",
+    "noClassesOnDate": "Không có lịch học nào vào ngày {{date}}",
+    "clickDateWithDot": "Nhấp vào một ngày có dấu chấm trong lịch để xem lịch học chi tiết",
+    "days": {
+      "0": "Chủ nhật",
+      "1": "Thứ 2",
+      "2": "Thứ 3",
+      "3": "Thứ 4",
+      "4": "Thứ 5",
+      "5": "Thứ 6",
+      "6": "Thứ 7"
+    },
+    "weekDays": ["Th 2", "Th 3", "Th 4", "Th 5", "Th 6", "Th 7", "CN"],
+    "months": ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+    "classTypesShort": {
+      "theory": "LT",
+      "practice": "TH",
+      "online": "Online",
+      "exam": "Thi",
+      "pause": "Tạm ngưng"
+    },
+    "legend": {
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Thi",
+      "pause": "Tạm ngưng"
+    },
+    "actions": {
+      "viewMore": "Xem thêm",
+      "today": "Hôm nay"
+    }
+  },
+  "dashboardStudent": {
+    "menu": {
+      "dashboard": "Tổng quan",
+      "teachers": "Giảng viên",
+      "enrolledCourses": "Khóa học đăng ký",
+      "myCourses": "Khóa học của tôi",
+      "assignments": "Bài tập",
+      "schedules": "Lịch học"
+    }
+  },
+  "studentschedule": {
+    "student": {
+      "title": "Lịch học của tôi",
+      "enrolledInfo": "Đang hiển thị lịch học cho {{count}} khóa học đã đăng ký"
+    },
+    "loading": "Đang tải lịch học...",
+    "print": "In lịch",
+    "previous": "Trở về",
+    "today": "Hôm nay",
+    "next": "Tiếp",
+    "period": "Ca học",
+    "emptySlot": "Trống",
+    "slot": "Slot",
+    "teacher": "GV",
+    "noTeacher": "Chưa có GV",
+    "class": "Lớp",
+    "noClass": "Chưa có lớp",
+    "lesson": "Tiết",
+    "noLesson": "Chưa có tiết",
+    "type": "Loại",
+    "types": {
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Lịch thi",
+      "pause": "Tạm ngưng",
+      "unknown": "Chưa xác định"
+    },
+    "legend": {
+      "title": "Chú thích",
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Lịch thi",
+      "pause": "Tạm ngưng"
+    },
+    "periods": {
+      "morning": "Sáng",
+      "afternoon": "Chiều",
+      "evening": "Tối"
+    },
+    "days": {
+      "0": "Thứ 2",
+      "1": "Thứ 3",
+      "2": "Thứ 4",
+      "3": "Thứ 5",
+      "4": "Thứ 6",
+      "5": "Thứ 7",
+      "6": "Chủ nhật"
+    },
+    "datePicker": {
+      "title": "Chọn ngày"
+    }
+  },
+  "teacherList": {
+    "title": "Danh sách giảng viên",
+    "loading": "Đang tải danh sách giảng viên...",
+    "noTeachers": "Không tìm thấy giảng viên",
+    "noCourses": "Chưa có khóa học",
+    "notAvailable": "-",
+    "notUpdated": "Chưa cập nhật",
+    "teachingCourses": "Khóa học giảng dạy",
+    "search": {
+      "placeholder": "Tìm theo tên hoặc email..."
+    },
+    "sort": {
+      "aToZ": "Tên A-Z",
+      "zToA": "Tên Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "Xem tất cả khóa học",
+      "hideCourses": "Ẩn khóa học",
+      "enroll": "Đăng ký học",
+      "enrolling": "Đang đăng ký...",
+      "enrolled": "Đã đăng ký"
+    },
+    "messages": {
+      "loadError": "Lỗi khi tải danh sách giảng viên",
+      "enrolledCoursesError": "Lỗi khi tải khóa học đã đăng ký",
+      "studentsOnly": "Chỉ sinh viên mới có thể đăng ký khóa học",
+      "alreadyEnrolled": "Bạn đã đăng ký khóa học này rồi",
+      "enrollSuccess": "Đã đăng ký thành công khóa học: {{courseTitle}}",
+      "noPermission": "Bạn không có quyền đăng ký khóa học",
+      "enrollError": "Có lỗi xảy ra khi đăng ký khóa học"
+    }
+  },
+  "welcometeacher": "Xin chào, {{name}}!",
+  "teacher": "Giảng viên",
+  "viewMore": "Xem thêm ({{count}})",
+  "collapse": "Thu gọn",
+  "today": "Hôm nay",
+  "selectDate": "Chọn một ngày",
+  "noData": "Chưa có dữ liệu",
+  "loading": "Đang tải...",
+  "loadingSchedule": "Đang tải lịch dạy...",
+  "teachercourses": "Khóa học",
+  "teacherstudents": "Học viên",
+  "videos": "Video",
+  "date": "Ngày",
+  "active": "Đang dạy",
+  "paused": "Tạm dừng",
+  "noLesson": "Chưa có tiết",
+  "noClass": "Chưa có lớp",
+  "months": {
+    "1": "Tháng 1",
+    "2": "Tháng 2",
+    "3": "Tháng 3",
+    "4": "Tháng 4",
+    "5": "Tháng 5",
+    "6": "Tháng 6",
+    "7": "Tháng 7",
+    "8": "Tháng 8",
+    "9": "Tháng 9",
+    "10": "Tháng 10",
+    "11": "Tháng 11",
+    "12": "Tháng 12"
+  },
+  "weekDays": ["Th 2", "Th 3", "Th 4", "Th 5", "Th 6", "Th 7", "CN"],
+  "classesThisMonth": "Lớp tháng này",
+  "recentActivity": "Hoạt động gần đây",
+  "newStudents": "Học viên mới",
+  "newVideos": "Video mới",
+  "teachingSchedule": "Lịch dạy",
+  "studentsRegistered": "{{count}} học viên đăng ký trong 7 ngày qua",
+  "videosUploaded": "Đã upload {{count}} video bài giảng",
+  "classesInMonth": "{{count}} lớp trong tháng",
+  "teachingScheduleTitle": "Lịch dạy tháng {{month}}",
+  "monthlyClasses": "Có {{count}} lớp học trong tháng này",
+  "scheduleForDate": "Lịch dạy ngày {{date}}",
+  "noClasses": "Không có lịch dạy nào vào ngày {{date}}",
+  "clickDateWithDot": "Nhấp vào một ngày có dấu chấm trong lịch để xem lịch dạy chi tiết",
+  "period": "Ca",
+  "lesson": "Tiết",
+  "class": "Lớp",
+  "classTypes": {
+    "theory": "Lý thuyết",
+    "practice": "Thực hành",
+    "online": "Trực tuyến",
+    "exam": "Thi",
+    "pause": "Tạm ngưng"
+  },
+  "courseManagements": {
+    "myCourses": "Khóa học của tôi",
+    "myAssignments": "Bài tập của tôi",
+    "lessons": "{{count}} bài học",
+    "hours": "{{count}} giờ",
+    "noCourses": "Chưa có khóa học nào",
+    "noAssignments": "Chưa có bài tập nào"
+  },
+   "messages": {
+    "createCourseSuccess": "Tạo khóa học thành công!",
+    "createCourseFail": "Tạo khóa học thất bại"
+  },
+  "teachercommon": {
+    "cancel": "Hủy",
+    "apply": "Áp dụng"
+  },
+  "teacherschedule": {
+    "mySchedule": "Lịch dạy của tôi",
+    "displayingCourses": "Đang hiển thị lịch dạy cho {{count}} khóa học của bạn",
+    "selectDate": "Chọn ngày",
+    "print": "In lịch",
+    "loading": "Đang tải lịch dạy...",
+    "previous": "Trở về",
+    "today": "Hôm nay",
+    "next": "Tiếp",
+    "period": "Ca học",
+    "legend": "Chú thích",
+    "empty": "Trống",
+    "slot": "Slot",
+    "teacher": "GV",
+    "noTeacher": "Chưa có GV",
+    "class": "Lớp",
+    "noClass": "Chưa có lớp",
+    "lesson": "Tiết",
+    "noLesson": "Chưa có tiết",
+    "type": "Loại",
+    "students": "Học viên",
+    "unknown": "Chưa xác định",
+    "days": {
+      "1": "Thứ 2",
+      "2": "Thứ 3",
+      "3": "Thứ 4",
+      "4": "Thứ 5",
+      "5": "Thứ 6",
+      "6": "Thứ 7",
+      "0": "Chủ nhật"
+    },
+    "periods": {
+      "morning": "Sáng",
+      "afternoon": "Chiều",
+      "evening": "Tối"
+    },
+    "lessonTypes": {
+      "theory": "Lý thuyết",
+      "practice": "Thực hành",
+      "online": "Trực tuyến",
+      "exam": "Lịch thi",
+      "pause": "Tạm ngưng"
+    }
+  },
+  "studentlist": {
+    "myCourses": "Khóa học của tôi",
+    "chooseCourse": "Chọn khóa học",
+    "loading": "Đang tải danh sách học viên...",
+    "stt": "STT",
+    "name": "Tên học viên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "gender": "Giới tính",
+    "enrolledAt": "Ngày đăng ký"
+  },
+"assign": {
+    "assignments": "Bài tập",
+    "create": "Tạo bài tập",
+    "createNew": "Tạo bài tập mới",
+    "course": "Khóa học",
+    "title": "Tiêu đề",
+    "maxScore": "Điểm tối đa",
+    "addQuestion": "Thêm câu hỏi",
+    "question": "Câu hỏi",
+    "score": "Điểm",
+    "questionList": "Danh sách câu hỏi",
+    "delete": "Xóa",
+    "confirmDeleteQuestion": "Xóa câu hỏi này?",
+    "successCreate": "Tạo bài tập thành công!",
+    "errorCreate": "Lỗi tạo bài tập",
+    "successAddQuestion": "Thêm câu hỏi thành công!",
+    "errorAddQuestion": "Lỗi thêm câu hỏi",
+    "successDeleteQuestion": "Xóa câu hỏi thành công!",
+    "errorDeleteQuestion": "Lỗi xóa câu hỏi",
+    "viewSubmissions": "Xem bài nộp",
+    "submissionList": "Danh sách bài nộp",
+    "student": "Học viên",
+    "answersAndScore": "Câu trả lời & Chấm điểm",
+    "confirmDeleteAnswer": "Xóa câu trả lời này?",
+    "deleteSubmission": "Xóa bài nộp",
+    "confirmDeleteSubmission": "Xóa toàn bộ bài nộp của học viên?",
+    "successDeleteAnswer": "Đã xóa câu trả lời!",
+    "errorDeleteAnswer": "Lỗi xóa câu trả lời",
+    "successDeleteSubmission": "Đã xóa toàn bộ bài nộp!",
+    "errorDeleteSubmission": "Lỗi xóa bài nộp",
+    "confirmGrading": "Xác nhận chấm điểm",
+    "close": "Đóng",
+    "successGrade": "Đã gửi điểm thành công!",
+    "errorGrade": "Lỗi khi gửi điểm!",
+    "noValidScore": "Chưa nhập điểm hợp lệ nào!",
+    "errorAssignmentNotFound": "Không xác định được bài tập."
+  },
+  "teacherCourses": {
+    "title": "Giảng viên - Quản lý khóa học",
+    "addCourseBtn": "+ Thêm khóa học",
+    "addCourseModalTitle": "Thêm khóa học mới",
+    "courseName": "Tên khóa học",
+    "courseNameRequired": "Vui lòng nhập tên khóa học",
+    "courseNamePlaceholder": "Nhập tên khóa học...",
+    "courseDescription": "Mô tả",
+    "courseDescriptionPlaceholder": "Mô tả ngắn gọn về khóa học...",
+    "courseLessons": "Số bài học",
+    "courseLessonsPlaceholder": "VD: 10",
+    "courseHours": "Số giờ học",
+    "courseHoursPlaceholder": "VD: 5",
+    "confirmAdd": "Xác nhận thêm",
+    "myCourses": "Danh sách khóa học của bạn",
+    "videoAdded": "Video đã thêm",
+    "addVideo": "Thêm video",
+    "viewDetails": "Xem chi tiết",
+    "manageVideos": "Quản lý video",
+    "videoTitle": "Tên video",
+    "videoTitleRequired": "Nhập tên video",
+    "videoUrl": "Đường dẫn video",
+    "videoUrlRequired": "Nhập URL video",
+    "videoUrlPlaceholder": "Ví dụ: https://youtu.be/...",
+    "videoDuration": "Thời lượng (vd: 15 min)",
+    "saveVideo": "Lưu video",
+    "updateVideo": "Cập nhật video",
+    "videoList": "Danh sách video hiện có",
+    "fetchCoursesFailed": "Lấy danh sách khóa học thất bại",
+    "addCourseSuccess": "Thêm khóa học thành công!",
+    "addCourseFailed": "Thêm khóa học thất bại",
+    "fetchVideosFailed": "Lỗi khi lấy video",
+    "updateVideoSuccess": "Cập nhật video thành công!",
+    "addVideoSuccess": "Thêm video thành công!",
+    "saveVideoFailed": "Lỗi khi lưu video",
+    "deleteVideoSuccess": "Xóa video thành công!",
+    "deleteVideoFailed": "Xóa video thất bại"
+  },
+  "registerTeacherSuccess": "Đăng ký giảng viên thành công. Chờ admin duyệt.",
+  "registerStudentSuccess": "Đăng ký học viên thành công!",
+  "registerFail": "Đăng ký thất bại!",
+  "enterName": "Nhập tên",
+  "fullName": "Họ và tên",
+  "enterEmail": "Nhập email",
+  "enterPassword": "Nhập mật khẩu",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "passwordMismatch": "Mật khẩu không khớp!",
+  "selectRole": "Chọn vai trò",
+  "student": "Học viên",
+  "selectProofFile": "Chọn file bằng chứng",
+  "chooseFile": "Chọn file",
+  "invalidEmail": "Email không hợp lệ",
+  "passwordMinLength": "Mật khẩu quá ngắn",
+  "alreadyHaveAccount": "Đã có tài khoản? Đăng nhập",
+  "loginSuccess": "Đăng nhập thành công!",
+  "invalidServerResponse": "Server không trả dữ liệu hợp lệ.",
+  "wrongEmailOrPassword": "Sai email hoặc mật khẩu!",
+  "noAccess": "Bạn không có quyền truy cập!",
+  "serverError": "Lỗi server!",
+  "cannotConnectServer": "Không thể kết nối server.",
+  "noAccount": "Chưa có tài khoản? Đăng ký",
+  "forgotPassword": "Quên mật khẩu?",
+  "sendOtp": "Gửi mã",
+  "enterOtp": "Nhập OTP",
+  "verifyOtp": "Xác nhận OTP",
+  "newPassword": "Mật khẩu mới",
+  "updatePassword": "Cập nhật mật khẩu",
+  "enterEmailBeforeSendingOtp": "Nhập email trước khi gửi mã",
+  "otpSentToEmail": "Đã gửi mã xác nhận vào email",
+  "cannotSendEmail": "Không gửi được email",
+  "enterOtpBeforeVerify": "Nhập OTP trước khi xác nhận",
+  "otpVerifiedSuccess": "Xác minh OTP thành công!",
+  "otpIncorrect": "OTP không đúng",
+  "enterAllPasswordFields": "Nhập đầy đủ mật khẩu",
+  "passwordResetSuccess": "Đổi mật khẩu thành công!",
+  "passwordUpdateError": "Lỗi khi cập nhật mật khẩu",
+  "contactUs": "Liên hệ với chúng tôi",
+  "menu": {
+    "introduction": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "selectMenu": "Chọn một mục từ menu bên trái",
+  "review": {
+    "title": "Giới thiệu E-learning Platform",
+    "paragraph1": "E-learning Platform là hệ thống học trực tuyến được thiết kế để cung cấp các khóa học chất lượng cao, từ những kiến thức cơ bản đến chuyên sâu, phù hợp với mọi đối tượng học viên. Với giao diện thân thiện, dễ sử dụng, bạn có thể dễ dàng tìm kiếm khóa học, theo dõi tiến trình học và tương tác với giảng viên một cách thuận tiện.",
+    "paragraph2": "Chúng tôi cung cấp đa dạng các khóa học từ lập trình, thiết kế, marketing, ngoại ngữ đến các kỹ năng mềm. Mỗi khóa học đều được xây dựng bởi các giảng viên uy tín, giàu kinh nghiệm thực tế, giúp học viên phát triển kỹ năng một cách nhanh chóng và hiệu quả.",
+    "paragraph3": "Ngoài ra, E-learning Platform còn hỗ trợ học viên bằng hệ thống đánh giá, chứng nhận hoàn tất khóa học, và cộng đồng học tập trực tuyến sôi động, giúp bạn kết nối với những người cùng chí hướng. Hãy bắt đầu hành trình học tập của bạn ngay hôm nay!"
+  },
+  "privacypolicy": {
+    "title": "Chính sách Bảo mật",
+    "introduction": "Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn. Chính sách bảo mật này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn.",
+    "principles": {
+      "title": "Nguyên tắc bảo mật",
+      "transparency": "Minh bạch: Chúng tôi luôn công khai cách thức thu thập và sử dụng thông tin",
+      "security": "Bảo mật: Áp dụng các biện pháp bảo mật tiên tiến nhất",
+      "control": "Kiểm soát: Bạn có quyền kiểm soát thông tin cá nhân của mình",
+      "compliance": "Tuân thủ: Tuân thủ nghiêm ngặt các quy định về bảo vệ dữ liệu"
+    },
+    "sections": {
+      "mainContent": "Nội dung chính sách",
+      "details": "Chi tiết",
+      "collection": {
+        "title": "Thu thập thông tin",
+        "description": "Chúng tôi thu thập thông tin cá nhân của bạn khi bạn:",
+        "points": {
+          "register": "Đăng ký tài khoản",
+          "enroll": "Tham gia khóa học",
+          "contact": "Liên hệ với chúng tôi",
+          "useService": "Sử dụng dịch vụ của chúng tôi"
+        },
+        "items": {
+          "name": "Họ và tên",
+          "email": "Email",
+          "phone": "Số điện thoại",
+          "studyInfo": "Thông tin học tập",
+          "paymentInfo": "Thông tin thanh toán (nếu có)"
+        }
+      },
+      "usage": {
+        "title": "Sử dụng thông tin",
+        "description": "Thông tin cá nhân của bạn được sử dụng để:",
+        "points": {
+          "provideService": "Cung cấp và cải thiện dịch vụ",
+          "processRegistration": "Xử lý đăng ký và thanh toán",
+          "sendNotifications": "Gửi thông báo quan trọng",
+          "customerSupport": "Hỗ trợ khách hàng",
+          "analysis": "Phân tích và nghiên cứu"
+        }
+      },
+      "security": {
+        "title": "Bảo mật thông tin",
+        "description": "Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn thông qua:",
+        "points": {
+          "encryption": "Mã hóa dữ liệu",
+          "multiLayer": "Hệ thống bảo mật nhiều lớp",
+          "accessControl": "Kiểm soát truy cập nghiêm ngặt",
+          "staffTraining": "Đào tạo nhân viên về bảo mật"
+        },
+        "items": {
+          "ssl": "SSL/TLS mã hóa",
+          "firewall": "Firewall bảo vệ",
+          "twoFactor": "Xác thực 2 lớp",
+          "backup": "Backup dữ liệu định kỳ"
+        }
+      },
+      "sharing": {
+        "title": "Chia sẻ thông tin",
+        "description": "Chúng tôi không bán, trao đổi hoặc cho thuê thông tin cá nhân của bạn cho bên thứ ba, trừ khi:",
+        "points": {
+          "consent": "Có sự đồng ý của bạn",
+          "legal": "Theo yêu cầu pháp luật",
+          "partners": "Hợp tác với đối tác cung cấp dịch vụ"
+        }
+      }
+    },
+    "contact": {
+      "title": "Thông tin liên hệ",
+      "description": "Nếu bạn có bất kỳ câu hỏi nào về chính sách bảo mật, vui lòng liên hệ:",
+      "email": "Email:",
+      "emailValue": "privacy@example.com",
+      "phone": "Điện thoại:",
+      "phoneValue": "1900 1234",
+      "address": "Địa chỉ:",
+      "addressValue": "123 Đường ABC, Quận XYZ, TP. Hồ Chí Minh"
+    },
+    "lastUpdated": "Cập nhật lần cuối:"
+  },
+  "teacherHomeList": {
+    "title": "Danh sách giảng viên",
+    "loading": "Đang tải danh sách giảng viên...",
+    "noTeachers": "Không tìm thấy giảng viên",
+    "noCourses": "Chưa có khóa học",
+    "notAvailable": "Chưa có",
+    "notUpdated": "Chưa cập nhật",
+    "teachingCourses": "Khóa học giảng dạy",
+    "search": {
+      "placeholder": "Tìm theo tên hoặc email..."
+    },
+    "sort": {
+      "aToZ": "Tên A-Z",
+      "zToA": "Tên Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "Xem tất cả khóa học",
+      "hideCourses": "Ẩn khóa học",
+      "enroll": "Đăng ký học",
+      "enrolling": "Đang đăng ký...",
+      "enrolled": "Đã đăng ký",
+      "cannotEnroll": "Không thể đăng ký",
+      "back": "Quay lại"
+    },
+    "messages": {
+      "loadError": "Lỗi khi tải danh sách giảng viên",
+      "enrolledCoursesError": "Lỗi khi tải khóa học đã đăng ký",
+      "loginRequired": "Vui lòng đăng nhập để đăng ký khóa học",
+      "studentsOnly": "Chỉ sinh viên mới có thể đăng ký khóa học",
+      "alreadyEnrolled": "Bạn đã đăng ký khóa học này rồi",
+      "enrollSuccess": "Đã đăng ký thành công khóa học: {{courseTitle}}",
+      "noPermission": "Bạn không có quyền đăng ký khóa học",
+      "enrollError": "Có lỗi xảy ra khi đăng ký khóa học",
+      "loginPrompt": "Vui lòng"
+    }
+  },
+  "courseHomeDetail": {
+    "notAvailable": "N/A",
+    "noDescription": "Chưa có mô tả chi tiết"
+  },
+  "enrolledCoursesHome": {
+    "lessons": "Số buổi",
+    "hours": "Số giờ"
+  },
+  "mycoursesHome": {
+    "enrolledDate": "Đăng ký"
+  },
+  "loginHome": "Đăng nhập",
+  "adds": {
+    "course":"Khóa học",
+    "topCourse": "Top khóa học",
+    "numberSubs": "lượt đăng ký",
+    "sumSubs": "Tổng lượt đăng ký",
+    "average": "Trung bình",
+    "student/course": "học viên/khóa",
+    "invalidCourse": "Chưa có dữ liệu khóa học"
+  },
+  "createcourses": {
+    "create_title": "Tạo khóa học mới",
+    "name": "Tên khóa học",
+    "name_required": "Vui lòng nhập tên khóa học",
+    "name_placeholder": "Nhập tên khóa học",
+    "description": "Mô tả",
+    "description_required": "Vui lòng nhập mô tả khóa học",
+    "description_placeholder": "Nhập mô tả khóa học",
+    "btn_create": "Tạo khóa học",
+    "creating": "Đang tạo...",
+    "success_message": "Tạo khóa học thành công!",
+    "pending_approval_message": "Khóa học của bạn đang chờ quản trị viên phê duyệt. Bạn sẽ được thông báo khi khóa học được duyệt.",
+    "error_message": "Có lỗi xảy ra khi tạo khóa học. Vui lòng thử lại.",
+    "instruction": "Sau khi tạo, khóa học sẽ được gửi để quản trị viên phê duyệt trước khi hiển thị công khai."
+  }
+}
+

@@ -1,0 +1,1275 @@
+.admin-schedule-with-courses {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+}
+
+.admin-schedule-section {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+  margin-bottom: 32px;
+}
+
+.admin-schedule-admin-header {
+  margin-bottom: 32px;
+  background: var(--header-bg);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--header-shadow);
+  border: 1px solid var(--header-border);
+}
+
+.admin-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.admin-header-top h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 32px;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.admin-print-btn, .admin-settings-btn {
+  padding: 10px 20px;
+  border: 1.5px solid var(--button-border);
+  background: var(--button-bg);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--button-text);
+}
+
+.admin-print-btn:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.admin-settings-btn {
+  font-size: 18px;
+  padding: 10px 14px;
+}
+
+.admin-settings-btn:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.admin-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.admin-filter-buttons {
+  display: flex;
+  background: var(--filter-bg);
+  border-radius: 12px;
+  padding: 6px;
+  border: 1.5px solid var(--filter-border);
+  box-shadow: var(--filter-shadow);
+}
+
+.admin-filter-btn {
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: var(--filter-text);
+}
+
+.admin-filter-btn.active {
+  background: var(--filter-active-bg);
+  box-shadow: var(--filter-active-shadow);
+  font-weight: 700;
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.admin-filter-btn:hover:not(.active) {
+  background: var(--filter-hover-bg);
+  color: var(--primary-color);
+}
+
+.admin-date-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-date-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 150px;
+  justify-content: center;
+  box-shadow: var(--input-shadow);
+  color: var(--text-primary);
+}
+
+.admin-date-display:hover {
+  border-color: var(--primary-color);
+  background: var(--input-hover-bg);
+  transform: translateY(-1px);
+  box-shadow: var(--input-hover-shadow);
+}
+
+.admin-calendar-icon {
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+.admin-date-text {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.admin-navigation-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-nav-btn {
+  padding: 10px 20px;
+  border: 1.5px solid var(--button-border);
+  background: var(--button-bg);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: var(--button-text);
+}
+
+.admin-nav-btn:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.admin-nav-btn.current {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: var(--button-active-shadow);
+}
+
+.admin-nav-btn.current:hover {
+  background: var(--gradient-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--button-active-hover-shadow);
+}
+
+.admin-schedule-table-container {
+  overflow-x: auto;
+  margin-bottom: 32px;
+  border: 1.5px solid var(--table-border);
+  border-radius: 16px;
+  box-shadow: var(--table-shadow);
+  background: var(--table-bg);
+}
+
+.admin-schedule-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 1000px;
+  background: var(--table-bg);
+}
+
+.admin-header-cell {
+  background: var(--table-header-bg);
+  padding: 20px 12px;
+  text-align: center;
+  border-bottom: 2px solid var(--table-border);
+  font-weight: 700;
+  color: var(--text-primary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-time-header {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 800;
+}
+
+.admin-day {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.admin-date {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.admin-time-period {
+  background: var(--table-header-bg);
+  padding: 24px 12px;
+  text-align: center;
+  font-weight: 700;
+  border-right: 2px solid var(--table-border);
+  border-bottom: 1px solid var(--table-border);
+  width: 100px;
+  font-size: 14px;
+  color: var(--text-primary);
+  position: sticky;
+  left: 0;
+  z-index: 5;
+}
+
+.admin-time-slot {
+  height: 160px;
+  border-bottom: 1px solid var(--table-row-border);
+  border-right: 1px solid var(--table-row-border);
+  vertical-align: top;
+  padding: 8px;
+  min-width: 160px;
+  position: relative;
+  transition: all 0.2s ease;
+  background: var(--table-cell-bg);
+}
+
+.admin-time-slot:hover {
+  background: var(--table-cell-hover-bg);
+}
+
+.admin-time-slot:last-child {
+  border-right: none;
+}
+
+.admin-event-item {
+  position: relative;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  height: 100%;
+  font-size: 11px;
+  line-height: 1.3;
+  box-shadow: var(--event-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  overflow: visible;
+  min-height: 120px;
+}
+
+.admin-event-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.admin-event-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--event-hover-shadow);
+  z-index: 5;
+}
+
+.admin-event-item.theory {
+  background: linear-gradient(135deg, #9E9E9E, #757575);
+}
+
+.admin-event-item.practice {
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+}
+
+.admin-event-item.online {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+.admin-event-item.exam {
+  background: linear-gradient(135deg, #FFEB3B, #FBC02D);
+  color: #1a1a1a;
+}
+
+.admin-event-item.pause {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+}
+
+.admin-event-item.clinical {
+  background: linear-gradient(135deg, #90CAF9, #42A5F5);
+}
+
+.admin-event-top-bar {
+  margin-bottom: 8px;
+  padding-right: 0;
+  position: relative;
+  min-height: 20px;
+}
+
+.admin-event-title {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.2;
+  word-wrap: break-word;
+  color: white;
+  margin: 0;
+  padding-right: 50px;
+}
+
+.admin-event-details {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.admin-event-details div {
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.admin-event-details strong {
+  font-weight: 600;
+  opacity: 0.9;
+  min-width: 25px;
+  font-size: 9px;
+}
+
+.admin-event-note {
+  margin-top: 6px;
+  font-style: italic;
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+.admin-event-note a {
+  color: inherit;
+  text-decoration: underline;
+  word-break: break-all;
+  display: block;
+  margin-top: 2px;
+}
+
+.admin-schedule-legend {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1.5px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.admin-schedule-legend h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.admin-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.admin-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--legend-bg);
+  border-radius: 10px;
+  border: 1.5px solid var(--legend-border);
+  transition: all 0.3s ease;
+}
+
+.admin-legend-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--legend-hover-shadow);
+}
+
+.admin-legend-color {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid var(--legend-color-border);
+  box-shadow: var(--legend-color-shadow);
+}
+
+.admin-legend-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--modal-overlay-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: admin-fadeIn 0.2s ease;
+}
+
+.admin-modal-content {
+  background: var(--modal-bg);
+  border-radius: 20px;
+  box-shadow: var(--modal-shadow);
+  border: 1px solid var(--modal-border);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: admin-scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-modal-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--modal-border);
+  background: var(--modal-header-bg);
+}
+
+.admin-modal-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.admin-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.admin-close-btn:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.admin-modal-body {
+  padding: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.admin-modal-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--modal-border);
+  background: var(--modal-footer-bg);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.admin-course-selection-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-course-selection-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.admin-course-selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.admin-course-selection-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.admin-course-selection-info p {
+  margin: 4px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.admin-course-selection-info strong {
+  color: var(--text-primary);
+}
+
+.admin-edit-form {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-form-group {
+  margin-bottom: 6px;
+}
+
+.admin-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.admin-form-group label {
+  display: block;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.admin-form-group input,
+.admin-form-group select {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.admin-form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 9px;
+}
+
+.admin-form-group input:focus,
+.admin-form-group select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.admin-form-group select option {
+  background: #2d3748;
+  color: white;
+  padding: 6px;
+  font-size: 10px;
+}
+
+.admin-course-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.admin-action-btn {
+  padding: 4px 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-edit-btn {
+  background: #17a2b8;
+  color: white;
+}
+
+.admin-edit-btn:hover {
+  background: #138496;
+}
+
+.admin-save-btn {
+  background: #28a745;
+  color: white;
+}
+
+.admin-save-btn:hover {
+  background: #218838;
+}
+
+.admin-cancel-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.admin-cancel-btn:hover {
+  background: #5a6268;
+}
+
+.admin-event-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+  flex-direction: row;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-event-item:hover .admin-event-actions {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.admin-event-actions button {
+  padding: 4px 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.admin-event-item.editing .admin-event-actions {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.admin-event-actions button .anticon {
+  font-size: 10px;
+}
+
+.admin-event-actions .admin-edit-btn {
+  color: #1890ff;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.admin-event-actions .admin-edit-btn:hover {
+  background: #1890ff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.admin-event-actions .admin-save-btn {
+  color: #52c41a;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.admin-event-actions .admin-save-btn:hover {
+  background: #52c41a;
+  color: white;
+  transform: scale(1.1);
+}
+
+.admin-event-actions .admin-cancel-btn {
+  color: #fa8c16;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.admin-event-actions .admin-cancel-btn:hover {
+  background: #fa8c16;
+  color: white;
+  transform: scale(1.1);
+}
+
+.admin-event-actions .admin-remove-btn {
+  color: #ff4d4f;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.admin-event-actions .admin-remove-btn:hover {
+  background: #ff4d4f;
+  color: white;
+  transform: scale(1.1);
+}
+
+.admin-event-item.editing {
+  border: 2px solid rgba(59, 130, 246, 0.8);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+  z-index: 10;
+}
+
+.admin-empty-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-align: center;
+  padding: 16px;
+  border: 2px dashed var(--empty-slot-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: var(--empty-slot-bg);
+}
+
+.admin-empty-slot:hover {
+  border-color: var(--primary-color);
+  background: var(--empty-slot-hover-bg);
+  color: var(--primary-color);
+}
+
+.admin-empty-icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: var(--empty-icon-color);
+  transition: all 0.3s ease;
+}
+
+.admin-empty-slot:hover .admin-empty-icon {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.admin-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--loading-overlay-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.admin-loading-spinner {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.admin-date-picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--modal-overlay-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: admin-fadeIn 0.2s ease;
+}
+
+.admin-date-picker {
+  background: var(--modal-bg);
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: var(--modal-shadow);
+  min-width: 380px;
+  max-width: 90vw;
+  animation: admin-scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-date-picker h3 {
+  margin: 0 0 24px 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-date-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid var(--input-border);
+  border-radius: 12px;
+  font-size: 16px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.admin-date-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--input-hover-bg);
+  box-shadow: 0 0 0 3px var(--primary-shadow);
+}
+
+.admin-date-picker-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.admin-cancel-btn, .admin-apply-btn {
+  padding: 12px 24px;
+  border: 2px solid;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.admin-cancel-btn {
+  background: var(--button-bg);
+  border-color: var(--button-border);
+  color: var(--button-text);
+}
+
+.admin-cancel-btn:hover {
+  background: var(--button-hover-bg);
+  border-color: var(--button-hover-border);
+  color: var(--button-hover-text);
+  transform: translateY(-1px);
+}
+
+.admin-apply-btn {
+  background: var(--gradient-primary);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.admin-apply-btn:hover {
+  background: var(--gradient-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.admin-courses-section {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  border: 1.5px solid var(--card-border);
+  margin-top: 32px;
+}
+
+.admin-courses-section h2 {
+  margin: 0 0 20px 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-course-item {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--card-border);
+  cursor: grab;
+  transition: all 0.3s ease;
+  box-shadow: var(--card-shadow);
+}
+
+.admin-course-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.admin-course-item:active {
+  cursor: grabbing;
+}
+
+.admin-course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.admin-course-header strong {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.admin-course-type {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-course-type.theory { background: linear-gradient(135deg, #9E9E9E, #757575); }
+.admin-course-type.practice { background: linear-gradient(135deg, #4CAF50, #388E3C); }
+.admin-course-type.online { background: linear-gradient(135deg, #2196F3, #1976D2); }
+.admin-course-type.exam { background: linear-gradient(135deg, #FFEB3B, #FBC02D); color: #1a1a1a; }
+
+.admin-course-teacher {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.admin-course-room {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  --text-primary: #e6e6e6;
+  --text-secondary: #8c8c8c;
+  --card-bg: #1a1a1a;
+  --card-border: #333;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --header-bg: #1f1f1f;
+  --header-border: #333;
+  --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --border-light: #333;
+  --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --gradient-primary-hover: linear-gradient(135deg, #1d4ed8, #1e40af);
+  --primary-color: #1890ff;
+  --primary-shadow: rgba(24, 144, 255, 0.2);
+  --secondary-color: #64748b;
+  --button-bg: #2d2d2d;
+  --button-border: #444;
+  --button-text: #e6e6e6;
+  --button-hover-bg: #3b82f6;
+  --button-hover-border: #3b82f6;
+  --button-hover-text: white;
+  --button-hover-shadow: 0 6px 20px rgba(24, 144, 255, 0.3);
+  --button-active-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+  --button-active-hover-shadow: 0 6px 16px rgba(24, 144, 255, 0.5);
+  --filter-bg: #2d2d2d;
+  --filter-border: #444;
+  --filter-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  --filter-text: #8c8c8c;
+  --filter-active-bg: #1a1a1a;
+  --filter-active-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+  --filter-hover-bg: rgba(24, 144, 255, 0.1);
+  --input-bg: #2d2d2d;
+  --input-border: #444;
+  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --input-hover-bg: #262626;
+  --input-hover-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+  --table-bg: #1a1a1a;
+  --table-border: #333;
+  --table-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --table-header-bg: linear-gradient(135deg, #2d2d2d, #262626);
+  --table-cell-bg: #1a1a1a;
+  --table-cell-hover-bg: #262626;
+  --table-row-border: #333;
+  --event-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --event-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --legend-bg: #2d2d2d;
+  --legend-border: #444;
+  --legend-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --legend-color-border: #1a1a1a;
+  --legend-color-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+  --modal-bg: #1a1a1a;
+  --modal-border: #333;
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --modal-header-bg: #1f1f1f;
+  --modal-footer-bg: #1f1f1f;
+  --empty-slot-border: #444;
+  --empty-slot-bg: rgba(45, 45, 45, 0.5);
+  --empty-slot-hover-bg: rgba(24, 144, 255, 0.1);
+  --empty-icon-color: #666;
+  --loading-overlay-bg: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  --text-primary: #1a1a1a;
+  --text-secondary: #64748b;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --header-bg: #ffffff;
+  --header-border: #e2e8f0;
+  --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --border-light: #f1f5f9;
+  --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --gradient-primary-hover: linear-gradient(135deg, #1d4ed8, #1e40af);
+  --primary-color: #3b82f6;
+  --primary-shadow: rgba(59, 130, 246, 0.2);
+  --secondary-color: #64748b;
+  --button-bg: #ffffff;
+  --button-border: #e2e8f0;
+  --button-text: #475569;
+  --button-hover-bg: #3b82f6;
+  --button-hover-border: #3b82f6;
+  --button-hover-text: white;
+  --button-hover-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+  --button-active-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  --button-active-hover-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  --filter-bg: #f8fafc;
+  --filter-border: #e2e8f0;
+  --filter-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  --filter-text: #64748b;
+  --filter-active-bg: #ffffff;
+  --filter-active-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  --filter-hover-bg: rgba(59, 130, 246, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #e2e8f0;
+  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --input-hover-bg: #f8fafc;
+  --input-hover-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  --table-bg: #ffffff;
+  --table-border: #e2e8f0;
+  --table-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --table-header-bg: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  --table-cell-bg: #ffffff;
+  --table-cell-hover-bg: #f8fafc;
+  --table-row-border: #f1f5f9;
+  --event-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --event-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --legend-bg: #f8fafc;
+  --legend-border: #e2e8f0;
+  --legend-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --legend-color-border: #ffffff;
+  --legend-color-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --modal-bg: #ffffff;
+  --modal-border: #e2e8f0;
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --modal-header-bg: #fafafa;
+  --modal-footer-bg: #fafafa;
+  --empty-slot-border: #cbd5e1;
+  --empty-slot-bg: rgba(248, 250, 252, 0.5);
+  --empty-slot-hover-bg: rgba(59, 130, 246, 0.05);
+  --empty-icon-color: #cbd5e1;
+  --loading-overlay-bg: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes admin-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes admin-scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-schedule-with-courses {
+    padding: 16px;
+  }
+  
+  .admin-header-top {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .admin-header-controls {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .admin-filter-buttons {
+    justify-content: center;
+  }
+  
+  .admin-date-controls {
+    justify-content: center;
+  }
+  
+  .admin-time-slot {
+    height: 140px;
+    min-width: 140px;
+  }
+  
+  .admin-event-item {
+    padding: 10px;
+    font-size: 10px;
+    min-height: 110px;
+  }
+  
+  .admin-event-actions {
+    top: 4px;
+    right: 4px;
+    gap: 3px;
+  }
+  
+  .admin-event-actions button {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+    padding: 3px;
+  }
+  
+  .admin-event-title {
+    padding-right: 45px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-schedule-with-courses {
+    padding: 12px;
+  }
+  
+  .admin-modal-content {
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .admin-legend-items {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .admin-date-picker {
+    margin: 20px;
+    padding: 24px;
+    min-width: auto;
+  }
+  
+  .admin-date-picker-actions {
+    flex-direction: column;
+  }
+  
+  .admin-cancel-btn, .admin-apply-btn {
+    width: 100%;
+  }
+}
+
+@media print {
+  .admin-schedule-with-courses {
+    background: white;
+    padding: 0;
+  }
+  
+  .admin-header-actions,
+  .admin-courses-section {
+    display: none;
+  }
+  
+  .admin-schedule-table-container {
+    box-shadow: none;
+    border: 2px solid #1a1a1a;
+  }
+  
+  .admin-schedule-legend {
+    border: 2px solid #1a1a1a;
+    break-inside: avoid;
+  }
+  
+  .admin-event-item {
+    box-shadow: none;
+    border: 1px solid #1a1a1a;
+  }
+  
+  .admin-event-actions {
+    display: none !important;
+  }
+  
+  .admin-event-title {
+    padding-right: 0;
+  }
+}
+
+.admin-schedule-with-courses * {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}

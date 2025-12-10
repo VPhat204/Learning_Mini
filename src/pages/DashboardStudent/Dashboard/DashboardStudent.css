@@ -1,0 +1,132 @@
+.dashboard-student {
+  min-height: 100vh;
+  background: var(--dashboard-bg);
+  transition: all 0.3s ease;
+}
+
+.student-sider {
+  background: var(--sider-bg) !important;
+  box-shadow: var(--sider-shadow);
+  border-right: 1px solid var(--sider-border);
+  transition: all 0.3s ease;
+}
+
+.student-menu {
+  height: 100%;
+  border-right: 0;
+  padding-top: 15px;
+  background: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.student-menu .ant-menu-item {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--menu-text);
+  padding: 15px 24px;
+  margin: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.student-menu .ant-menu-item:hover {
+  color: var(--primary-color);
+  background: var(--menu-hover-bg);
+  transform: translateX(4px);
+}
+
+.student-menu .ant-menu-item-selected {
+  color: var(--menu-selected-text) !important;
+  background: var(--primary-color) !important;
+  box-shadow: var(--menu-selected-shadow);
+}
+
+.student-menu .ant-menu-item .anticon {
+  font-size: 20px;
+  margin-right: 12px;
+  transition: color 0.3s ease;
+}
+
+.student-content {
+  padding: 20px;
+  background: var(--content-bg);
+  transition: all 0.3s ease;
+}
+
+.student-content-layout {
+  margin: 0;
+  min-height: 280px;
+  background: transparent;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .dashboard-student {
+  --dashboard-bg: #0f0f0f;
+  --sider-bg: #1a1a1a;
+  --sider-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  --sider-border: #333;
+  --menu-text: #e6e6e6;
+  --menu-hover-bg: #262626;
+  --menu-selected-text: #ffffff;
+  --menu-selected-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  --primary-color: #1890ff;
+  --content-bg: #0f0f0f;
+}
+
+[data-theme="light"] .dashboard-student {
+  --dashboard-bg: #f0f2f5;
+  --sider-bg: #ffffff;
+  --sider-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  --sider-border: #e8e8e8;
+  --menu-text: #333333;
+  --menu-hover-bg: #e6f7ff;
+  --menu-selected-text: #ffffff;
+  --menu-selected-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  --primary-color: #1890ff;
+  --content-bg: #f0f2f5;
+}
+
+@media (max-width: 768px) {
+  .student-sider {
+    position: fixed !important;
+    z-index: 1000;
+    height: 100vh;
+  }
+  
+  .student-menu .ant-menu-item {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 6px 12px;
+  }
+  
+  .student-content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .student-content {
+    padding: 10px;
+  }
+  
+  .student-menu .ant-menu-item {
+    font-size: 14px;
+    padding: 10px 16px;
+    margin: 4px 8px;
+  }
+  
+  .student-menu .ant-menu-item .anticon {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+}
+
+.dashboard-student * {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}

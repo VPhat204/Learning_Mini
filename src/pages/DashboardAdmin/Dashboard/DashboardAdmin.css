@@ -1,0 +1,108 @@
+.admin-dashboard {
+  min-height: 100vh;
+  background: var(--layout-bg);
+  transition: all 0.3s ease;
+}
+
+.admin-sider {
+  background: var(--sider-bg) !important;
+  box-shadow: 2px 0 8px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.custom-menu {
+  height: 100%;
+  border-right: 0;
+  padding-top: 15px;
+  background: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.custom-menu .ant-menu-item {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--menu-text);
+  padding: 15px 24px;
+  margin: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.custom-menu .ant-menu-item:hover {
+  color: var(--primary-color);
+  background: var(--menu-hover-bg);
+  transform: translateX(4px);
+}
+
+.custom-menu .ant-menu-item-selected {
+  color: var(--menu-selected-text) !important;
+  background: var(--primary-color) !important;
+  box-shadow: 0 4px 12px var(--primary-shadow);
+}
+
+.custom-menu .ant-menu-item .anticon {
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.admin-content {
+  padding: 20px;
+  background: var(--content-bg);
+  transition: all 0.3s ease;
+}
+
+.admin-content-layout {
+  margin: 0;
+  min-height: 280px;
+  background: transparent;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .admin-dashboard {
+  --layout-bg: #000000;
+  --sider-bg: #141414;
+  --content-bg: #000000;
+  --menu-text: #e6e6e6;
+  --menu-hover-bg: #262626;
+  --menu-selected-text: #ffffff;
+  --primary-color: #1890ff;
+  --primary-shadow: rgba(24, 144, 255, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .admin-dashboard {
+  --layout-bg: #f0f2f5;
+  --sider-bg: #ffffff;
+  --content-bg: #f0f2f5;
+  --menu-text: #333333;
+  --menu-hover-bg: #e6f7ff;
+  --menu-selected-text: #ffffff;
+  --primary-color: #1890ff;
+  --primary-shadow: rgba(24, 144, 255, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .admin-sider {
+    position: fixed !important;
+    z-index: 1000;
+    height: 100vh;
+  }
+  
+  .custom-menu .ant-menu-item {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 6px 12px;
+  }
+  
+  .admin-content {
+    padding: 15px;
+  }
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

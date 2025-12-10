@@ -1,0 +1,16 @@
+.review-container {
+  padding: 20px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.review-container h1 {
+  font-size: 32px;
+  color: #1890ff;
+  margin-bottom: 20px;
+}
+
+.review-container p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}

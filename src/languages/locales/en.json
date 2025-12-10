@@ -1,0 +1,922 @@
+{
+  "welcome": "Welcome to E-learning Platform",
+  "description": "This is a mini online learning system. You can register, choose courses and start learning today.",
+  "login": "Login",
+  "register": "Register",
+  "courses": "Courses",
+  "teachers": "Teachers",
+  "profile": "Profile",
+  "logout": "Logout",
+  "editName": "Change Name",
+  "footerText": "System E_Study Platform @2025",
+  "about": "About",
+  "contact": "Contact",
+  "privacy": "Privacy Policy",
+  "lang": { "vi": "Vietnamese", "en": "English" },
+  "searchPlaceholder": "Search courses...",
+  "updateNameSuccess": "Name updated successfully!",
+  "updateNameFail": "Failed to update name!",
+  "profileInfo": "Profile Info",
+  "changeName": "Change Name",
+  "account": "Account",
+  "notifications": "Notifications",
+  "update": "Update",
+  "newName": "New Name",
+  "enterNewName": "Enter new name",
+  "save": "Save",
+  "edit": "Edit",
+  "close": "Close",
+  "uploadNewAvatar": "Upload New Avatar",
+  "name": "Name",
+  "birthdate": "Birthdate",
+  "chooseBirthdate": "Choose birthdate",
+  "gender": "Gender",
+  "chooseGender": "Choose gender",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other",
+  "phone": "Phone",
+  "enterPhone": "Enter phone",
+  "role": "Role",
+  "email": "Email",
+  "address": "Address",
+  "enterAddress": "Enter address",
+  "proofInfo": "Proof Info",
+  "enterProofInfo": "Enter proof info",
+  "proofFiles": "Proof Files",
+  "uploadProofFiles": "Upload proof files",
+  "fileTypes": "(PDF, images, DOC - max 5MB)",
+  "uploadedFiles": "Uploaded files",
+  "delete": "Delete",
+  "profileUpdateSuccess": "Profile updated successfully!",
+  "profileUpdateFail": "Failed to update profile!",
+  "welcomeAdmin": "Welcome Admin!",
+  "totalUsers": "Total users",
+  "students": "Students",
+  "admins": "Admins",
+  "monthlyAccounts": "Student & Teacher accounts per month",
+  "barChart": "Bar Chart",
+  "lineChart": "Line Chart",
+  "pageNotFound": "Page not found",
+  "dashboard": "Dashboard",
+  "userManagement": "User Manager",
+  "courseManagement": "Course Managemr",
+  "scheduleManagement": "Schedule Manager",
+  "videoManagement": "Video Manager",
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "apply": "Apply",
+    "processing": "Processing...",
+    "delete": "Delete"
+  },
+  "schedule": {
+    "title": "Weekly Schedule - Exam Schedule",
+    "print": "Print Schedule",
+    "addCourse": "Click to add course",
+    "slot": "Slot",
+    "selectCourse": "Select Course",
+    "deleteSchedule": "Delete schedule",
+    "teacher": "Teacher",
+    "noTeacher": "No teacher",
+    "noClass": "No class",
+    "noLesson": "No lesson",
+    "period": "Period",
+    "previous": "Previous",
+    "today": "Today",
+    "next": "Next",
+    "defaultLesson": "Lesson {{count}}",
+    "teacherId": "Teacher {{id}}",
+    
+    "filters": {
+      "all": "All",
+      "study": "Study Schedule",
+      "exam": "Exam Schedule"
+    },
+    
+    "days": {
+      "0": "Monday",
+      "1": "Tuesday",
+      "2": "Wednesday",
+      "3": "Thursday",
+      "4": "Friday",
+      "5": "Saturday",
+      "6": "Sunday"
+    },
+    
+    "periods": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    },
+    
+    "types": {
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam",
+      "pause": "Pause",
+      "unknown": "Unknown"
+    },
+    
+    "legend": {
+      "title": "Legend",
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam Schedule",
+      "pause": "Paused"
+    },
+    
+    "form": {
+      "class": "Class",
+      "lesson": "Lesson",
+      "type": "Class Type",
+      "enterClass": "Enter class",
+      "enterLesson": "Enter lesson"
+    },
+    
+    "alert": {
+      "enterClass": "Please enter class",
+      "enterLesson": "Please enter lesson",
+      "updateSuccess": "Update successful!",
+      "updateError": "Error updating: ",
+      "deleteError": "Error deleting schedule",
+      "addSuccess": "Course added to schedule successfully!",
+      "error": "Error: "
+    },
+    
+    "confirm": {
+      "deleteSchedule": "Are you sure you want to delete this schedule?"
+    },
+    
+    "datePicker": {
+      "title": "Select Date"
+    }
+  },
+  "commons": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "apply": "Apply",
+    "processing": "Processing...",
+    "delete": "Delete",
+    "add": "Add",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close"
+  },
+  "userManagements": {
+    "title": "User Management",
+    "columns": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "approval": "Approval",
+      "status": "Status",
+      "verificationInfo": "Verification Info",
+      "actions": "Actions"
+    },
+    "roles": {
+      "admin": "ADMIN",
+      "teacher": "TEACHER",
+      "student": "STUDENT"
+    },
+    "approval": {
+      "approved": "Approved (Cancel)",
+      "pending": "Pending",
+      "notRequired": "Not Required"
+    },
+    "status": {
+      "locked": "Locked (Unlock)",
+      "active": "Active (Lock)"
+    },
+    "verification": {
+      "none": "None"
+    },
+    "actions": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "resetPassword": "Reset Password",
+      "addUser": "Add User",
+      "selectImages": "Select Images",
+      "download": "Download",
+      "downloadFile": "Download File",
+      "reset": "Reset"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New Password",
+      "role": "Role",
+      "verificationInfo": "Verification Info",
+      "proofFiles": "Proof Files",
+      "enterName": "Enter user name",
+      "enterEmail": "Enter email",
+      "enterPassword": "Password",
+      "enterNewPassword": "Enter new password",
+      "selectRole": "Select role",
+      "enterVerificationInfo": "Enter teacher verification information..."
+    },
+    "validation": {
+      "enterName": "Enter name",
+      "enterEmail": "Enter email",
+      "enterPassword": "Enter password",
+      "enterNewPassword": "Enter new password",
+      "selectRole": "Select role",
+      "enterVerificationInfo": "Enter verification information",
+      "imageOnly": "Only image files (jpg, jpeg, png, gif) are allowed!"
+    },
+    "messages": {
+      "loadError": "Unable to load user list",
+      "updateSuccess": "Update successful!",
+      "teacherRegisterSuccess": "Teacher registered, waiting for admin approval!",
+      "addSuccess": "User added successfully!",
+      "saveError": "Error saving user",
+      "deleteSuccess": "User deleted",
+      "deleteError": "Unable to delete user",
+      "approveError": "Error approving",
+      "lockError": "Error locking/unlocking account",
+      "resetPasswordSuccess": "Password reset successfully!",
+      "resetPasswordError": "Error resetting password"
+    },
+    "confirm": {
+      "delete": "Delete this user?"
+    },
+    "modal": {
+      "addTitle": "Add User",
+      "editTitle": "Update User",
+      "resetPasswordTitle": "Reset Password",
+      "verificationInfoTitle": "Teacher Verification Information"
+    }
+  },
+  "assignments": {
+    "title": "My Assignments",
+    "subtitle": "Manage and complete all assigned tasks",
+    "loading": "Loading assignments...",
+    "maxScore": "Max score",
+    "yourScore": "Your score",
+    "points": "points",
+    "status": {
+      "graded": "Graded",
+      "submitted": "Submitted",
+      "pending": "Not submitted"
+    },
+    "stats": {
+      "total": "Total assignments",
+      "graded": "Graded"
+    },
+    "progress": {
+      "completion": "Completion progress",
+      "answered": "answered"
+    },
+    "actions": {
+      "submit": "Submit Assignment",
+      "exploreCourses": "Explore Courses"
+    },
+    "messages": {
+      "loadError": "Unable to load assignments list",
+      "submitSuccess": "Assignment submitted successfully!",
+      "submitError": "Assignment submission failed!",
+      "answerRequired": "Please answer at least one question before submitting."
+    },
+    "empty": {
+      "noAssignments": "No assignments yet",
+      "noQuestions": "No questions yet"
+    },
+    "placeholder": {
+      "enterAnswer": "Enter your answer..."
+    }
+  },
+  "courseDetail": {
+    "teacher": "Teacher",
+    "videos": "videos",
+    "students": "students",
+    "notAvailable": "N/A",
+    "user": "User",
+    "send": "Send",
+    "tabs": {
+      "overview": "Overview",
+      "content": "Course Content",
+      "comments": "Comments"
+    },
+    "courseDescription": "Course Description",
+    "noDescription": "No detailed description available",
+    "lessonList": "Lesson List",
+    "noVideos": "No videos in this course yet.",
+    "studentComments": "Student Comments",
+    "noComments": "No comments yet.",
+    "placeholder": {
+      "writeComment": "Write a comment..."
+    },
+    "messages": {
+      "videosLoadError": "Unable to load videos list",
+      "commentsLoadError": "Unable to load comments",
+      "studentCountError": "Unable to load student count",
+      "commentRequired": "Please enter comment content",
+      "commentSuccess": "Comment sent successfully!",
+      "commentError": "Failed to send comment"
+    }
+  },
+  "enrolledCourses": {
+    "title": "Enrolled Courses",
+    "noCourses": "You haven't enrolled in any courses yet.",
+    "teacher": "Teacher",
+    "teacherEmail": "Teacher Email",
+    "lessons": "Lessons",
+    "hours": "Hours",
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending"
+    },
+    "sort": {
+      "aToZ": "Name A-Z",
+      "zToA": "Name Z-A"
+    },
+    "actions": {
+      "cancel": "Cancel Enrollment",
+      "confirmAll": "Confirm All Courses"
+    },
+    "messages": {
+      "loadError": "Error loading courses",
+      "emailRequired": "Please enter confirmation email",
+      "confirmAllSuccess": "Successfully confirmed all courses and sent email",
+      "confirmAllError": "Error confirming enrollment",
+      "cancelSuccess": "Successfully canceled course enrollment",
+      "cancelError": "Error canceling enrollment"
+    },
+    "modal": {
+      "title": "Confirm All Courses",
+      "description": "Enter your email to confirm course enrollment:",
+      "placeholder": "Enter email...",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "mycourses": {
+    "title": "My Courses",
+    "loading": "Loading courses...",
+    "noCourses": "You haven't enrolled in any courses yet",
+    "teacher": "Teacher",
+    "progress": "Progress",
+    "enrolledDate": "Enrolled",
+    "actions": {
+      "back": "Back",
+      "unenroll": "Unenroll",
+      "viewDetail": "View Details"
+    },
+    "messages": {
+      "unenrollSuccess": "Successfully unenrolled from course: {{courseTitle}}",
+      "unenrollError": "An error occurred while unenrolling"
+    }
+  },
+  "studentdashboard": {
+    "loading": "Loading schedule...",
+    "student": "Student",
+    "welcome": "Hi {{name}}!",
+    "lessonsCompleted": "You have completed {{count}} lessons in the last day.",
+    "enrolledCourses": "Currently enrolled in {{count}} courses",
+    "myCourses": "My Courses",
+    "unknown": "Unknown",
+    "monthlySchedule": "Monthly schedule for {{month}}",
+    "classesThisMonth": "There are {{count}} classes this month",
+    "scheduleForDate": "Schedule for {{date}}",
+    "selectDateToView": "Select a date to view schedule",
+    "lessonNumber": "Lesson {{number}}",
+    "notAvailable": "N/A",
+    "teacher": "Teacher",
+    "noTeacher": "None",
+    "class": "Class",
+    "noClass": "None",
+    "noClassesOnDate": "No classes on {{date}}",
+    "clickDateWithDot": "Click on a date with a dot in the calendar to view detailed schedule",
+    "days": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    },
+    "weekDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "classTypesShort": {
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam",
+      "pause": "Pause"
+    },
+    "legend": {
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam",
+      "pause": "Pause"
+    },
+    "actions": {
+      "viewMore": "View more",
+      "today": "Today"
+    }
+  },
+  "dashboardStudent": {
+    "menu": {
+      "dashboard": "Dashboard",
+      "teachers": "Teachers",
+      "enrolledCourses": "Enrolled Courses",
+      "myCourses": "My Courses",
+      "assignments": "Assignments",
+      "schedules": "Schedules"
+    }
+  },
+   "studentschedule": {
+    "student": {
+      "title": "My Schedule",
+      "enrolledInfo": "Showing schedule for {{count}} enrolled courses"
+    },
+    "loading": "Loading schedule...",
+    "print": "Print Schedule",
+    "previous": "Previous",
+    "today": "Today",
+    "next": "Next",
+    "period": "Period",
+    "emptySlot": "Empty",
+    "slot": "Slot",
+    "teacher": "Teacher",
+    "noTeacher": "No teacher",
+    "class": "Class",
+    "noClass": "No class",
+    "lesson": "Lesson",
+    "noLesson": "No lesson",
+    "type": "Type",
+    "types": {
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam",
+      "pause": "Pause",
+      "unknown": "Unknown"
+    },
+    "legend": {
+      "title": "Legend",
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam Schedule",
+      "pause": "Pause"
+    },
+    "days": {
+      "0": "Monday",
+      "1": "Tuesday",
+      "2": "Wednesday",
+      "3": "Thursday",
+      "4": "Friday",
+      "5": "Saturday",
+      "6": "Sunday"
+    },
+    "datePicker": {
+      "title": "Select Date"
+    }
+  },
+  "teacherList": {
+    "title": "Teacher List",
+    "loading": "Loading teachers list...",
+    "noTeachers": "No teachers found",
+    "noCourses": "No courses yet",
+    "notAvailable": "-",
+    "notUpdated": "Not updated",
+    "teachingCourses": "Teaching Courses",
+    "search": {
+      "placeholder": "Search by name or email..."
+    },
+    "sort": {
+      "aToZ": "Name A-Z",
+      "zToA": "Name Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "View All Courses",
+      "hideCourses": "Hide Courses",
+      "enroll": "Enroll",
+      "enrolling": "Enrolling...",
+      "enrolled": "Enrolled"
+    },
+    "messages": {
+      "loadError": "Error loading teachers list",
+      "enrolledCoursesError": "Error loading enrolled courses",
+      "studentsOnly": "Only students can enroll in courses",
+      "alreadyEnrolled": "You have already enrolled in this course",
+      "enrollSuccess": "Successfully enrolled in course: {{courseTitle}}",
+      "noPermission": "You don't have permission to enroll in courses",
+      "enrollError": "An error occurred while enrolling in the course"
+    }
+  },
+  "welcometeacher": "Welcome, {{name}}!",
+  "teacher": "Teacher",
+  "viewMore": "View more ({{count}})",
+  "collapse": "Collapse",
+  "today": "Today",
+  "selectDate": "Select a date",
+  "noData": "No data",
+  "loading": "Loading...",
+  "loadingSchedule": "Loading schedule...",
+  "teachercourses": "Courses",
+  "teacherstudents": "Students",
+  "videos": "Videos",
+  "date": "Date",
+  "active": "Active",
+  "paused": "Paused",
+  "noLesson": "No lesson",
+  "noClass": "No class",
+  "months": {
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "weekDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "classesThisMonth": "Classes month",
+  "recentActivity": "Recent Activity",
+  "newStudents": "New Students",
+  "newVideos": "New Videos",
+  "teachingSchedule": "Teaching Schedule",
+  "studentsRegistered": "{{count}} students registered in the past 7 days",
+  "videosUploaded": "Uploaded {{count}} lecture videos",
+  "classesInMonth": "{{count}} classes this month",
+  "teachingScheduleTitle": "Teaching Schedule for {{month}}",
+  "monthlyClasses": "{{count}} classes this month",
+  "scheduleForDate": "Schedule for {{date}}",
+  "noClasses": "No classes on {{date}}",
+  "clickDateWithDot": "Click on a date with a dot to view detailed schedule",
+  "period": "Period",
+  "lesson": "Lesson",
+  "class": "Class",
+  "classTypes": {
+    "theory": "Theory",
+    "practice": "Practice",
+    "online": "Online",
+    "exam": "Exam",
+    "pause": "Paused"
+  },
+  "courseManagements": {
+    "myCourses": "My Courses",
+    "myAssignments": "My Assignments",
+    "lessons": "{{count}} lessons",
+    "hours": "{{count}} hours",
+    "noCourses": "No courses yet",
+    "noAssignments": "No assignments yet"
+  },
+  "messages": {
+    "createCourseSuccess": "Course created successfully!",
+    "createCourseFail": "Failed to create course"
+  },
+  "teachercommon": {
+    "cancel": "Cancel",
+    "apply": "Apply"
+  },
+  "teacherschedule": {
+    "mySchedule": "My Teaching Schedule",
+    "displayingCourses": "Displaying schedule for {{count}} of your courses",
+    "selectDate": "Select Date",
+    "print": "Print Schedule",
+    "loading": "Loading schedule...",
+    "previous": "Previous",
+    "today": "Today",
+    "next": "Next",
+    "period": "Period",
+    "legend": "Legend",
+    "empty": "Empty",
+    "slot": "Slot",
+    "teacher": "Teacher",
+    "noTeacher": "No teacher",
+    "class": "Class",
+    "noClass": "No class",
+    "lesson": "Lesson",
+    "noLesson": "No lesson",
+    "type": "Type",
+    "students": "Students",
+    "unknown": "Unknown",
+    "days": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "0": "Sunday"
+    },
+    "periods": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    },
+    "lessonTypes": {
+      "theory": "Theory",
+      "practice": "Practice",
+      "online": "Online",
+      "exam": "Exam Schedule",
+      "pause": "Paused"
+    }
+  },
+  "studentlist": {
+    "myCourses": "My Courses",
+    "chooseCourse": "Select course",
+    "loading": "Loading students...",
+    "stt": "No.",
+    "name": "Student Name",
+    "email": "Email",
+    "phone": "Phone",
+    "gender": "Gender",
+    "enrolledAt": "Enrollment Date"
+  },
+  "assign": {
+    "assignments": "Assignments",
+    "create": "Create assignment",
+    "createNew": "Create new assignment",
+    "course": "Course",
+    "title": "Title",
+    "maxScore": "Max score",
+    "addQuestion": "Add question",
+    "question": "Question",
+    "score": "Score",
+    "questionList": "Question list",
+    "delete": "Delete",
+    "confirmDeleteQuestion": "Delete this question?",
+    "successCreate": "Assignment created successfully!",
+    "errorCreate": "Failed to create assignment",
+    "successAddQuestion": "Question added!",
+    "errorAddQuestion": "Failed to add question",
+    "successDeleteQuestion": "Deleted question!",
+    "errorDeleteQuestion": "Cannot delete question",
+    "viewSubmissions": "View submissions",
+    "submissionList": "Submissions list",
+    "student": "Student",
+    "answersAndScore": "Answers & grading",
+    "confirmDeleteAnswer": "Delete this answer?",
+    "deleteSubmission": "Delete submission",
+    "confirmDeleteSubmission": "Delete all student's submissions?",
+    "successDeleteAnswer": "Answer deleted!",
+    "errorDeleteAnswer": "Failed to delete answer",
+    "successDeleteSubmission": "Submission deleted!",
+    "errorDeleteSubmission": "Failed to delete submission",
+    "confirmGrading": "Confirm grading",
+    "close": "Close",
+    "successGrade": "Grading submitted!",
+    "errorGrade": "Error submitting grades!",
+    "noValidScore": "No valid score entered!",
+    "errorAssignmentNotFound": "Assignment not found."
+  },
+  "teacherCourses": {
+    "title": "Teacher - Course Management",
+    "addCourseBtn": "+ Add Course",
+    "addCourseModalTitle": "Add New Course",
+    "courseName": "Course Name",
+    "courseNameRequired": "Please enter course name",
+    "courseNamePlaceholder": "Enter course name...",
+    "courseDescription": "Description",
+    "courseDescriptionPlaceholder": "Brief description about the course...",
+    "courseLessons": "Number of Lessons",
+    "courseLessonsPlaceholder": "Ex: 10",
+    "courseHours": "Number of Hours",
+    "courseHoursPlaceholder": "Ex: 5",
+    "confirmAdd": "Confirm Add",
+    "myCourses": "Your Courses",
+    "videoAdded": "Video Added",
+    "addVideo": "Add Video",
+    "viewDetails": "View Details",
+    "manageVideos": "Manage Videos",
+    "videoTitle": "Video Title",
+    "videoTitleRequired": "Enter video title",
+    "videoUrl": "Video URL",
+    "videoUrlRequired": "Enter video URL",
+    "videoUrlPlaceholder": "Ex: https://youtu.be/...",
+    "videoDuration": "Duration (e.g., 15 min)",
+    "saveVideo": "Save Video",
+    "updateVideo": "Update Video",
+    "videoList": "Current Video List",
+    "fetchCoursesFailed": "Failed to fetch courses",
+    "addCourseSuccess": "Course added successfully!",
+    "addCourseFailed": "Failed to add course",
+    "fetchVideosFailed": "Failed to fetch videos",
+    "updateVideoSuccess": "Video updated successfully!",
+    "addVideoSuccess": "Video added successfully!",
+    "saveVideoFailed": "Failed to save video",
+    "deleteVideoSuccess": "Video deleted successfully!",
+    "deleteVideoFailed": "Failed to delete video"
+  },
+  "registerTeacherSuccess": "Teacher registration successful. Waiting for admin approval.",
+  "registerStudentSuccess": "Student registration successful!",
+  "registerFail": "Registration failed!",
+  "enterName": "Enter name",
+  "fullName": "Full Name",
+  "enterEmail": "Enter email",
+  "enterPassword": "Enter password",
+  "password": "Password",
+  "confirmPassword": "Confirm password",
+  "passwordMismatch": "Passwords do not match!",
+  "selectRole": "Select role",
+  "student": "Student",
+  "selectProofFile": "Select proof file",
+  "chooseFile": "Choose file",
+  "alreadyHaveAccount": "Already have an account? Login",
+  "loginSuccess": "Login successful!",
+  "invalidEmail": "Invalid Email",
+  "passWordMinLenght": "Password Min Lenght",
+  "invalidServerResponse": "Server returned invalid data.",
+  "wrongEmailOrPassword": "Wrong email or password!",
+  "noAccess": "You do not have access!",
+  "serverError": "Server error!",
+  "cannotConnectServer": "Cannot connect to server.",
+  "noAccount": "Don't have an account? Register",
+  "forgotPassword": "Forgot password?",
+  "sendOtp": "Send OTP",
+  "enterOtp": "Enter OTP",
+  "verifyOtp": "Verify OTP",
+  "newPassword": "New Password",
+  "updatePassword": "Update Password",
+  "enterEmailBeforeSendingOtp": "Enter email before sending OTP",
+  "otpSentToEmail": "OTP has been sent to your email",
+  "cannotSendEmail": "Cannot send email",
+  "enterOtpBeforeVerify": "Enter OTP before verifying",
+  "otpVerifiedSuccess": "OTP verified successfully!",
+  "otpIncorrect": "Incorrect OTP",
+  "enterAllPasswordFields": "Enter all password fields",
+  "passwordResetSuccess": "Password reset successfully!",
+  "passwordUpdateError": "Error updating password",
+  "contactUs": "Contact Us",
+  "menu": {
+    "introduction": "Introduction",
+    "contact": "Contact"
+  },
+  "selectMenu": "Select an item from the left menu",
+  "review": {
+    "title": "Introduction to E-learning Platform",
+    "paragraph1": "E-learning Platform is an online learning system designed to provide high-quality courses, from basic to advanced knowledge, suitable for all types of learners. With a friendly and easy-to-use interface, you can easily search for courses, track your learning progress, and interact with instructors conveniently.",
+    "paragraph2": "We offer a wide variety of courses from programming, design, marketing, foreign languages to soft skills. Each course is created by reputable instructors with rich practical experience, helping learners develop skills quickly and effectively.",
+    "paragraph3": "Additionally, E-learning Platform supports learners with assessment systems, course completion certificates, and a vibrant online learning community, helping you connect with like-minded individuals. Start your learning journey today!"
+  },
+  "privacypolicy": {
+    "title": "Privacy Policy",
+    "introduction": "We are committed to protecting your personal information. This privacy policy describes how we collect, use, and protect your information.",
+    "principles": {
+      "title": "Security Principles",
+      "transparency": "Transparency: We always disclose how we collect and use information",
+      "security": "Security: Applying the most advanced security measures",
+      "control": "Control: You have the right to control your personal information",
+      "compliance": "Compliance: Strict compliance with data protection regulations"
+    },
+    "sections": {
+      "mainContent": "Policy Content",
+      "details": "Details",
+      "collection": {
+        "title": "Information Collection",
+        "description": "We collect your personal information when you:",
+        "points": {
+          "register": "Register an account",
+          "enroll": "Enroll in a course",
+          "contact": "Contact us",
+          "useService": "Use our services"
+        },
+        "items": {
+          "name": "Full name",
+          "email": "Email",
+          "phone": "Phone number",
+          "studyInfo": "Study information",
+          "paymentInfo": "Payment information (if applicable)"
+        }
+      },
+      "usage": {
+        "title": "Information Usage",
+        "description": "Your personal information is used to:",
+        "points": {
+          "provideService": "Provide and improve services",
+          "processRegistration": "Process registration and payments",
+          "sendNotifications": "Send important notifications",
+          "customerSupport": "Customer support",
+          "analysis": "Analysis and research"
+        }
+      },
+      "security": {
+        "title": "Information Security",
+        "description": "We are committed to protecting your personal information through:",
+        "points": {
+          "encryption": "Data encryption",
+          "multiLayer": "Multi-layer security system",
+          "accessControl": "Strict access control",
+          "staffTraining": "Staff security training"
+        },
+        "items": {
+          "ssl": "SSL/TLS encryption",
+          "firewall": "Firewall protection",
+          "twoFactor": "Two-factor authentication",
+          "backup": "Regular data backup"
+        }
+      },
+      "sharing": {
+        "title": "Information Sharing",
+        "description": "We do not sell, exchange, or rent your personal information to third parties, unless:",
+        "points": {
+          "consent": "With your consent",
+          "legal": "As required by law",
+          "partners": "Cooperating with service provider partners"
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact Information",
+      "description": "If you have any questions about the privacy policy, please contact:",
+      "email": "Email:",
+      "emailValue": "privacy@example.com",
+      "phone": "Phone:",
+      "phoneValue": "1900 1234",
+      "address": "Address:",
+      "addressValue": "123 ABC Street, XYZ District, Ho Chi Minh City"
+    },
+    "lastUpdated": "Last updated:"
+  },
+  "teacherHomeList": {
+    "title": "Teacher List",
+    "loading": "Loading teachers list...",
+    "noTeachers": "No teachers found",
+    "noCourses": "No courses yet",
+    "notAvailable": "Not available",
+    "notUpdated": "Not updated",
+    "teachingCourses": "Teaching Courses",
+    "search": {
+      "placeholder": "Search by name or email..."
+    },
+    "sort": {
+      "aToZ": "Name A-Z",
+      "zToA": "Name Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "View All Courses",
+      "hideCourses": "Hide Courses",
+      "enroll": "Enroll",
+      "enrolling": "Enrolling...",
+      "enrolled": "Enrolled",
+      "cannotEnroll": "Cannot enroll",
+      "back": "Back"
+    },
+    "messages": {
+      "loadError": "Error loading teachers list",
+      "enrolledCoursesError": "Error loading enrolled courses",
+      "loginRequired": "Please login to enroll in courses",
+      "studentsOnly": "Only students can enroll in courses",
+      "alreadyEnrolled": "You have already enrolled in this course",
+      "enrollSuccess": "Successfully enrolled in course: {{courseTitle}}",
+      "noPermission": "You don't have permission to enroll in courses",
+      "enrollError": "An error occurred while enrolling in the course",
+      "loginPrompt": "Please"
+    }
+  },
+  "courseHomeDetail": {
+    "notAvailable": "N/A",
+    "noDescription": "No detailed description available"
+  },
+  "enrolledCoursesHome": {
+    "lessons": "Lessons",
+    "hours": "Hours"
+  },
+  "mycoursesHome": {
+    "enrolledDate": "Enrolled"
+  },
+  "loginHome": "Login",
+  "adds": {
+    "course":"Courses",
+    "topCourse": "Course Top",
+    "numberSubs": "subrise",
+    "sumSubs": "Total subrise",
+    "average": "Average",
+    "student/course": "student/course",
+    "invalidCourse": "Invalid data course"
+  },
+  "createcourses": {
+    "create_title": "Create New Course",
+    "name": "Course Name",
+    "name_required": "Please enter course name",
+    "name_placeholder": "Enter course name",
+    "description": "Description",
+    "description_required": "Please enter course description",
+    "description_placeholder": "Enter course description",
+    "btn_create": "Create Course",
+    "creating": "Creating...",
+    "success_message": "Course created successfully!",
+    "pending_approval_message": "Your course is pending administrator approval. You will be notified when the course is approved.",
+    "error_message": "An error occurred while creating the course. Please try again.",
+    "instruction": "After creation, the course will be submitted for administrator approval before being publicly displayed.",
+    "success_title": "Course Created Successfully!"
+  }
+}

@@ -1,0 +1,128 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--login-bg);
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.login-container {
+  background: var(--login-card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--login-shadow);
+  width: 350px;
+  border: 1px solid var(--login-border-color);
+  transition: all 0.3s ease;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--login-text-primary);
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.login-links a {
+  color: var(--login-primary-color);
+  text-decoration: none;
+  margin: 4px 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+  color: var(--login-primary-hover);
+}
+
+.ant-form-item-label > label {
+  color: var(--login-text-primary) !important;
+}
+
+.ant-input {
+  background: var(--login-input-bg) !important;
+  border-color: var(--login-border-color) !important;
+  color: var(--login-text-primary) !important;
+}
+
+.ant-input::placeholder {
+  color: var(--login-text-secondary) !important;
+}
+
+.ant-input:focus,
+.ant-input-focused {
+  border-color: var(--login-primary-color) !important;
+  box-shadow: 0 0 0 2px var(--login-primary-shadow) !important;
+}
+
+.ant-input-password .ant-input {
+  background: transparent !important;
+}
+
+.ant-input-password {
+  background: var(--login-input-bg) !important;
+  border-color: var(--login-border-color) !important;
+}
+
+.ant-input-password:focus,
+.ant-input-password-focused {
+  border-color: var(--login-primary-color) !important;
+  box-shadow: 0 0 0 2px var(--login-primary-shadow) !important;
+}
+
+.ant-btn-primary {
+  background: var(--login-primary-color) !important;
+  border-color: var(--login-primary-color) !important;
+}
+
+.ant-btn-primary:hover {
+  background: var(--login-primary-hover) !important;
+  border-color: var(--login-primary-hover) !important;
+}
+
+[data-theme="dark"] {
+  --login-bg: #141414;
+  --login-card-bg: #1f1f1f;
+  --login-input-bg: #141414;
+  --login-text-primary: rgba(255, 255, 255, 0.85);
+  --login-text-secondary: rgba(255, 255, 255, 0.45);
+  --login-primary-color: #1890ff;
+  --login-primary-hover: #40a9ff;
+  --login-primary-shadow: rgba(24, 144, 255, 0.2);
+  --login-border-color: #434343;
+  --login-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+  --login-bg: #f5f5f5;
+  --login-card-bg: #ffffff;
+  --login-input-bg: #ffffff;
+  --login-text-primary: rgba(0, 0, 0, 0.85);
+  --login-text-secondary: rgba(0, 0, 0, 0.45);
+  --login-primary-color: #1677ff;
+  --login-primary-hover: #4096ff;
+  --login-primary-shadow: rgba(22, 119, 255, 0.2);
+  --login-border-color: #d9d9d9;
+  --login-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .login-title {
+    font-size: 20px;
+  }
+}

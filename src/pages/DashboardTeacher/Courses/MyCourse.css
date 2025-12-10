@@ -1,0 +1,135 @@
+.course-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 12px 24px;
+  width: 100%;
+}
+
+.mycourses-grid.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex: 1;
+  width: 100%;
+  align-items: stretch;
+}
+
+.course-card {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+}
+
+.course-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+}
+
+.course-icon.orange { background: linear-gradient(135deg, #ffb47b, #ff7e4a); }
+.course-icon.blue { background: linear-gradient(135deg, #89baff, #5373ff); }
+.course-icon.green { background: linear-gradient(135deg, #b4ec51, #4ca94b); }
+.course-icon.purple { background: linear-gradient(135deg, #a68bff, #6a42ff); }
+
+.course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.course-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2em;
+  max-height: 2.4em;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.course-progress {
+  margin-top: 8px;
+}
+
+.course-status {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ant-progress-inner {
+  height: 4px !important;
+  border-radius: 4px !important;
+}
+
+.ant-progress-bg {
+  height: 4px !important;
+  border-radius: 4px !important;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.teacher-back-button {
+  color: #1677ff;
+  padding: 8px 16px 8px 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 90px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.teacher-back-button:before {
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.teacher-back-button:hover {
+  background: rgba(22, 119, 255, 0.05);
+  color: #4096ff;
+}
+
+.teacher-back-button:hover:before {
+  transform: translateX(-2px);
+}
