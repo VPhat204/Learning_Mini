@@ -20,6 +20,7 @@ import {
   WechatOutlined
 } from '@ant-design/icons';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import './AdminChatInterface.css';
 
 const { Text } = Typography;
@@ -27,6 +28,7 @@ const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 const AdminChatInterface = () => {
+  const { t } = useTranslation();
   const [chatUsers, setChatUsers] = useState([]);
   const [searchUsers, setSearchUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -66,14 +68,14 @@ const AdminChatInterface = () => {
         setTotalUnread(total);
       }
     } catch (error) {
-      console.error('Lỗi khi lấy danh sách người chat:', error);
+      console.error(t('adminChat.errors.loadChatUsers'), error);
       if (error.response?.data?.message) {
         message.error(error.response.data.message);
       } else {
-        message.error('Không thể tải danh sách chat');
+        message.error(t('adminChat.errors.cannotLoadChats'));
       }
     }
-  }, [token, user]);
+  }, [token, user, t]);
 
   const searchUsersForChat = useCallback(async () => {
     if (!searchTerm.trim() || searchTerm.length < 2) {
@@ -91,10 +93,10 @@ const AdminChatInterface = () => {
         setSearchUsers(response.data.data || []);
       }
     } catch (error) {
-      console.error('Lỗi khi tìm kiếm người dùng:', error);
-      message.error('Không thể tìm kiếm người dùng');
+      console.error(t('adminChat.errors.searchUsers'), error);
+      message.error(t('adminChat.errors.cannotSearchUsers'));
     }
-  }, [searchTerm, token]);
+  }, [searchTerm, token, t]);
 
   const fetchMessages = useCallback(async (userId) => {
     if (!userId) return;
@@ -110,19 +112,19 @@ const AdminChatInterface = () => {
         setSelectedUser(response.data.user);
         fetchChatUsers();
       } else {
-        message.error(response.data.message || 'Không thể tải tin nhắn');
+        message.error(response.data.message || t('adminChat.errors.cannotLoadMessages'));
       }
     } catch (error) {
-      console.error('Lỗi khi lấy tin nhắn:', error);
+      console.error(t('adminChat.errors.loadMessages'), error);
       if (error.response?.data?.message) {
         message.error(error.response.data.message);
       } else {
-        message.error('Không thể tải tin nhắn');
+        message.error(t('adminChat.errors.cannotLoadMessages'));
       }
     } finally {
       setLoading(false);
     }
-  }, [token, fetchChatUsers]);
+  }, [token, fetchChatUsers, t]);
 
   const sendMessage = useCallback(async () => {
     if (!newMessage.trim() || !selectedUser) return;
@@ -141,17 +143,17 @@ const AdminChatInterface = () => {
         scrollToBottom();
         fetchChatUsers();
       } else {
-        message.error(response.data.message || 'Không thể gửi tin nhắn');
+        message.error(response.data.message || t('adminChat.errors.cannotSendMessage'));
       }
     } catch (error) {
-      console.error('Lỗi khi gửi tin nhắn:', error);
+      console.error(t('adminChat.errors.sendMessage'), error);
       if (error.response?.data?.message) {
         message.error(error.response.data.message);
       } else {
-        message.error('Không thể gửi tin nhắn');
+        message.error(t('adminChat.errors.cannotSendMessage'));
       }
     }
-  }, [selectedUser, newMessage, token, fetchChatUsers]);
+  }, [selectedUser, newMessage, token, fetchChatUsers, t]);
 
   const handleKeyPress = useCallback((e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -179,14 +181,14 @@ const AdminChatInterface = () => {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
     
-    if (diffMins < 1) return 'Vừa xong';
-    if (diffMins < 60) return `${diffMins} phút`;
-    if (diffHours < 24) return `${diffHours} giờ`;
-    if (diffDays === 1) return 'Hôm qua';
-    if (diffDays < 7) return `${diffDays} ngày`;
+    if (diffMins < 1) return t('adminChat.time.justNow');
+    if (diffMins < 60) return t('adminChat.time.minutesAgo', { minutes: diffMins });
+    if (diffHours < 24) return t('adminChat.time.hoursAgo', { hours: diffHours });
+    if (diffDays === 1) return t('adminChat.time.yesterday');
+    if (diffDays < 7) return t('adminChat.time.daysAgo', { days: diffDays });
     
     return date.toLocaleDateString();
-  }, []);
+  }, [t]);
 
   const formatDate = useCallback((dateString) => {
     if (!dateString) return '';
@@ -195,18 +197,18 @@ const AdminChatInterface = () => {
     const today = new Date();
     
     if (date.toDateString() === today.toDateString()) {
-      return 'Hôm nay';
+      return t('adminChat.time.today');
     }
     
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     
     if (date.toDateString() === yesterday.toDateString()) {
-      return 'Hôm qua';
+      return t('adminChat.time.yesterday');
     }
     
-    return date.toLocaleDateString('vi-VN');
-  }, []);
+    return date.toLocaleDateString();
+  }, [t]);
 
   const truncateMessage = useCallback((text, maxLength = 30) => {
     if (!text) return '';
@@ -224,11 +226,11 @@ const AdminChatInterface = () => {
 
   const getRoleText = useCallback((role) => {
     switch(role) {
-      case 'student': return 'Học viên';
-      case 'teacher': return 'Giảng viên';
-      default: return 'Người dùng';
+      case 'student': return t('adminChat.roles.student');
+      case 'teacher': return t('adminChat.roles.teacher');
+      default: return t('adminChat.roles.user');
     }
-  }, []);
+  }, [t]);
 
   const getBadgeStatus = useCallback((role) => {
     switch(role) {
@@ -281,10 +283,10 @@ const AdminChatInterface = () => {
         <div className="not-authorized-content">
           <WechatOutlined />
           <Text type="danger" strong>
-            Bạn không có quyền truy cập tính năng chat
+            {t('adminChat.notAuthorized.title')}
           </Text>
           <Text type="secondary">
-            Chỉ quản trị viên mới có thể sử dụng tính năng này
+            {t('adminChat.notAuthorized.description')}
           </Text>
         </div>
       </Card>
@@ -307,7 +309,7 @@ const AdminChatInterface = () => {
                   <TabPane 
                     tab={
                       <span>
-                        Tin nhắn
+                        {t('adminChat.tabs.messages')}
                         {totalUnread > 0 && (
                           <Badge count={totalUnread} />
                         )}
@@ -315,7 +317,7 @@ const AdminChatInterface = () => {
                     } 
                     key="chats" 
                   />
-                  <TabPane tab="Tìm kiếm" key="search" />
+                  <TabPane tab={t('adminChat.tabs.search')} key="search" />
                 </Tabs>
               </div>
             }
@@ -324,10 +326,10 @@ const AdminChatInterface = () => {
               <>
                 <div className="chat-users-count">
                   <Text type="secondary">
-                    {chatUsers.length} cuộc trò chuyện
+                    {t('adminChat.stats.conversations', { count: chatUsers.length })}
                     {totalUnread > 0 && (
                       <Text type="danger">
-                        • {totalUnread} tin nhắn chưa đọc
+                        • {t('adminChat.stats.unreadMessages', { count: totalUnread })}
                       </Text>
                     )}
                   </Text>
@@ -371,7 +373,9 @@ const AdminChatInterface = () => {
                         description={
                           <div className="chat-user-last-message">
                             <Text type="secondary" ellipsis>
-                              {chatUser.last_message ? truncateMessage(chatUser.last_message, 25) : 'Chưa có tin nhắn'}
+                              {chatUser.last_message 
+                                ? truncateMessage(chatUser.last_message, 25) 
+                                : t('adminChat.messages.noMessages')}
                             </Text>
                           </div>
                         }
@@ -382,7 +386,7 @@ const AdminChatInterface = () => {
                     emptyText: (
                       <div>
                         <MessageOutlined />
-                        <Text type="secondary">Chưa có cuộc trò chuyện nào</Text>
+                        <Text type="secondary">{t('adminChat.empty.noConversations')}</Text>
                       </div>
                     )
                   }}
@@ -392,7 +396,7 @@ const AdminChatInterface = () => {
               <>
                 <div className="chat-search-input">
                   <Input
-                    placeholder="Tìm kiếm theo tên hoặc email..."
+                    placeholder={t('adminChat.search.placeholder')}
                     prefix={<SearchOutlined />}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -440,12 +444,12 @@ const AdminChatInterface = () => {
                     emptyText: searchTerm ? (
                       <div>
                         <SearchOutlined />
-                        <Text type="secondary">Không tìm thấy người dùng</Text>
+                        <Text type="secondary">{t('adminChat.empty.noUsersFound')}</Text>
                       </div>
                     ) : (
                       <div>
                         <SearchOutlined />
-                        <Text type="secondary">Nhập từ khóa để tìm kiếm</Text>
+                        <Text type="secondary">{t('adminChat.empty.enterKeyword')}</Text>
                       </div>
                     )
                   }}
@@ -484,7 +488,7 @@ const AdminChatInterface = () => {
               ) : (
                 <div className="empty-chat-header">
                   <MessageOutlined />
-                  <Text strong>Chọn một cuộc trò chuyện để bắt đầu</Text>
+                  <Text strong>{t('adminChat.select.startConversation')}</Text>
                 </div>
               )
             }
@@ -496,10 +500,10 @@ const AdminChatInterface = () => {
                     <div className="chat-empty-state">
                       <MessageOutlined />
                       <Text type="secondary">
-                        Chưa có tin nhắn nào
+                        {t('adminChat.messages.noMessages')}
                       </Text>
                       <Text type="secondary">
-                        Hãy bắt đầu cuộc trò chuyện với {selectedUser.name}!
+                        {t('adminChat.messages.startConversation', { name: selectedUser.name })}
                       </Text>
                     </div>
                   ) : (
@@ -536,7 +540,7 @@ const AdminChatInterface = () => {
                                   <div className="message-time">
                                     {formatTime(msg.created_at)}
                                     {msg.sender_id === user.id && msg.is_read === 1 && (
-                                      <span className="read-status">✓ Đã đọc</span>
+                                      <span className="read-status">✓ {t('adminChat.messages.read')}</span>
                                     )}
                                   </div>
                                 </div>
@@ -552,7 +556,7 @@ const AdminChatInterface = () => {
 
                 <div className="chat-input-container">
                   <TextArea
-                    placeholder={`Nhắn tin cho ${selectedUser.name}...`}
+                    placeholder={t('adminChat.input.placeholder', { name: selectedUser.name })}
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
@@ -567,7 +571,7 @@ const AdminChatInterface = () => {
                     className="chat-send-button"
                     size="large"
                   >
-                    Gửi
+                    {t('adminChat.buttons.send')}
                   </Button>
                 </div>
               </>
@@ -575,10 +579,10 @@ const AdminChatInterface = () => {
               <div className="no-chat-selected">
                 <WechatOutlined />
                 <Text type="secondary">
-                  Chọn một người dùng từ danh sách để bắt đầu trò chuyện
+                  {t('adminChat.select.instructions')}
                 </Text>
                 <Text type="secondary">
-                  Hoặc sử dụng tab "Tìm kiếm" để tìm người dùng mới
+                  {t('adminChat.select.useSearchTab')}
                 </Text>
               </div>
             )}

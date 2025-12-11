@@ -22,6 +22,7 @@ import {
   SolutionOutlined
 } from '@ant-design/icons';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import './StudentChatInterface.css';
 
 const { Text } = Typography;
@@ -29,6 +30,7 @@ const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 const StudentChatInterface = () => {
+  const { t } = useTranslation();
   const [admins, setAdmins] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -66,17 +68,17 @@ const StudentChatInterface = () => {
               counts[admin.id] = unreadResponse.data.unread_count || 0;
             }
           } catch (error) {
-            console.error(`Lỗi khi lấy unread count cho admin ${admin.id}:`, error);
+            console.error(`${t('studentChat.errors.unreadCountAdmin')} ${admin.id}:`, error);
             counts[admin.id] = 0;
           }
         }
         setUnreadCounts(counts);
       }
     } catch (error) {
-      console.error('Lỗi khi lấy danh sách admin:', error);
-      message.error('Không thể tải danh sách admin');
+      console.error(t('studentChat.errors.loadAdmins'), error);
+      message.error(t('studentChat.errors.cannotLoadAdmins'));
     }
-  }, [token, user, unreadCounts]);
+  }, [token, user, unreadCounts, t]);
 
   const fetchTeachers = useCallback(async () => {
     if (!token || !user) return;
@@ -101,17 +103,17 @@ const StudentChatInterface = () => {
               counts[teacher.id] = unreadResponse.data.unread_count || 0;
             }
           } catch (error) {
-            console.error(`Lỗi khi lấy unread count cho giảng viên ${teacher.id}:`, error);
+            console.error(`${t('studentChat.errors.unreadCountTeacher')} ${teacher.id}:`, error);
             counts[teacher.id] = 0;
           }
         }
         setUnreadCounts(counts);
       }
     } catch (error) {
-      console.error('Lỗi khi lấy danh sách giảng viên:', error);
-      message.error('Không thể tải danh sách giảng viên');
+      console.error(t('studentChat.errors.loadTeachers'), error);
+      message.error(t('studentChat.errors.cannotLoadTeachers'));
     }
-  }, [token, user, unreadCounts]);
+  }, [token, user, unreadCounts, t]);
 
   const getTotalUnread = useCallback((type) => {
     const users = type === 'admins' ? admins : teachers;
@@ -135,12 +137,12 @@ const StudentChatInterface = () => {
         fetchTeachers();
       }
     } catch (error) {
-      console.error('Lỗi khi lấy tin nhắn:', error);
-      message.error('Không thể tải tin nhắn');
+      console.error(t('studentChat.errors.loadMessages'), error);
+      message.error(t('studentChat.errors.cannotLoadMessages'));
     } finally {
       setLoading(false);
     }
-  }, [token, fetchAdmins, fetchTeachers]);
+  }, [token, fetchAdmins, fetchTeachers, t]);
 
   const sendMessage = useCallback(async () => {
     if (!newMessage.trim() || !selectedUser) return;
@@ -160,13 +162,13 @@ const StudentChatInterface = () => {
         fetchAdmins();
         fetchTeachers();
       } else {
-        message.error(response.data.message || 'Không thể gửi tin nhắn');
+        message.error(response.data.message || t('studentChat.errors.cannotSendMessage'));
       }
     } catch (error) {
-      console.error('Lỗi khi gửi tin nhắn:', error);
-      message.error('Không thể gửi tin nhắn');
+      console.error(t('studentChat.errors.sendMessage'), error);
+      message.error(t('studentChat.errors.cannotSendMessage'));
     }
-  }, [selectedUser, newMessage, token, fetchAdmins, fetchTeachers]);
+  }, [selectedUser, newMessage, token, fetchAdmins, fetchTeachers, t]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -197,14 +199,14 @@ const StudentChatInterface = () => {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
     
-    if (diffMins < 1) return 'Vừa xong';
-    if (diffMins < 60) return `${diffMins} phút`;
-    if (diffHours < 24) return `${diffHours} giờ`;
-    if (diffDays === 1) return 'Hôm qua';
-    if (diffDays < 7) return `${diffDays} ngày`;
+    if (diffMins < 1) return t('studentChat.time.justNow');
+    if (diffMins < 60) return t('studentChat.time.minutesAgo', { minutes: diffMins });
+    if (diffHours < 24) return t('studentChat.time.hoursAgo', { hours: diffHours });
+    if (diffDays === 1) return t('studentChat.time.yesterday');
+    if (diffDays < 7) return t('studentChat.time.daysAgo', { days: diffDays });
     
     return date.toLocaleDateString();
-  }, []);
+  }, [t]);
 
   const formatDate = useCallback((dateString) => {
     if (!dateString) return '';
@@ -213,18 +215,18 @@ const StudentChatInterface = () => {
     const today = new Date();
     
     if (date.toDateString() === today.toDateString()) {
-      return 'Hôm nay';
+      return t('studentChat.time.today');
     }
     
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     
     if (date.toDateString() === yesterday.toDateString()) {
-      return 'Hôm qua';
+      return t('studentChat.time.yesterday');
     }
     
     return date.toLocaleDateString();
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (token && user && user.roles === 'student') {
@@ -261,10 +263,10 @@ const StudentChatInterface = () => {
         <div className="not-authorized-content">
           <CustomerServiceOutlined />
           <Text type="danger" strong>
-            Bạn không có quyền truy cập tính năng chat
+            {t('studentChat.notAuthorized.title')}
           </Text>
           <Text type="secondary">
-            Chỉ học viên mới có thể sử dụng tính năng này
+            {t('studentChat.notAuthorized.description')}
           </Text>
         </div>
       </Card>
@@ -290,7 +292,7 @@ const StudentChatInterface = () => {
                   <TabPane 
                     tab={
                       <span>
-                        <TeamOutlined /> Hỗ trợ
+                        <TeamOutlined /> {t('studentChat.tabs.support')}
                         {getTotalUnread('admins') > 0 && (
                           <Badge count={getTotalUnread('admins')} style={{ marginLeft: 8 }} />
                         )}
@@ -301,7 +303,7 @@ const StudentChatInterface = () => {
                   <TabPane 
                     tab={
                       <span>
-                        <SolutionOutlined /> Giảng viên
+                        <SolutionOutlined /> {t('studentChat.tabs.teachers')}
                         {getTotalUnread('teachers') > 0 && (
                           <Badge count={getTotalUnread('teachers')} style={{ marginLeft: 8 }} />
                         )}
@@ -316,8 +318,8 @@ const StudentChatInterface = () => {
             <div className="student-chat-info">
               <Text type="secondary">
                 {activeTab === 'admins' 
-                  ? 'Chọn quản trị viên để liên hệ hỗ trợ' 
-                  : 'Chọn giảng viên để liên hệ học tập'}
+                  ? t('studentChat.select.support') 
+                  : t('studentChat.select.teachers')}
               </Text>
             </div>
             
@@ -361,7 +363,9 @@ const StudentChatInterface = () => {
                         </Text>
                         <Badge 
                           status={activeTab === 'admins' ? 'processing' : 'success'}
-                          text={activeTab === 'admins' ? 'Quản trị viên' : 'Giảng viên'}
+                          text={activeTab === 'admins' 
+                            ? t('studentChat.roles.admin') 
+                            : t('studentChat.roles.teacher')}
                           className="user-role-badge"
                         />
                       </div>
@@ -375,8 +379,8 @@ const StudentChatInterface = () => {
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
                     description={
                       activeTab === 'admins' 
-                        ? 'Không có quản trị viên nào online' 
-                        : 'Bạn chưa đăng ký khóa học nào'
+                        ? t('studentChat.empty.noAdmins') 
+                        : t('studentChat.empty.noTeachers')
                     }
                   />
                 )
@@ -407,7 +411,9 @@ const StudentChatInterface = () => {
                       </Text>
                       <Badge 
                         status={selectedUser.roles === 'admin' ? 'processing' : 'success'}
-                        text={selectedUser.roles === 'admin' ? 'Quản trị viên' : 'Giảng viên'}
+                        text={selectedUser.roles === 'admin' 
+                          ? t('studentChat.roles.admin') 
+                          : t('studentChat.roles.teacher')}
                         className="user-role-badge"
                       />
                     </div>
@@ -418,8 +424,8 @@ const StudentChatInterface = () => {
                   <MessageOutlined />
                   <Text strong>
                     {activeTab === 'admins' 
-                      ? 'Chọn quản trị viên để liên hệ hỗ trợ' 
-                      : 'Chọn giảng viên để liên hệ học tập'}
+                      ? t('studentChat.select.support') 
+                      : t('studentChat.select.teachers')}
                   </Text>
                 </div>
               )
@@ -432,10 +438,10 @@ const StudentChatInterface = () => {
                     <div className="student-chat-empty-state">
                       <MessageOutlined />
                       <Text type="secondary">
-                        Chưa có tin nhắn nào
+                        {t('studentChat.messages.noMessages')}
                       </Text>
                       <Text type="secondary">
-                        Hãy bắt đầu cuộc trò chuyện với {selectedUser.name}!
+                        {t('studentChat.messages.startConversation', { name: selectedUser.name })}
                       </Text>
                     </div>
                   ) : (
@@ -474,7 +480,7 @@ const StudentChatInterface = () => {
                                   <div className="student-message-time">
                                     {formatTime(msg.created_at)}
                                     {msg.sender_id === user.id && msg.is_read === 1 && (
-                                      <span className="read-status">✓ Đã đọc</span>
+                                      <span className="read-status">{t('studentChat.messages.read')}</span>
                                     )}
                                   </div>
                                 </div>
@@ -490,7 +496,7 @@ const StudentChatInterface = () => {
 
                 <div className="student-chat-input-container">
                   <TextArea
-                    placeholder={`Nhắn tin cho ${selectedUser.name}...`}
+                    placeholder={t('studentChat.input.placeholder', { name: selectedUser.name })}
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
@@ -505,7 +511,7 @@ const StudentChatInterface = () => {
                     className="student-chat-send-button"
                     size="large"
                   >
-                    Gửi
+                    {t('studentChat.buttons.send')}
                   </Button>
                 </div>
               </>
@@ -518,13 +524,13 @@ const StudentChatInterface = () => {
                 )}
                 <Text type="secondary">
                   {activeTab === 'admins' 
-                    ? 'Chọn một quản trị viên từ danh sách để liên hệ hỗ trợ' 
-                    : 'Chọn một giảng viên từ danh sách để liên hệ học tập'}
+                    ? t('studentChat.select.instructions.admin') 
+                    : t('studentChat.select.instructions.teacher')}
                 </Text>
                 <Text type="secondary">
                   {activeTab === 'admins' 
-                    ? 'Chúng tôi luôn sẵn sàng hỗ trợ bạn!' 
-                    : 'Giảng viên sẽ hỗ trợ bạn trong quá trình học tập'}
+                    ? t('studentChat.select.supportMessage') 
+                    : t('studentChat.select.teacherSupportMessage')}
                 </Text>
               </div>
             )}

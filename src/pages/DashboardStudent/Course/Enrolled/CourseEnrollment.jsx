@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { message, Modal, Input, Button, Pagination, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import "./EnrolledCourses.css";
-import { Option } from "antd/es/mentions";
+
+const { Option } = Select;
 
 function EnrolledCourses() {
   const { t } = useTranslation();
@@ -19,20 +20,21 @@ function EnrolledCourses() {
 
   const coursesPerPage = 8;
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const res = await axios.get(
-          `https://learning-mini-be.onrender.com/enrolled-courses/${user.id}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setCourses(res.data);
-      } catch (err) {
-        messageApi.error(t('enrolledCourses.messages.loadError'));
-      }
-    };
-    fetchCourses();
+  const fetchCourses = useCallback(async () => {
+    try {
+      const res = await axios.get(
+        `https://learning-mini-be.onrender.com/enrolled-courses/${user.id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setCourses(res.data);
+    } catch (err) {
+      messageApi.error(t('enrolledCourses.messages.loadError'));
+    }
   }, [user, token, messageApi, t]);
+
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
 
   useEffect(() => {
     let sorted = [...courses];
@@ -96,13 +98,13 @@ function EnrolledCourses() {
         <>
           <div className="enrolled-controls">
             <Select
-                value={sortOrder}
-                onChange={value => setSortOrder(value)}
-                style={{ width: 150 }}
-              >
-                <Option value="a-z">{t('enrolledCourses.sort.aToZ')}</Option>
-                <Option value="z-a">{t('enrolledCourses.sort.zToA')}</Option>
-              </Select>
+              value={sortOrder}
+              onChange={value => setSortOrder(value)}
+              style={{ width: 150 }}
+            >
+              <Option value="a-z">{t('enrolledCourses.sort.aToZ')}</Option>
+              <Option value="z-a">{t('enrolledCourses.sort.zToA')}</Option>
+            </Select>
           </div>
           <div className="enrolled-grid">
             {currentCourses.map((c) => (

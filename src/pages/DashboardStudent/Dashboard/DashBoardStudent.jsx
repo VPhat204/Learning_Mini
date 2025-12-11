@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import DashboardOverview from "./Overview/DashboardOverview";
 import ScheduleStudent from "../Schedules/ScheduleStudent";
 import Courses from "../Course/Courses";
-import EnrolledCourse from "../Course/CourseEnrollment";
+import EnrolledCourse from "../Course/Enrolled/CourseEnrollment";
 import TeacherList from "../Teachers/TeacherList";
-import StudentAssignments from "../Assignment/AssignmentPage";
-import './DashboardStudent.css';
+import StudentScores from "../Score/TableScore";
+import './DashBoardStudent.css';
 import StudentChatInterface from "../Chat/StudentChatInterface";
 
 const { Sider, Content } = Layout;
@@ -30,8 +30,8 @@ function DashboardStudent() {
         return <EnrolledCourse/>;
       case "mycourses":
         return <Courses refreshTrigger={refreshCourses} />;
-      case "assignments":
-        return <StudentAssignments />;
+      case "scores":
+        return <StudentScores />;
       case "schedules":
         return <ScheduleStudent />;
       case "chats":
@@ -65,9 +65,9 @@ function DashboardStudent() {
       label: t('dashboardStudent.menu.myCourses')
     },
     {
-      key: "assignments",
+      key: "scores",
       icon: <ReadOutlined />,
-      label: t('dashboardStudent.menu.assignments')
+      label: t('dashboardStudent.menu.scores')
     },
     {
       key: "chats",

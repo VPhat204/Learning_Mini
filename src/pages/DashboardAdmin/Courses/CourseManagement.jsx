@@ -33,6 +33,7 @@ import {
   CheckOutlined,
   StopOutlined
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/themeContext';
 import './CourseManagement.css';
 
@@ -41,6 +42,7 @@ const { TabPane } = Tabs;
 const { Paragraph } = Typography;
 
 const CourseManagement = () => {
+  const { t } = useTranslation();
   const [courses, setCourses] = useState([]);
   const [pendingCourses, setPendingCourses] = useState([]);
   const [rejectedCourses, setRejectedCourses] = useState([]);
@@ -82,14 +84,14 @@ const CourseManagement = () => {
         setUserRole(tokenData.roles);
         setUserId(tokenData.id);
       } catch (error) {
-        console.error('Error parsing token:', error);
+        console.error(t('courseadminManagement.errors.parseToken'), error);
       }
     };
     
     if (token) {
       getUserInfo();
     }
-  }, [token]);
+  }, [token, t]);
 
   const fetchAllCourses = useCallback(async () => {
     setLoading(true);
@@ -123,12 +125,12 @@ const CourseManagement = () => {
         setRejectedCourses([]);
       }
     } catch (error) {
-      console.error('Error fetching courses:', error);
-      messageApi.error('Lỗi khi tải danh sách khóa học');
+      console.error(t('courseadminManagement.errors.fetchCourses'), error);
+      messageApi.error(t('courseadminManagement.errors.loadCoursesFailed'));
     } finally {
       setLoading(false);
     }
-  }, [token, messageApi, userRole, userId]);
+  }, [token, messageApi, userRole, userId, t]);
 
   useEffect(() => {
     if (userRole) {
@@ -146,7 +148,7 @@ const CourseManagement = () => {
       const data = await response.json();
       setStudents(data.students || []);
     } catch (error) {
-      messageApi.error('Lỗi khi tải danh sách học viên');
+      messageApi.error(t('courseadminManagement.errors.loadStudentsFailed'));
     }
   };
 
@@ -171,14 +173,14 @@ const CourseManagement = () => {
       });
 
       if (response.ok) {
-        messageApi.success('Xóa khóa học thành công');
+        messageApi.success(t('courseadminManagement.messages.deleteSuccess'));
         refreshData();
       } else {
         const errorData = await response.json();
-        messageApi.error(errorData.message || 'Lỗi khi xóa khóa học');
+        messageApi.error(errorData.message || t('courseadminManagement.errors.deleteFailed'));
       }
     } catch (error) {
-      messageApi.error('Lỗi kết nối đến server');
+      messageApi.error(t('courseadminManagement.errors.connectionError'));
     }
   };
 
@@ -188,7 +190,7 @@ const CourseManagement = () => {
       await fetchCourseStudents(course.id);
       setStudentsModalVisible(true);
     } catch (error) {
-      messageApi.error('Lỗi khi tải danh sách học viên');
+      messageApi.error(t('courseadminManagement.errors.loadStudentsFailed'));
     }
   };
 
@@ -226,8 +228,8 @@ const CourseManagement = () => {
       if (response.ok) {
         messageApi.success(
           approvalAction === 'approve' 
-            ? 'Đã duyệt khóa học thành công' 
-            : 'Đã từ chối khóa học thành công'
+            ? t('courseadminManagement.messages.approveSuccess')
+            : t('courseadminManagement.messages.rejectSuccess')
         );
         setApprovalModalVisible(false);
         setCourseForApproval(null);
@@ -239,10 +241,10 @@ const CourseManagement = () => {
         }
       } else {
         const errorData = await response.json();
-        messageApi.error(errorData.message || 'Lỗi khi xử lý khóa học');
+        messageApi.error(errorData.message || t('courseadminManagement.errors.processFailed'));
       }
     } catch (error) {
-      messageApi.error('Lỗi kết nối đến server');
+      messageApi.error(t('courseadminManagement.errors.connectionError'));
     }
   };
 
@@ -264,38 +266,38 @@ const CourseManagement = () => {
       });
 
       if (response.ok) {
-        messageApi.success(editingCourse ? 'Cập nhật thành công' : 'Thêm khóa học thành công');
+        messageApi.success(editingCourse ? t('courseadminManagement.messages.updateSuccess') : t('courseadminManagement.messages.addSuccess'));
         setModalVisible(false);
         refreshData();
       } else {
         const errorData = await response.json();
-        messageApi.error(errorData.message || 'Lỗi khi lưu khóa học');
+        messageApi.error(errorData.message || t('courseadminManagement.errors.saveFailed'));
       }
     } catch (error) {
-      messageApi.error('Lỗi kết nối đến server');
+      messageApi.error(t('courseadminManagement.errors.connectionError'));
     }
   };
 
   const renderStatusTag = (isApproved) => {
     if (isApproved === 1) {
-      return <Tag color="success" icon={<CheckCircleOutlined />}>Đã duyệt</Tag>;
+      return <Tag color="success" icon={<CheckCircleOutlined />}>{t('courseadminManagement.status.approved')}</Tag>;
     } else if (isApproved === 0) {
-      return <Tag color="warning" icon={<ClockCircleOutlined />}>Chờ duyệt</Tag>;
+      return <Tag color="warning" icon={<ClockCircleOutlined />}>{t('courseadminManagement.status.pending')}</Tag>;
     } else if (isApproved === 2) {
-      return <Tag color="error" icon={<CloseCircleOutlined />}>Từ chối</Tag>;
+      return <Tag color="error" icon={<CloseCircleOutlined />}>{t('courseadminManagement.status.rejected')}</Tag>;
     } else {
-      return <Tag color="default">Không xác định</Tag>;
+      return <Tag color="default">{t('courseadminManagement.status.unknown')}</Tag>;
     }
   };
 
   const baseColumns = [
     {
-      title: 'Tên khóa học',
+      title: t('courseadminManagement.columns.title'),
       dataIndex: 'title',
       key: 'title',
       width: 200,
       render: (text, record) => (
-        <div className="course-title-cell">
+        <div className="course-admin-title-cell">
           <span className="table-text course-title">{text}</span>
           <div className="course-status">
             {renderStatusTag(record.is_approved)}
@@ -304,7 +306,7 @@ const CourseManagement = () => {
       )
     },
     {
-      title: 'Mô tả',
+      title: t('courseadminManagement.columns.description'),
       dataIndex: 'description',
       key: 'description',
       ellipsis: true,
@@ -313,23 +315,23 @@ const CourseManagement = () => {
           ellipsis={{ 
             rows: 2, 
             expandable: true, 
-            symbol: 'Xem thêm' 
+            symbol: t('courseadminManagement.actions.viewMore') 
           }}
           className="table-text"
         >
-          {text || 'Không có mô tả'}
+          {text || t('courseadminManagement.text.noDescription')}
         </Paragraph>
       )
     },
     {
-      title: 'Giảng viên',
+      title: t('courseadminManagement.columns.teacher'),
       dataIndex: 'teacher_name',
       key: 'teacher_name',
       render: (teacherName, record) => (
         <div className="teacher-info">
           <UserOutlined className="teacher-icon" />
           <div>
-            <span className="teacher-course-name">{teacherName || 'Chưa xác định'}</span>
+            <span className="teacher-course-name">{teacherName || t('courseadminManagement.text.unknown')}</span>
             {userRole === 'admin' && record.teacher_email && (
               <div className="teacher-email">
                 <small>{record.teacher_email}</small>
@@ -340,28 +342,28 @@ const CourseManagement = () => {
       )
     },
     {
-      title: 'Thời lượng',
+      title: t('courseadminManagement.columns.duration'),
       key: 'duration',
       width: 150,
       render: (_, record) => (
         <div className="duration-info">
           <Tag color="blue" className="duration-tag">
-            {record.lessons || 0} buổi
+            {record.lessons || 0} {t('courseadminManagement.text.lessons')}
           </Tag>
           <Tag color="green" className="duration-tag">
-            {record.hours || 0} giờ
+            {record.hours || 0} {t('courseadminManagement.text.hours')}
           </Tag>
         </div>
       )
     },
     {
-      title: 'Ngày tạo',
+      title: t('courseadminManagement.columns.createdAt'),
       dataIndex: 'created_at',
       key: 'created_at',
       width: 120,
       render: (date) => (
         <span className="table-text date-text">
-          {date ? new Date(date).toLocaleDateString('vi-VN') : 'N/A'}
+          {date ? new Date(date).toLocaleDateString('vi-VN') : t('courseadminManagement.text.notAvailable')}
         </span>
       )
     }
@@ -369,8 +371,8 @@ const CourseManagement = () => {
 
   const actionColumns = {
     approved: (_, record) => (
-      <Space className="action-buttons">
-        <Tooltip title="Xem học viên">
+      <Space className="action-admin-buttons">
+        <Tooltip title={t('courseadminManagement.tooltips.viewStudents')}>
           <Button 
             size="small"
             icon={<TeamOutlined />} 
@@ -379,7 +381,7 @@ const CourseManagement = () => {
         </Tooltip>
         {(userRole === 'admin' || (userRole === 'teacher' && record.teacher_id === parseInt(userId))) && (
           <>
-            <Tooltip title="Chỉnh sửa">
+            <Tooltip title={t('courseadminManagement.tooltips.edit')}>
               <Button 
                 size="small"
                 icon={<EditOutlined />} 
@@ -387,13 +389,13 @@ const CourseManagement = () => {
               />
             </Tooltip>
             <Popconfirm
-              title="Xóa khóa học"
-              description="Bạn có chắc chắn muốn xóa khóa học này?"
+              title={t('courseadminManagement.confirm.deleteTitle')}
+              description={t('courseadminManagement.confirm.deleteDescription')}
               onConfirm={() => handleDelete(record.id)}
-              okText="Xóa"
-              cancelText="Hủy"
+              okText={t('commonAdmin.delete')}
+              cancelText={t('commonAdmin.cancel')}
             >
-              <Tooltip title="Xóa">
+              <Tooltip title={t('courseadminManagement.tooltips.delete')}>
                 <Button size="small" icon={<DeleteOutlined />} danger />
               </Tooltip>
             </Popconfirm>
@@ -405,7 +407,7 @@ const CourseManagement = () => {
       <Space className="action-buttons">
         {userRole === 'admin' && (
           <>
-            <Tooltip title="Duyệt khóa học">
+            <Tooltip title={t('courseadminManagement.tooltips.approve')}>
               <Button 
                 type="primary"
                 size="small"
@@ -413,7 +415,7 @@ const CourseManagement = () => {
                 onClick={() => handleApproveCourse(record)}
               />
             </Tooltip>
-            <Tooltip title="Từ chối">
+            <Tooltip title={t('courseadminManagement.tooltips.reject')}>
               <Button 
                 danger
                 size="small"
@@ -425,13 +427,13 @@ const CourseManagement = () => {
         )}
         {(userRole === 'admin' || (userRole === 'teacher' && record.teacher_id === parseInt(userId))) && (
           <Popconfirm
-            title="Xóa khóa học"
-            description="Bạn có chắc chắn muốn xóa khóa học này?"
+            title={t('courseadminManagement.confirm.deleteTitle')}
+            description={t('courseadminManagement.confirm.deleteDescription')}
             onConfirm={() => handleDelete(record.id)}
-            okText="Xóa"
-            cancelText="Hủy"
+            okText={t('commonAdmin.delete')}
+            cancelText={t('commonAdmin.cancel')}
           >
-            <Tooltip title="Xóa">
+            <Tooltip title={t('courseadminManagement.tooltips.delete')}>
               <Button size="small" icon={<DeleteOutlined />} danger />
             </Tooltip>
           </Popconfirm>
@@ -442,7 +444,7 @@ const CourseManagement = () => {
       <Space className="action-buttons">
         {userRole === 'admin' && (
           <>
-            <Tooltip title="Duyệt lại">
+            <Tooltip title={t('courseadminManagement.tooltips.reApprove')}>
               <Button 
                 type="primary"
                 size="small"
@@ -454,13 +456,13 @@ const CourseManagement = () => {
         )}
         {(userRole === 'admin' || (userRole === 'teacher' && record.teacher_id === parseInt(userId))) && (
           <Popconfirm
-            title="Xóa khóa học"
-            description="Bạn có chắc chắn muốn xóa khóa học này?"
+            title={t('courseadminManagement.confirm.deleteTitle')}
+            description={t('courseadminManagement.confirm.deleteDescription')}
             onConfirm={() => handleDelete(record.id)}
-            okText="Xóa"
-            cancelText="Hủy"
+            okText={t('commonAdmin.delete')}
+            cancelText={t('commonAdmin.cancel')}
           >
-            <Tooltip title="Xóa">
+            <Tooltip title={t('courseadminManagement.tooltips.delete')}>
               <Button size="small" icon={<DeleteOutlined />} danger />
             </Tooltip>
           </Popconfirm>
@@ -472,7 +474,7 @@ const CourseManagement = () => {
   const getColumns = (tabKey) => {
     const columns = [...baseColumns];
     columns.push({
-      title: 'Thao tác',
+      title: t('courseadminManagement.columns.actions'),
       key: 'actions',
       width: tabKey === 'pending' ? 150 : 120,
       render: actionColumns[tabKey]
@@ -482,45 +484,45 @@ const CourseManagement = () => {
 
   const studentColumns = [
     {
-      title: 'Họ tên',
+      title: t('courseadminManagement.columns.studentName'),
       dataIndex: 'student_name',
       key: 'student_name',
       render: (text) => <span className="table-text">{text}</span>
     },
     {
-      title: 'Email',
+      title: t('courseadminManagement.columns.email'),
       dataIndex: 'email',
       key: 'email',
       render: (text) => <span className="table-text">{text}</span>
     },
     {
-      title: 'Số điện thoại',
+      title: t('courseadminManagement.columns.phone'),
       dataIndex: 'phone',
       key: 'phone',
       render: (phone) => (
         <span className="table-text">
-          {phone || 'Chưa cập nhật'}
+          {phone || t('courseadminManagement.text.notUpdated')}
         </span>
       )
     },
     {
-      title: 'Giới tính',
+      title: t('courseadminManagement.columns.gender'),
       dataIndex: 'gender',
       key: 'gender',
       render: (gender) => {
         const genderMap = {
-          'male': 'Nam',
-          'female': 'Nữ'
+          'male': t('courseadminManagement.text.male'),
+          'female': t('courseadminManagement.text.female')
         };
         return (
           <span className="table-text">
-            {genderMap[gender] || 'Khác'}
+            {genderMap[gender] || t('courseadminManagement.text.other')}
           </span>
         );
       }
     },
     {
-      title: 'Ngày đăng ký',
+      title: t('courseadminManagement.columns.enrollmentDate'),
       dataIndex: 'enrolled_at',
       key: 'enrolled_at',
       render: (date) => (
@@ -531,6 +533,16 @@ const CourseManagement = () => {
     }
   ];
 
+  const getHeaderText = () => {
+    if (userRole === 'admin') {
+      return t('courseadminManagement.headers.management');
+    } else if (userRole === 'teacher') {
+      return t('courseadminManagement.headers.myCourses');
+    } else {
+      return t('courseadminManagement.headers.viewCourses');
+    }
+  };
+
   return (
     <ConfigProvider theme={themeConfig}>
       <div className={`course-management ${darkMode ? 'dark-mode' : 'light-mode'}`}>
@@ -538,13 +550,9 @@ const CourseManagement = () => {
         <Card className="course-management-card">
           <div className="card-header">
             <div>
-              <h2 className="course-management-header">Quản lý Khóa học</h2>
+              <h2 className="course-management-header">{t('courseadminManagement.title')}</h2>
               <p className="course-management-subheader">
-                {userRole === 'admin' 
-                  ? 'Quản lý và duyệt các khóa học' 
-                  : userRole === 'teacher'
-                  ? 'Quản lý khóa học của bạn'
-                  : 'Xem danh sách khóa học'}
+                {getHeaderText()}
               </p>
             </div>
           </div>
@@ -553,7 +561,7 @@ const CourseManagement = () => {
             <Col span={6}>
               <Card className="statistic-card">
                 <Statistic 
-                  title="Tổng số khóa học" 
+                  title={t('courseadminManagement.stats.totalCourses')} 
                   value={courses.length + pendingCourses.length + rejectedCourses.length}
                   className="statistic-value"
                 />
@@ -562,7 +570,7 @@ const CourseManagement = () => {
             <Col span={6}>
               <Card className="statistic-card">
                 <Statistic 
-                  title="Đã duyệt" 
+                  title={t('courseadminManagement.stats.approved')} 
                   value={courses.length}
                   valueStyle={{ color: '#52c41a' }}
                   className="statistic-value"
@@ -574,7 +582,7 @@ const CourseManagement = () => {
               <Col span={6}>
                 <Card className="statistic-card">
                   <Statistic 
-                    title="Chờ duyệt" 
+                    title={t('courseadminManagement.stats.pending')} 
                     value={pendingCourses.length}
                     valueStyle={{ color: '#faad14' }}
                     className="statistic-value"
@@ -586,7 +594,7 @@ const CourseManagement = () => {
             <Col span={6}>
               <Card className="statistic-card">
                 <Statistic 
-                  title="Từ chối" 
+                  title={t('courseadminManagement.stats.rejected')} 
                   value={rejectedCourses.length}
                   valueStyle={{ color: '#ff4d4f' }}
                   className="statistic-value"
@@ -606,7 +614,7 @@ const CourseManagement = () => {
               tab={
                 <span className="tab-title">
                   <CheckCircleOutlined className="tab-icon" style={{ color: '#52c41a' }} />
-                  Đã duyệt
+                  {t('courseadminManagement.tabs.approved')}
                   {courses.length > 0 && (
                     <Badge 
                       count={courses.length} 
@@ -630,7 +638,7 @@ const CourseManagement = () => {
                 }}
                 className="course-table"
                 scroll={{ x: 1000 }}
-                locale={{ emptyText: 'Không có khóa học nào đã duyệt' }}
+                locale={{ emptyText: t('courseadminManagement.empty.noApprovedCourses') }}
                 loading={loading}
               />
             </TabPane>
@@ -639,7 +647,7 @@ const CourseManagement = () => {
                 tab={
                   <span className="tab-title">
                     <ClockCircleOutlined className="tab-icon" style={{ color: '#faad14' }} />
-                    Chờ duyệt
+                    {t('courseadminManagement.tabs.pending')}
                     {pendingCourses.length > 0 && (
                       <Badge 
                         count={pendingCourses.length} 
@@ -662,7 +670,7 @@ const CourseManagement = () => {
                   }}
                   className="course-table"
                   scroll={{ x: 1000 }}
-                  locale={{ emptyText: 'Không có khóa học nào chờ duyệt' }}
+                  locale={{ emptyText: t('courseadminManagement.empty.noPendingCourses') }}
                   loading={loading}
                 />
               </TabPane>
@@ -672,7 +680,7 @@ const CourseManagement = () => {
               tab={
                 <span className="tab-title">
                   <CloseCircleOutlined className="tab-icon" style={{ color: '#ff4d4f' }} />
-                  Từ chối
+                  {t('courseadminManagement.tabs.rejected')}
                   {rejectedCourses.length > 0 && (
                     <Badge 
                       count={rejectedCourses.length} 
@@ -695,14 +703,14 @@ const CourseManagement = () => {
                 }}
                 className="course-table"
                 scroll={{ x: 1000 }}
-                locale={{ emptyText: 'Không có khóa học nào bị từ chối' }}
+                locale={{ emptyText: t('courseadminManagement.empty.noRejectedCourses') }}
                 loading={loading}
               />
             </TabPane>
           </Tabs>
         </Card>
         <Modal
-          title={editingCourse ? 'Chỉnh sửa Khóa học' : 'Thêm Khóa học Mới'}
+          title={editingCourse ? t('courseadminManagement.modals.editTitle') : t('courseadminManagement.modals.addTitle')}
           open={modalVisible}
           onCancel={() => setModalVisible(false)}
           footer={null}
@@ -718,27 +726,27 @@ const CourseManagement = () => {
           >
             <Form.Item
               name="title"
-              label="Tên khóa học"
-              rules={[{ required: true, message: 'Vui lòng nhập tên khóa học' }]}
+              label={t('courseadminManagement.form.courseName')}
+              rules={[{ required: true, message: t('courseadminManagement.validation.courseNameRequired') }]}
             >
-              <Input className="form-input" placeholder="Nhập tên khóa học" />
+              <Input className="form-input" placeholder={t('courseadminManagement.placeholder.courseName')} />
             </Form.Item>
             <Form.Item
               name="description"
-              label="Mô tả"
-              rules={[{ required: true, message: 'Vui lòng nhập mô tả' }]}
+              label={t('courseadminManagement.form.description')}
+              rules={[{ required: true, message: t('courseadminManagement.validation.descriptionRequired') }]}
             >
               <TextArea 
                 rows={4} 
                 className="form-textarea" 
-                placeholder="Nhập mô tả chi tiết về khóa học"
+                placeholder={t('courseadminManagement.placeholder.description')}
               />
             </Form.Item>
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
                   name="lessons"
-                  label="Số buổi học"
+                  label={t('courseadminManagement.form.lessons')}
                 >
                   <InputNumber 
                     min={1} 
@@ -751,7 +759,7 @@ const CourseManagement = () => {
               <Col span={12}>
                 <Form.Item
                   name="hours"
-                  label="Tổng số giờ"
+                  label={t('courseadminManagement.form.hours')}
                 >
                   <InputNumber 
                     min={1} 
@@ -766,17 +774,17 @@ const CourseManagement = () => {
             <Form.Item>
               <div className="form-actions">
                 <Button onClick={() => setModalVisible(false)}>
-                  Hủy
+                  {t('commonAdmin.cancel')}
                 </Button>
                 <Button type="primary" htmlType="submit" loading={loading}>
-                  {editingCourse ? 'Cập nhật' : 'Thêm'}
+                  {editingCourse ? t('commonAdmin.update') : t('commonAdmin.add')}
                 </Button>
               </div>
             </Form.Item>
           </Form>
         </Modal>
         <Modal
-          title={courseForApproval ? `Xét duyệt khóa học: ${courseForApproval.title}` : 'Xét duyệt khóa học'}
+          title={courseForApproval ? t('courseadminManagement.modals.approveTitle', { title: courseForApproval.title }) : t('courseadminManagement.modals.approve')}
           open={approvalModalVisible}
           onCancel={() => {
             setApprovalModalVisible(false);
@@ -790,20 +798,20 @@ const CourseManagement = () => {
           {courseForApproval && (
             <div className="approval-info">
               <div className="info-item">
-                <strong>Giảng viên:</strong> {courseForApproval.teacher_name}
+                <strong>{t('courseadminManagement.modals.teacher')}:</strong> {courseForApproval.teacher_name}
               </div>
               <div className="info-item">
-                <strong>Email giảng viên:</strong> {courseForApproval.teacher_email}
+                <strong>{t('courseadminManagement.modals.teacherEmail')}:</strong> {courseForApproval.teacher_email}
               </div>
               <div className="info-item">
-                <strong>Mô tả:</strong> 
+                <strong>{t('courseadminManagement.modals.description')}:</strong> 
                 <div className="description-text">{courseForApproval.description}</div>
               </div>
               <div className="info-item">
-                <strong>Ngày tạo:</strong> {new Date(courseForApproval.created_at).toLocaleString('vi-VN')}
+                <strong>{t('courseadminManagement.modals.createdAt')}:</strong> {new Date(courseForApproval.created_at).toLocaleString('vi-VN')}
               </div>
               <div className="info-item">
-                <strong>Trạng thái hiện tại:</strong> {renderStatusTag(courseForApproval.is_approved)}
+                <strong>{t('courseadminManagement.modals.currentStatus')}:</strong> {renderStatusTag(courseForApproval.is_approved)}
               </div>
             </div>
           )}
@@ -816,8 +824,8 @@ const CourseManagement = () => {
           >
             <Form.Item
               name="action"
-              label="Hành động"
-              rules={[{ required: true, message: 'Vui lòng chọn hành động' }]}
+              label={t('courseadminManagement.modals.action')}
+              rules={[{ required: true, message: t('courseadminManagement.validation.actionRequired') }]}
             >
               <Radio.Group 
                 value={approvalAction} 
@@ -826,25 +834,25 @@ const CourseManagement = () => {
               >
                 <Radio value="approve" style={{ display: 'block', marginBottom: 8 }}>
                   <CheckCircleOutlined style={{ color: '#52c41a', marginRight: 8 }} />
-                  <strong>Duyệt khóa học</strong>
-                  <div className="radio-description">Khóa học sẽ được hiển thị cho học viên</div>
+                  <strong>{t('courseadminManagement.modals.approveOption')}</strong>
+                  <div className="radio-description">{t('courseadminManagement.modals.approveDescription')}</div>
                 </Radio>
                 <Radio value="reject" style={{ display: 'block' }}>
                   <CloseCircleOutlined style={{ color: '#ff4d4f', marginRight: 8 }} />
-                  <strong>Từ chối khóa học</strong>
-                  <div className="radio-description">Khóa học sẽ không được hiển thị</div>
+                  <strong>{t('courseadminManagement.modals.rejectOption')}</strong>
+                  <div className="radio-description">{t('courseadminManagement.modals.rejectDescription')}</div>
                 </Radio>
               </Radio.Group>
             </Form.Item>
             <Form.Item
               name="reason"
-              label="Lý do"
-              rules={[{ required: true, message: 'Vui lòng nhập lý do' }]}
+              label={t('courseadminManagement.modals.reason')}
+              rules={[{ required: true, message: t('courseadminManagement.validation.reasonRequired') }]}
             >
               <TextArea 
                 rows={3} 
                 className="form-textarea" 
-                placeholder="Nhập lý do duyệt/từ chối..."
+                placeholder={t('courseadminManagement.placeholder.reason')}
               />
             </Form.Item>
             <Form.Item>
@@ -853,7 +861,7 @@ const CourseManagement = () => {
                   setApprovalModalVisible(false);
                   setCourseForApproval(null);
                 }}>
-                  Hủy
+                  {t('commonAdmin.cancel')}
                 </Button>
                 <Button 
                   type="primary" 
@@ -861,19 +869,19 @@ const CourseManagement = () => {
                   loading={loading}
                   danger={approvalAction === 'reject'}
                 >
-                  {approvalAction === 'approve' ? 'Duyệt' : 'Từ chối'}
+                  {approvalAction === 'approve' ? t('courseadminManagement.buttons.approve') : t('courseadminManagement.buttons.reject')}
                 </Button>
               </div>
             </Form.Item>
           </Form>
         </Modal>
         <Modal
-          title={`Danh sách Học viên - ${selectedCourse?.title}`}
+          title={t('courseadminManagement.modals.studentsTitle', { title: selectedCourse?.title })}
           open={studentsModalVisible}
           onCancel={() => setStudentsModalVisible(false)}
           footer={[
             <Button key="close" onClick={() => setStudentsModalVisible(false)}>
-              Đóng
+              {t('commonAdmin.close')}
             </Button>
           ]}
           width={800}
@@ -881,10 +889,10 @@ const CourseManagement = () => {
         >
           <div className="student-modal-info">
             <div className="info-item">
-              <strong>Giảng viên:</strong> {selectedCourse?.teacher_name}
+              <strong>{t('courseadminManagement.modals.teacher')}:</strong> {selectedCourse?.teacher_name}
             </div>
             <div className="info-item">
-              <strong>Tổng số học viên:</strong> {students.length}
+              <strong>{t('courseadminManagement.modals.totalStudents')}:</strong> {students.length}
             </div>
           </div>
           <Table 
@@ -892,7 +900,7 @@ const CourseManagement = () => {
             dataSource={students} 
             rowKey="student_id"
             pagination={{ pageSize: 5 }}
-            locale={{ emptyText: 'Chưa có học viên đăng ký khóa học này' }}
+            locale={{ emptyText: t('courseadminManagement.empty.noStudents') }}
             className="student-table"
           />
         </Modal>

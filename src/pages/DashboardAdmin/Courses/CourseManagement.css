@@ -29,7 +29,7 @@
   background-color: #ff4d4f;
 }
 
-.course-title-cell {
+.course-admin-title-cell {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -88,7 +88,7 @@
   color: #cccccc;
 }
 
-.action-buttons {
+.action-admin-buttons {
   display: flex;
   gap: 6px;
 }
@@ -235,7 +235,6 @@
 .student-modal-info {
   margin-bottom: 16px;
   padding: 16px;
-  background-color: #fafafa;
   border-radius: 8px;
   border: 1px solid #f0f0f0;
 }

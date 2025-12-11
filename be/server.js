@@ -343,17 +343,20 @@ app.get("/", (req, res) => {
 
 app.get("/health", async (req, res) => {
   try {
-    const [result] = await db.execute("SELECT 1 as status");
-    res.json({
+    const [result] = await db.execute("SELECT 1 as status, NOW() as db_time");
+      res.json({
       status: "healthy",
       database: "connected",
-      timestamp: new Date().toISOString()
+      dbTimestamp: result[0].db_time,
+      serverTimestamp: new Date().toISOString(),
+      uptime: process.uptime()
     });
   } catch (err) {
     res.status(500).json({
       status: "unhealthy",
       database: "disconnected",
-      error: err.message
+      error: err.message,
+      timestamp: new Date().toISOString()
     });
   }
 });

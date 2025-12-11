@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { Card, Button, Modal, Form, Input, Select, message, Table, Popconfirm } from "antd";
+import { useEffect, useState, useCallback } from "react";
+import { Card, Button, Modal, Form, Input, message, Table, Popconfirm } from "antd";
 import { useTranslation } from "react-i18next";
-import api from "../../../api";
-import "./MyAssignments.css";
+import api from "../../../../api";
+import "./Assignments.css";
 
-export default function MyAssignments() {
+export default function Assignments({ course }) {
   const { t } = useTranslation();
-  const [courses, setCourses] = useState([]);
   const [assignments, setAssignments] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
   const [visibleAssignmentModal, setVisibleAssignmentModal] = useState(false);
   const [visibleQuestionModal, setVisibleQuestionModal] = useState(false);
   const [currentAssignment, setCurrentAssignment] = useState(null);
@@ -18,29 +16,32 @@ export default function MyAssignments() {
   const [form] = Form.useForm();
   const [questionForm] = Form.useForm();
 
-  useEffect(() => {
-    api.get("/courses").then(res => {
-      setCourses(res.data);
-      if (res.data.length > 0) setSelectedCourse(res.data[0].id);
-    });
-  }, []);
+  const courseId = course?.id;
+
+  const loadAssignments = useCallback((id) => {
+    api.get(`/assignments/course/${id}`)
+      .then(res => setAssignments(res.data))
+      .catch(() => message.error(t("assign.errorLoadAssignments")));
+  }, [t]); 
 
   useEffect(() => {
-    if (!selectedCourse) return;
-    setAssignments([]);
-    setSubmissions([]);
-    setCurrentAssignment(null);
-    setQuestions([]);
-    api.get(`/assignments/course/${selectedCourse}`).then(res => setAssignments(res.data));
-  }, [selectedCourse]);
+    if (courseId) {
+      loadAssignments(courseId);
+    }
+  }, [courseId, loadAssignments]);
 
   const handleCreateAssignment = (values) => {
-    api.post("/assignments", values)
+    const assignmentData = {
+      ...values,
+      course_id: courseId
+    };
+
+    api.post("/assignments", assignmentData)
       .then(() => {
         message.success(t("assign.successCreate"));
         form.resetFields();
         setVisibleAssignmentModal(false);
-        api.get(`/assignments/course/${selectedCourse}`).then(res => setAssignments(res.data));
+        loadAssignments(courseId);
       })
       .catch(() => message.error(t("assign.errorCreate")));
   };
@@ -89,7 +90,7 @@ export default function MyAssignments() {
   const handleChangeScore = (submissionId, questionId, value) => {
     setGrading(prev => ({
       ...prev,
-      [submissionId]: { ...prev[submissionId], [questionId]: value !== "" ? Number(value) : undefined },
+      [submissionId]: { ...prev[submissionId], [questionId]: value !== "" ? Number(value) : 0 },
     }));
   };
 
@@ -179,25 +180,47 @@ export default function MyAssignments() {
   return (
     <div className="assign-container">
       <Card
-        title={t("assign.assignments")}
+        title={`${t("assign.assignments")} - ${course?.title || ""}`}
         extra={<Button type="primary" onClick={() => setVisibleAssignmentModal(true)} className="assign-primary-btn">{t("assign.create")}</Button>}
         className="assign-card"
       >
-        <Select
-          className="course-select"
-          value={selectedCourse}
-          onChange={val => setSelectedCourse(val)}
-          options={courses.map(c => ({ label: c.title, value: c.id }))}
-        />
+        <div className="course-info">
+          <p><strong>{t("assign.course")}:</strong> {course?.title}</p>
+          <p><strong>{t("assign.courseId")}:</strong> {courseId}</p>
+        </div>
 
-        {assignments.map(a => (
-          <Card key={a.id} className="assignment-item">
-            <h3>{a.title}</h3>
-            <p>{t("assign.maxScore")}: {a.total_points}</p>
-            <Button type="primary" className="assign-primary-btn" onClick={() => { setCurrentAssignment(a.id); setVisibleQuestionModal(true); loadQuestions(a.id); }}>{t("assign.addQuestion")}</Button>
-            <Button className="ml10 assign-primary-btn" onClick={() => viewSubmissions(a.id)}>{t("assign.viewSubmissions")}</Button>
-          </Card>
-        ))}
+        {assignments.length === 0 ? (
+          <div className="no-assignments">
+            <p>{t("assign.noAssignments")}</p>
+            <Button type="primary" onClick={() => setVisibleAssignmentModal(true)}>
+              {t("assign.createFirstAssignment")}
+            </Button>
+          </div>
+        ) : (
+          assignments.map(a => (
+            <Card key={a.id} className="assignment-item">
+              <h3>{a.title}</h3>
+              <p>{t("assign.maxScore")}: {a.total_points}</p>
+              <Button 
+                type="primary" 
+                className="assign-primary-btn" 
+                onClick={() => { 
+                  setCurrentAssignment(a.id); 
+                  setVisibleQuestionModal(true); 
+                  loadQuestions(a.id); 
+                }}
+              >
+                {t("assign.addQuestion")}
+              </Button>
+              <Button 
+                className="ml10 assign-primary-btn" 
+                onClick={() => viewSubmissions(a.id)}
+              >
+                {t("assign.viewSubmissions")}
+              </Button>
+            </Card>
+          ))
+        )}
       </Card>
 
       <Modal 
@@ -207,32 +230,44 @@ export default function MyAssignments() {
         title={t("assign.createNew")}
         className="assign-modal"
       >
+        <div className="course-info-modal">
+          <p><strong>{t("assign.course")}:</strong> {course?.title}</p>
+        </div>
         <Form form={form} layout="vertical" onFinish={handleCreateAssignment}>
-          <Form.Item name="course_id" label={t("assign.course")} initialValue={selectedCourse} rules={[{ required: true }]}>
-            <Select options={courses.map(c => ({ label: c.title, value: c.id }))} />
-          </Form.Item>
           <Form.Item name="title" label={t("assign.title")} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name="total_points" label={t("assign.maxScore")}>
-            <Input type="number" />
+          <Form.Item name="description" label={t("assign.description")}>
+            <Input.TextArea />
+          </Form.Item>
+          <Form.Item name="total_points" label={t("assign.maxScore")} rules={[{ required: true }]}>
+            <Input type="number" min={1} />
+          </Form.Item>
+          <Form.Item name="deadline" label={t("assign.deadline")}>
+            <Input type="datetime-local" />
           </Form.Item>
         </Form>
       </Modal>
 
       <Modal 
         open={visibleQuestionModal} 
-        onCancel={() => setVisibleQuestionModal(false)} 
+        onCancel={() => {
+          setVisibleQuestionModal(false);
+          setQuestions([]);
+        }} 
         onOk={() => questionForm.submit()} 
         title={t("assign.addQuestion")}
         className="assign-modal"
       >
+        <div className="assignment-info-modal">
+          <p><strong>{t("assign.assignment")}:</strong> {assignments.find(a => a.id === currentAssignment)?.title}</p>
+        </div>
         <Form form={questionForm} layout="vertical" onFinish={handleAddQuestion}>
           <Form.Item name="question_text" label={t("assign.question")} rules={[{ required: true }]}>
             <Input.TextArea />
           </Form.Item>
           <Form.Item name="points" label={t("assign.score")} rules={[{ required: true }]}>
-            <Input type="number" />
+            <Input type="number" min={1} />
           </Form.Item>
         </Form>
 
@@ -242,7 +277,7 @@ export default function MyAssignments() {
             <ul>
               {questions.map(q => (
                 <li key={q.id}>
-                  {q.question_text} ({q.points})
+                  {q.question_text} ({q.points} {t("assign.points")})
                   <Popconfirm title={t("assign.confirmDeleteQuestion")} onConfirm={() => handleDeleteQuestion(q.id)}>
                     <Button danger size="small" className="ml10 assign-danger-btn">{t("assign.delete")}</Button>
                   </Popconfirm>

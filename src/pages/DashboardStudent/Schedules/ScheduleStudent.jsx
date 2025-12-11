@@ -39,7 +39,7 @@ const StudentSchedule = () => {
       const userId = JSON.parse(localStorage.getItem("user"))?.id;
       
       const res = await axios.get(
-        `http://localhost:5001/users/${userId}/courses`,
+        `https://learning-mini-be.onrender.com/users/${userId}/courses`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -90,7 +90,7 @@ const StudentSchedule = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5001/api/schedule/week?date=${dateString}`,
+        `https://learning-mini-be.onrender.com/api/schedule/week?date=${dateString}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       

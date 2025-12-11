@@ -430,7 +430,7 @@
       "teachers": "Giảng viên",
       "enrolledCourses": "Khóa học đăng ký",
       "myCourses": "Khóa học của tôi",
-      "assignments": "Bài tập",
+      "scores": "Điểm khóa học",
       "schedules": "Lịch học"
     }
   },
@@ -922,6 +922,594 @@
     "pending_approval_message": "Khóa học của bạn đang chờ quản trị viên phê duyệt. Bạn sẽ được thông báo khi khóa học được duyệt.",
     "error_message": "Có lỗi xảy ra khi tạo khóa học. Vui lòng thử lại.",
     "instruction": "Sau khi tạo, khóa học sẽ được gửi để quản trị viên phê duyệt trước khi hiển thị công khai."
+  },
+  "gradeTable": {
+    "title": "Bảng Điểm Cá Nhân",
+    "studentId": "Mã học viên",
+    "summaryCards": {
+      "totalCourses": "Tổng số khóa học",
+      "gradedAssignments": "Bài tập đã chấm",
+      "overallGPA": "GPA Tổng thể",
+      "totalCredits": "Tổng tín chỉ"
+    },
+    "tabs": {
+      "overview": "Tổng quan khóa học",
+      "details": "Chi tiết bài tập"
+    },
+    "coursesOverview": {
+      "header": "Điểm theo khóa học",
+      "showingPerPage": "Hiển thị khóa học mỗi trang",
+      "courseCard": {
+        "teacher": "GV",
+        "overallGrade": "Xếp loại",
+        "assignments": "Bài tập",
+        "totalScore": "Điểm tổng",
+        "completionRate": "Tỉ lệ hoàn thành"
+      }
+    },
+    "assignmentsDetails": {
+      "header": "Chi tiết bài tập",
+      "expandControls": {
+        "expandAll": "Xem tất cả chi tiết",
+        "collapseAll": "Thu gọn tất cả"
+      },
+      "instructions": "Hướng dẫn: Nhấp vào tên khóa học để xem chi tiết bài tập hoặc nhấp nút \"Xem tất cả chi tiết\" để mở tất cả.",
+      "courseDetail": {
+        "averageScore": "Điểm TB",
+        "grade": "Xếp loại",
+        "assignmentsCount": "Bài tập",
+        "viewDetails": "Xem chi tiết",
+        "teacher":"Giảng viên",
+        "collapse": "Thu gọn ▲"
+      },
+      "assignmentsTable": {
+        "headers": {
+          "stt": "STT",
+          "assignment": "Bài tập",
+          "maxScore": "Điểm tối đa",
+          "obtainedScore": "Điểm đạt được",
+          "percentage": "Tỷ lệ",
+          "grade": "Xếp loại",
+          "submissionDate": "Ngày nộp",
+          "status": "Trạng thái"
+        },
+        "notGraded": "Chưa chấm",
+        "notSubmitted": "Chưa nộp",
+        "statuses": {
+          "graded": "Đã chấm",
+          "pending": "Chờ chấm"
+        },
+        "noAssignments": "Chưa có bài tập nào trong khóa học này"
+      }
+    },
+    "modal": {
+      "summary": "Điểm tổng kết",
+      "grade": "Xếp loại",
+      "totalAssignments": "Số bài tập",
+      "completed": "Đã hoàn thành",
+      "graded": "Đã chấm",
+      "assignmentList": "Danh sách bài tập",
+      "close": "Đóng"
+    },
+    "loading": {
+      "message": "Đang tải dữ liệu điểm...",
+      "error": "Không thể tải dữ liệu điểm",
+      "tryAgain": "Thử lại",
+      "noData": "Chưa có dữ liệu điểm",
+      "noDataMessage": "Bạn chưa đăng ký khóa học nào hoặc chưa có bài tập được chấm điểm."
+    },
+    "pagination": {
+      "showTotal": "{{start}}-{{end}} trên {{total}} khóa học",
+      "pageSizeOptions": ["3", "6", "9", "12", "15"]
+    }
+  },
+  "teacherlist": {
+    "title": "Danh sách giảng viên",
+    "loading": "Đang tải danh sách giảng viên...",
+    "noTeachers": "Không tìm thấy giảng viên",
+    "noCourses": "Chưa có khóa học",
+    "notAvailable": "Chưa có",
+    "notUpdated": "Chưa cập nhật",
+    "teachingCourses": "Khóa học giảng dạy",
+    "search": {
+      "placeholder": "Tìm theo tên hoặc email..."
+    },
+    "sort": {
+      "aToZ": "Tên A-Z",
+      "zToA": "Tên Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "Xem tất cả khóa học",
+      "hideCourses": "Ẩn khóa học",
+      "enroll": "Đăng ký học",
+      "enrolling": "Đang đăng ký...",
+      "enrolled": "Đã đăng ký",
+      "cannotEnroll": "Không thể đăng ký",
+      "back": "Quay lại"
+    },
+    "messages": {
+      "loadError": "Lỗi khi tải danh sách giảng viên",
+      "enrolledCoursesError": "Lỗi khi tải khóa học đã đăng ký",
+      "loginRequired": "Vui lòng đăng nhập để đăng ký khóa học",
+      "studentsOnly": "Chỉ sinh viên mới có thể đăng ký khóa học",
+      "alreadyEnrolled": "Bạn đã đăng ký khóa học này rồi",
+      "enrollSuccess": "Đã đăng ký thành công khóa học: {{courseTitle}}",
+      "noPermission": "Bạn không có quyền đăng ký khóa học",
+      "enrollError": "Có lỗi xảy ra khi đăng ký khóa học",
+      "loginPrompt": "Vui lòng"
+    }
+  },
+  "studentChat": {
+    "notAuthorized": {
+      "title": "Bạn không có quyền truy cập tính năng chat",
+      "description": "Chỉ học viên mới có thể sử dụng tính năng này"
+    },
+    "tabs": {
+      "support": "Hỗ trợ",
+      "teachers": "Giảng viên"
+    },
+    "select": {
+      "support": "Chọn quản trị viên để liên hệ hỗ trợ",
+      "teachers": "Chọn giảng viên để liên hệ học tập",
+      "instructions": {
+        "admin": "Chọn một quản trị viên từ danh sách để liên hệ hỗ trợ",
+        "teacher": "Chọn một giảng viên từ danh sách để liên hệ học tập"
+      },
+      "supportMessage": "Chúng tôi luôn sẵn sàng hỗ trợ bạn!",
+      "teacherSupportMessage": "Giảng viên sẽ hỗ trợ bạn trong quá trình học tập"
+    },
+    "roles": {
+      "admin": "Quản trị viên",
+      "teacher": "Giảng viên"
+    },
+    "empty": {
+      "noAdmins": "Không có quản trị viên nào online",
+      "noTeachers": "Bạn chưa đăng ký khóa học nào"
+    },
+    "messages": {
+      "noMessages": "Chưa có tin nhắn nào",
+      "startConversation": "Hãy bắt đầu cuộc trò chuyện với {{name}}!",
+      "read": "✓ Đã đọc"
+    },
+    "input": {
+      "placeholder": "Nhắn tin cho {{name}}..."
+    },
+    "buttons": {
+      "send": "Gửi"
+    },
+    "errors": {
+      "unreadCountAdmin": "Lỗi khi lấy unread count cho admin",
+      "unreadCountTeacher": "Lỗi khi lấy unread count cho giảng viên",
+      "loadAdmins": "Lỗi khi lấy danh sách admin:",
+      "cannotLoadAdmins": "Không thể tải danh sách admin",
+      "loadTeachers": "Lỗi khi lấy danh sách giảng viên:",
+      "cannotLoadTeachers": "Không thể tải danh sách giảng viên",
+      "loadMessages": "Lỗi khi lấy tin nhắn:",
+      "cannotLoadMessages": "Không thể tải tin nhắn",
+      "sendMessage": "Lỗi khi gửi tin nhắn:",
+      "cannotSendMessage": "Không thể gửi tin nhắn"
+    },
+    "time": {
+      "justNow": "Vừa xong",
+      "minutesAgo": "{{minutes}} phút",
+      "hoursAgo": "{{hours}} giờ",
+      "yesterday": "Hôm qua",
+      "daysAgo": "{{days}} ngày",
+      "today": "Hôm nay"
+    }
+  },
+  "adminChat": {
+    "notAuthorized": {
+      "title": "Bạn không có quyền truy cập tính năng chat",
+      "description": "Chỉ quản trị viên mới có thể sử dụng tính năng này"
+    },
+    "tabs": {
+      "messages": "Tin nhắn",
+      "search": "Tìm kiếm"
+    },
+    "roles": {
+      "student": "Học viên",
+      "teacher": "Giảng viên",
+      "user": "Người dùng"
+    },
+    "stats": {
+      "conversations": "{{count}} cuộc trò chuyện",
+      "unreadMessages": "• {{count}} tin nhắn chưa đọc"
+    },
+    "messages": {
+      "noMessages": "Chưa có tin nhắn",
+      "startConversation": "Hãy bắt đầu cuộc trò chuyện với {{name}}!",
+      "read": "Đã đọc"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm theo tên hoặc email..."
+    },
+    "input": {
+      "placeholder": "Nhắn tin cho {{name}}..."
+    },
+    "buttons": {
+      "send": "Gửi"
+    },
+    "select": {
+      "startConversation": "Chọn một cuộc trò chuyện để bắt đầu",
+      "instructions": "Chọn một người dùng từ danh sách để bắt đầu trò chuyện",
+      "useSearchTab": "Hoặc sử dụng tab \"Tìm kiếm\" để tìm người dùng mới"
+    },
+    "empty": {
+      "noConversations": "Chưa có cuộc trò chuyện nào",
+      "noUsersFound": "Không tìm thấy người dùng",
+      "enterKeyword": "Nhập từ khóa để tìm kiếm"
+    },
+    "errors": {
+      "loadChatUsers": "Lỗi khi lấy danh sách người chat:",
+      "cannotLoadChats": "Không thể tải danh sách chat",
+      "searchUsers": "Lỗi khi tìm kiếm người dùng:",
+      "cannotSearchUsers": "Không thể tìm kiếm người dùng",
+      "loadMessages": "Lỗi khi lấy tin nhắn:",
+      "cannotLoadMessages": "Không thể tải tin nhắn",
+      "sendMessage": "Lỗi khi gửi tin nhắn:",
+      "cannotSendMessage": "Không thể gửi tin nhắn"
+    },
+    "time": {
+      "justNow": "Vừa xong",
+      "minutesAgo": "{{minutes}} phút",
+      "hoursAgo": "{{hours}} giờ",
+      "yesterday": "Hôm qua",
+      "daysAgo": "{{days}} ngày",
+      "today": "Hôm nay"
+    }
+  },
+  "teacherChat": {
+    "notAuthorized": {
+      "title": "Bạn không có quyền truy cập tính năng chat",
+      "description": "Chỉ giảng viên mới có thể sử dụng tính năng này"
+    },
+    "tabs": {
+      "students": "Học viên",
+      "admin": "Admin",
+      "search": "Tìm kiếm"
+    },
+    "roles": {
+      "student": "Học viên",
+      "admin": "Quản trị viên"
+    },
+    "stats": {
+      "chattedStudents": "{{count}} học viên đã chat",
+      "unreadMessages": "• {{count}} tin nhắn chưa đọc",
+      "admins": "{{count}} quản trị viên"
+    },
+    "messages": {
+      "noMessages": "Chưa có tin nhắn",
+      "startConversation": "Hãy bắt đầu cuộc trò chuyện với {{name}}!",
+      "read": "Đã đọc"
+    },
+    "search": {
+      "placeholder": "Tìm học viên theo tên hoặc email..."
+    },
+    "input": {
+      "placeholder": "Nhắn tin cho {{name}}..."
+    },
+    "buttons": {
+      "send": "Gửi"
+    },
+    "select": {
+      "startConversation": "Chọn học viên hoặc admin để bắt đầu trò chuyện",
+      "instructions": "Chọn học viên hoặc quản trị viên để bắt đầu trò chuyện",
+      "contactMessage": "Giữ liên lạc với học viên và admin qua chat!"
+    },
+    "empty": {
+      "noStudentConversations": "Chưa có cuộc trò chuyện với học viên",
+      "noAdminsOnline": "Không có admin nào online",
+      "noStudentsFound": "Không tìm thấy học viên",
+      "enterKeyword": "Nhập từ khóa để tìm kiếm học viên"
+    },
+    "errors": {
+      "loadStudents": "Lỗi khi lấy danh sách học viên:",
+      "cannotLoadStudents": "Không thể tải danh sách học viên",
+      "loadAdmins": "Lỗi khi lấy danh sách admin:",
+      "cannotLoadAdmins": "Không thể tải danh sách admin",
+      "searchStudents": "Lỗi khi tìm kiếm học viên:",
+      "cannotSearchStudents": "Không thể tìm kiếm học viên",
+      "loadMessages": "Lỗi khi lấy tin nhắn:",
+      "cannotLoadMessages": "Không thể tải tin nhắn",
+      "sendMessage": "Lỗi khi gửi tin nhắn:",
+      "cannotSendMessage": "Không thể gửi tin nhắn"
+    },
+    "time": {
+      "justNow": "Vừa xong",
+      "minutesAgo": "{{minutes}} phút",
+      "hoursAgo": "{{hours}} giờ",
+      "yesterday": "Hôm qua",
+      "daysAgo": "{{days}} ngày",
+      "today": "Hôm nay"
+    }
+  },
+  "courseadminManagement": {
+    "title": "Quản lý Khóa học",
+    "headers": {
+      "management": "Quản lý và duyệt các khóa học",
+      "myCourses": "Quản lý khóa học của bạn",
+      "viewCourses": "Xem danh sách khóa học"
+    },
+    "stats": {
+      "totalCourses": "Tổng số khóa học",
+      "approved": "Đã duyệt",
+      "pending": "Chờ duyệt",
+      "rejected": "Từ chối"
+    },
+    "tabs": {
+      "approved": "Đã duyệt",
+      "pending": "Chờ duyệt",
+      "rejected": "Từ chối"
+    },
+    "columns": {
+      "title": "Tên khóa học",
+      "description": "Mô tả",
+      "teacher": "Giảng viên",
+      "duration": "Thời lượng",
+      "createdAt": "Ngày tạo",
+      "actions": "Thao tác",
+      "studentName": "Họ tên",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "gender": "Giới tính",
+      "enrollmentDate": "Ngày đăng ký"
+    },
+    "status": {
+      "approved": "Đã duyệt",
+      "pending": "Chờ duyệt",
+      "rejected": "Từ chối",
+      "unknown": "Không xác định"
+    },
+    "text": {
+      "noDescription": "Không có mô tả",
+      "unknown": "Chưa xác định",
+      "lessons": "buổi",
+      "hours": "giờ",
+      "notAvailable": "N/A",
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác",
+      "notUpdated": "Chưa cập nhật"
+    },
+    "actions": {
+      "viewMore": "Xem thêm"
+    },
+    "tooltips": {
+      "viewStudents": "Xem học viên",
+      "edit": "Chỉnh sửa",
+      "delete": "Xóa",
+      "approve": "Duyệt khóa học",
+      "reject": "Từ chối",
+      "reApprove": "Duyệt lại"
+    },
+    "confirm": {
+      "deleteTitle": "Xóa khóa học",
+      "deleteDescription": "Bạn có chắc chắn muốn xóa khóa học này?"
+    },
+    "empty": {
+      "noApprovedCourses": "Không có khóa học nào đã duyệt",
+      "noPendingCourses": "Không có khóa học nào chờ duyệt",
+      "noRejectedCourses": "Không có khóa học nào bị từ chối",
+      "noStudents": "Chưa có học viên đăng ký khóa học này"
+    },
+    "modals": {
+      "editTitle": "Chỉnh sửa Khóa học",
+      "addTitle": "Thêm Khóa học Mới",
+      "approveTitle": "Xét duyệt khóa học: {{title}}",
+      "approve": "Xét duyệt khóa học",
+      "studentsTitle": "Danh sách Học viên - {{title}}",
+      "teacher": "Giảng viên",
+      "teacherEmail": "Email giảng viên",
+      "description": "Mô tả",
+      "createdAt": "Ngày tạo",
+      "currentStatus": "Trạng thái hiện tại",
+      "action": "Hành động",
+      "approveOption": "Duyệt khóa học",
+      "rejectOption": "Từ chối khóa học",
+      "approveDescription": "Khóa học sẽ được hiển thị cho học viên",
+      "rejectDescription": "Khóa học sẽ không được hiển thị",
+      "reason": "Lý do",
+      "totalStudents": "Tổng số học viên"
+    },
+    "form": {
+      "courseName": "Tên khóa học",
+      "description": "Mô tả",
+      "lessons": "Số buổi học",
+      "hours": "Tổng số giờ"
+    },
+    "validation": {
+      "courseNameRequired": "Vui lòng nhập tên khóa học",
+      "descriptionRequired": "Vui lòng nhập mô tả",
+      "actionRequired": "Vui lòng chọn hành động",
+      "reasonRequired": "Vui lòng nhập lý do"
+    },
+    "placeholder": {
+      "courseName": "Nhập tên khóa học",
+      "description": "Nhập mô tả chi tiết về khóa học",
+      "reason": "Nhập lý do duyệt/từ chối..."
+    },
+    "buttons": {
+      "approve": "Duyệt",
+      "reject": "Từ chối"
+    },
+    "messages": {
+      "deleteSuccess": "Xóa khóa học thành công",
+      "approveSuccess": "Đã duyệt khóa học thành công",
+      "rejectSuccess": "Đã từ chối khóa học thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "addSuccess": "Thêm khóa học thành công"
+    },
+    "errors": {
+      "parseToken": "Lỗi phân tích token:",
+      "fetchCourses": "Lỗi khi tải khóa học:",
+      "loadCoursesFailed": "Lỗi khi tải danh sách khóa học",
+      "loadStudentsFailed": "Lỗi khi tải danh sách học viên",
+      "deleteFailed": "Lỗi khi xóa khóa học",
+      "connectionError": "Lỗi kết nối đến server",
+      "processFailed": "Lỗi khi xử lý khóa học",
+      "saveFailed": "Lỗi khi lưu khóa học"
+    }
+  },
+  "commonAdmin": {
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "update": "Cập nhật",
+    "add": "Thêm",
+    "delete": "Xóa"
+  },
+  "translation": {
+    "videoManagement": "Quản lý Video",
+    "loading": "Đang tải...",
+    "loadingVideoDetails": "Đang tải chi tiết video...",
+    "tryAgain": "Thử lại",
+    "back": "Quay lại",
+    "view": "Xem",
+    "save": "Lưu",
+    "reply": "Trả lời",
+    "edited": "(đã chỉnh sửa)",
+    "sendReply": "Gửi trả lời",
+    "sendComment": "Gửi bình luận",
+    "videoInfo": "Thông tin video",
+    "openLink": "Mở liên kết",
+    "noURL": "Không có URL",
+    "orderInCourse": "Thứ tự trong khóa học",
+    "otherVideosInCourse": "Các video khác trong khóa học",
+    "featureInDevelopment": "Chức năng đang phát triển",
+    "teacherMode": "Chế độ giảng viên",
+    "adminMode": "Chế độ quản trị viên",
+    "replyingTo": "Đang trả lời cho",
+    "writeReplyTo": "Viết trả lời cho",
+    "noStudents": "Không có học viên nào",
+    "noEmail": "Không có email",
+    "enrolled": "Đăng ký",
+    "totalVideos": "Tổng cộng",
+    "videos": "video",
+    "inCourse": "trong khóa học",
+    "noVideosInCourse": "Không có video nào trong khóa học",
+    "selectVideo": "Chọn video",
+    "lesson": "Bài",
+    "watchingNow": "Đang xem",
+    "noVideoSelected": "Không có video nào được chọn",
+    "browserNotSupportVideo": "Trình duyệt của bạn không hỗ trợ thẻ video.",
+    "noTitleVideo": "Video không có tiêu đề",
+    "allVideos": "Tất cả video",
+    "confirmDeleteComment": "Xác nhận xóa bình luận",
+    "confirmDeleteCommentMessage": "Bạn có chắc chắn muốn xóa bình luận này không?",
+    "warning": "Cảnh báo",
+    "commentHasReplies": "Bình luận này có",
+    "replies": "phản hồi",
+    "cannotDeleteWithReplies": "Bạn không thể xóa bình luận đã có phản hồi.",
+    "adminWillDeleteAllReplies": "Với quyền admin, tất cả phản hồi sẽ bị xóa.",
+    "anonymousUser": "Người dùng ẩn danh",
+    "commentDeleted": "Nội dung bình luận này đã bị xóa",
+    "published": "Đã công khai",
+    "draft": "Bản nháp",
+    "status": "Trạng thái",
+    
+    "commons": {
+      "cancel": "Hủy",
+      "save": "Lưu",
+      "edit": "Chỉnh sửa",
+      "delete": "Xóa",
+      "yes": "Có",
+      "no": "Không",
+      "close": "Đóng"
+    },
+    
+    "commonAdmin": {
+      "update": "Cập nhật",
+      "add": "Thêm"
+    },
+    
+    "courseDetail": {
+      "tabs": {
+        "overview": "Tổng quan",
+        "comments": "Bình luận"
+      },
+      "noComments": "Chưa có bình luận nào.",
+      "noDescription": "Chưa có mô tả chi tiết",
+      "notAvailable": "N/A",
+      "placeholder": {
+        "writeComment": "Viết bình luận..."
+      },
+      "messages": {
+        "videosLoadError": "Không thể tải danh sách video",
+        "commentsLoadError": "Không thể tải bình luận",
+        "studentCountError": "Không thể tải số lượng học viên",
+        "commentRequired": "Vui lòng nhập nội dung bình luận",
+        "commentSuccess": "Đã gửi bình luận!",
+        "commentError": "Gửi bình luận thất bại"
+      }
+    },
+    
+    "teacherCourses": {
+      "fetchCoursesFailed": "Lấy danh sách khóa học thất bại",
+      "fetchVideosFailed": "Lỗi khi lấy video",
+      "deleteVideoSuccess": "Xóa video thành công!",
+      "deleteVideoFailed": "Xóa video thất bại",
+      "updateVideoSuccess": "Cập nhật video thành công!",
+      "addVideoSuccess": "Thêm video thành công!",
+      "saveVideoFailed": "Lỗi khi lưu video",
+      "manageVideos": "Quản lý video",
+      "addVideo": "Thêm Video",
+      "viewDetails": "Xem chi tiết",
+      "videoTitle": "Tên video",
+      "videoTitleRequired": "Nhập tên video",
+      "videoTitlePlaceholder": "Nhập tên video",
+      "videoUrl": "Đường dẫn video",
+      "videoUrlRequired": "Nhập URL video",
+      "videoUrlPlaceholder": "Ví dụ: https://youtu.be/...",
+      "videoDuration": "Thời lượng",
+      "videoDurationPlaceholder": "Vd: 15 min",
+      "noVideos": "Chưa có video nào. Hãy chọn khóa học để xem video hoặc thêm video mới."
+    },
+    
+    "userManagements": {
+      "messages": {
+        "deleteSuccess": "Đã xóa người dùng",
+        "deleteError": "Không thể xóa người dùng"
+      }
+    },
+    
+    "updateNameSuccess": "Cập nhật tên thành công!",
+    "updateNameFail": "Cập nhật tên thất bại!",
+    
+    "assign": {
+      "course": "Khóa học"
+    },
+    
+    "studentlist": {
+      "chooseCourse": "Chọn khóa học"
+    },
+    
+    "courseadminManagement": {
+      "stats": {
+        "totalCourses": "Tổng số khóa học"
+      },
+      "columns": {
+        "createdAt": "Ngày tạo",
+        "actions": "Thao tác"
+      },
+      "text": {
+        "notUpdated": "Chưa cập nhật"
+      },
+      "confirm": {
+        "deleteTitle": "Xóa khóa học",
+        "deleteDescription": "Bạn có chắc chắn muốn xóa khóa học này?"
+      },
+      "modals": {
+        "editTitle": "Chỉnh sửa Khóa học",
+        "addTitle": "Thêm Khóa học Mới"
+      }
+    },
+    
+    "teacher": "Giảng viên",
+    "teachercourses": "Khóa học",
+    "admins": "Quản trị viên",
+    "students": "Học viên",
+    "student": "Học viên",
+    "date": "Ngày"
   }
 }
 

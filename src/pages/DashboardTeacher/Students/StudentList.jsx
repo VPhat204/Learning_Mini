@@ -32,7 +32,7 @@ function StudentList() {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("https://learning-mini-be.onrender.com/course-students", {
+        const res = await axios.get("http://localhost:5000/course-students", {
           headers: { Authorization: `Bearer ${token}` },
           params: { courseId: selectedCourse.id },
         });

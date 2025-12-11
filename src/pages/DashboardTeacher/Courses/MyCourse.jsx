@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Card,
   Button,
@@ -10,266 +10,483 @@ import {
   Avatar,
   Progress,
   Modal,
+  Tabs,
+  Tag,
+  Space,
+  Popconfirm,
 } from "antd";
 import axios from "axios";
-import "./MyCourse.css";
-import { PlusOutlined, PlayCircleOutlined, DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+  FileTextOutlined,
+  PlayCircleOutlined,
+} from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import CourseDetail from "./DetailVideo";
+import CourseDetail from "./Video/DetailVideo";
+import Assignment from "./Assignments/Assignments";
+import "./MyCourse.css";
 
-export default function MyCourse() {
+const { TextArea } = Input;
+
+function getAvatarColor(id) {
+  const mod = (id || 0) % 4;
+  if (mod === 0) return "avatar-orange";
+  if (mod === 1) return "avatar-blue";
+  if (mod === 2) return "avatar-green";
+  return "avatar-purple";
+}
+
+function tagClassByStatus(status) {
+  if (status === "approved") return "tag-approved";
+  if (status === "pending") return "tag-pending";
+  return "tag-rejected";
+}
+
+function MyCourse() {
   const { t } = useTranslation();
-  const [courses, setCourses] = useState([]);
-  const [form] = Form.useForm();
-  const [videoForm] = Form.useForm();
   const token = localStorage.getItem("token");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const [courses, setCourses] = useState([]);
   const [videosByCourse, setVideosByCourse] = useState({});
-  const [selectedDetailCourse, setSelectedDetailCourse] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [pageSize] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [selectedTab, setSelectedTab] = useState("approved");
+
+  const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
+  const [courseForm] = Form.useForm();
+  const [editingCourse, setEditingCourse] = useState(null);
+
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [videoForm] = Form.useForm();
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [editingVideo, setEditingVideo] = useState(null);
-  
-  const pageSize = 3;
+
+  const [selectedDetailCourse, setSelectedDetailCourse] = useState(null);
+  const [selectedAssignmentCourse, setSelectedAssignmentCourse] = useState(null);
 
   const fetchCourses = useCallback(async () => {
     if (!token) return;
+    setLoading(true);
     try {
       const res = await axios.get("https://learning-mini-be.onrender.com/courses", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setCourses(res.data);
-
-      for (const c of res.data) {
-        const videosRes = await axios.get(`https://learning-mini-be.onrender.com/videos/${c.id}`);
-        setVideosByCourse((prev) => ({ ...prev, [c.id]: videosRes.data }));
+      const normalized = (res.data || []).map((c) => {
+        const status =
+          c.is_approved === 1 || c.status === "approved"
+            ? "approved"
+            : c.is_approved === 0 || c.status === "pending"
+            ? "pending"
+            : "rejected";
+        return { ...c, status };
+      });
+      setCourses(normalized);
+      const map = {};
+      for (const c of normalized) {
+        try {
+          const vres = await axios.get(`https://learning-mini-be.onrender.com/videos/${c.id}`);
+          map[c.id] = vres.data || [];
+        } catch {
+          map[c.id] = [];
+        }
       }
-    } catch {
-      message.error(t("teacherCourses.fetchCoursesFailed"));
+      setVideosByCourse(map);
+    } catch (err) {
+      message.error(t("teacherCourses.fetchCoursesFailed") || t("fetchCoursesFailed", "Lỗi khi tải khóa học"));
+    } finally {
+      setLoading(false);
     }
   }, [token, t]);
 
-  const handleAddCourse = async (values) => {
-    try {
-      await axios.post(
-        "https://learning-mini-be.onrender.com/courses",
-        { ...values },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      message.success(t("teacherCourses.addCourseSuccess"));
-      form.resetFields();
-      setIsCourseModalOpen(false);
-      fetchCourses();
-    } catch {
-      message.error(t("teacherCourses.addCourseFailed"));
-    }
-  };
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
 
   const fetchVideos = async (courseId) => {
     try {
       const res = await axios.get(`https://learning-mini-be.onrender.com/videos/${courseId}`);
-      setVideosByCourse((prev) => ({ ...prev, [courseId]: res.data }));
-    } catch {
-      message.error(t("teacherCourses.fetchVideosFailed"));
+      setVideosByCourse((prev) => ({ ...prev, [courseId]: res.data || [] }));
+    } catch (err) {
+      message.error(t("teacherCourses.fetchVideosFailed") || t("fetchVideosFailed", "Lỗi khi tải video"));
     }
   };
 
-  const handleAddVideo = async (values) => {
+  const openAddCourseModal = () => {
+    setEditingCourse(null);
+    courseForm.resetFields();
+    setIsCourseModalOpen(true);
+  };
+
+  const openEditCourseModal = (course) => {
+    setEditingCourse(course);
+    courseForm.setFieldsValue({
+      title: course.title,
+      description: course.description,
+      lessons: course.lessons,
+      hours: course.hours,
+    });
+    setIsCourseModalOpen(true);
+  };
+
+  const handleCourseSubmit = async (values) => {
+    if (!token) return;
+    try {
+      if (editingCourse) {
+        await axios.put(
+          `https://learning-mini-be.onrender.com/courses/${editingCourse.id}`,
+          values,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        message.success(t("teacherCourses.updateCourseSuccess") || t("updateCourseSuccess", "Cập nhật khóa học thành công"));
+      } else {
+        await axios.post("https://learning-mini-be.onrender.com/courses", values, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        message.success(t("teacherCourses.addCourseSuccess") || t("addCourseSuccess", "Thêm khóa học thành công"));
+      }
+      setIsCourseModalOpen(false);
+      courseForm.resetFields();
+      fetchCourses();
+    } catch (err) {
+      message.error(t("teacherCourses.saveCourseFailed") || t("saveCourseFailed", "Lỗi khi lưu khóa học"));
+    }
+  };
+
+  const handleDeleteCourse = async (courseId) => {
+    if (!token) return;
+    try {
+      await axios.delete(`https://learning-mini-be.onrender.com/courses/${courseId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      message.success(t("teacherCourses.deleteCourseSuccess") || t("deleteCourseSuccess", "Xóa khóa học thành công"));
+      fetchCourses();
+    } catch {
+      message.error(t("teacherCourses.deleteCourseFailed") || t("deleteCourseFailed", "Lỗi khi xóa khóa học"));
+    }
+  };
+
+  const openVideoModal = (course) => {
+    setSelectedCourse(course);
+    setEditingVideo(null);
+    videoForm.resetFields();
+    fetchVideos(course.id);
+    setIsVideoModalOpen(true);
+  };
+
+  const handleVideoSubmit = async (values) => {
+    if (!token || !selectedCourse) return;
     try {
       if (editingVideo) {
         await axios.put(
           `https://learning-mini-be.onrender.com/videos/${editingVideo.id}`,
-          { ...values },
+          values,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        message.success(t("teacherCourses.updateVideoSuccess"));
+        message.success(t("teacherCourses.updateVideoSuccess") || t("updateVideoSuccess", "Cập nhật video thành công"));
       } else {
         await axios.post(
           "https://learning-mini-be.onrender.com/videos/add",
           { course_id: selectedCourse.id, ...values },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        message.success(t("teacherCourses.addVideoSuccess"));
+        message.success(t("teacherCourses.addVideoSuccess") || t("addVideoSuccess", "Thêm video thành công"));
       }
-      videoForm.resetFields();
       setEditingVideo(null);
+      videoForm.resetFields();
       fetchVideos(selectedCourse.id);
     } catch {
-      message.error(t("teacherCourses.saveVideoFailed"));
+      message.error(t("teacherCourses.saveVideoFailed") || t("saveVideoFailed", "Lỗi khi lưu video"));
     }
   };
 
   const handleDeleteVideo = async (videoId) => {
+    if (!token || !selectedCourse) return;
     try {
       await axios.delete(`https://learning-mini-be.onrender.com/videos/${videoId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      message.success(t("teacherCourses.deleteVideoSuccess"));
+      message.success(t("teacherCourses.deleteVideoSuccess") || t("deleteVideoSuccess", "Xóa video thành công"));
       fetchVideos(selectedCourse.id);
     } catch {
-      message.error(t("teacherCourses.deleteVideoFailed"));
+      message.error(t("teacherCourses.deleteVideoFailed") || t("deleteVideoFailed", "Lỗi khi xóa video"));
     }
   };
 
-  const handleViewDetail = (course) => setSelectedDetailCourse(course);
-  const handleBack = () => setSelectedDetailCourse(null);
+  const openDetailView = (course) => {
+    setSelectedDetailCourse(course);
+  };
 
-  useEffect(() => {
-    fetchCourses();
-  }, [fetchCourses]);
+  const openAssignmentView = (course) => {
+    setSelectedAssignmentCourse(course);
+  };
 
-  const paginatedCourses = courses.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
+  const handleBackFromDetail = () => {
+    setSelectedDetailCourse(null);
+  };
+  
+  const handleBackFromAssignment = () => {
+    setSelectedAssignmentCourse(null);
+  };
+
+  const filterMap = {
+    approved: (c) => c.status === "approved",
+    pending: (c) => c.status === "pending",
+    rejected: (c) => c.status === "rejected",
+  };
+
+  const filtered = courses.filter(filterMap[selectedTab] || (() => true));
+  const paginated = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  const labelByStatus = (status) => {
+    if (status === "approved") return t("courseadminManagement.status.approved", "Đã duyệt");
+    if (status === "pending") return t("courseadminManagement.status.pending", "Chờ duyệt");
+    return t("courseadminManagement.status.rejected", "Từ chối");
+  };
+
   if (selectedDetailCourse) {
     return (
-      <div className="courses-container">
-        <Button className="teacher-back-button" onClick={handleBack}>
-          &lt; {t('mycourses.actions.back')}
+      <div className="courses-container-detail">
+        <Button className="teacher-back-button" onClick={handleBackFromDetail}>
+          &lt; {t("mycourses.actions.back")}
         </Button>
         <CourseDetail course={selectedDetailCourse} />
       </div>
     );
   }
 
-  return (
-    <div className="course-container">
-      <h2>{t("teacherCourses.title")}</h2>
-
-      <div style={{ textAlign: "right", marginBottom: 20 }}>
-        <Button type="primary" onClick={() => setIsCourseModalOpen(true)}>
-          {t("teacherCourses.addCourseBtn")}
+  if (selectedAssignmentCourse) {
+    return (
+      <div className="courses-container-detail">
+        <Button className="teacher-back-button" onClick={handleBackFromAssignment}>
+          &lt; {t("mycourses.actions.back")}
         </Button>
+        <Assignment course={selectedAssignmentCourse} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="course-root">
+      <div className="course-top">
+        <h2 className="course-title">{t("courseManagements.myCourses")}</h2>
+        <Space>
+          <Button type="primary" onClick={openAddCourseModal}>
+            {t("teacherCourses.addCourseBtn")}
+          </Button>
+        </Space>
       </div>
 
-      <Modal
-        title={t("teacherCourses.addCourseModalTitle")}
-        open={isCourseModalOpen}
-        onCancel={() => setIsCourseModalOpen(false)}
-        footer={null}
+      <Tabs
+        activeKey={selectedTab}
+        onChange={(key) => {
+          setSelectedTab(key);
+          setCurrentPage(1);
+        }}
+        className="course-tabs"
       >
-        <Form form={form} layout="vertical" onFinish={handleAddCourse}>
-          <Form.Item
-            name="title"
-            label={t("teacherCourses.courseName")}
-            rules={[{ required: true, message: t("teacherCourses.courseNameRequired") }]}
-          >
-            <Input placeholder={t("teacherCourses.courseNamePlaceholder")} />
-          </Form.Item>
+        <Tabs.TabPane 
+          tab={`${t("courseadminManagement.status.approved", "Đã duyệt")} (${courses.filter(c => c.status === "approved").length})`} 
+          key="approved" 
+        />
+        <Tabs.TabPane 
+          tab={`${t("courseadminManagement.status.pending", "Chờ duyệt")} (${courses.filter(c => c.status === "pending").length})`} 
+          key="pending" 
+        />
+        <Tabs.TabPane 
+          tab={`${t("courseadminManagement.status.rejected", "Từ chối")} (${courses.filter(c => c.status === "rejected").length})`} 
+          key="rejected" 
+        />
+      </Tabs>
 
-          <Form.Item
-            name="description"
-            label={t("teacherCourses.courseDescription")}
-          >
-            <Input.TextArea placeholder={t("teacherCourses.courseDescriptionPlaceholder")} />
-          </Form.Item>
-
-          <Form.Item
-            name="lessons"
-            label={t("teacherCourses.courseLessons")}
-          >
-            <Input type="number" min={0} placeholder={t("teacherCourses.courseLessonsPlaceholder")} />
-          </Form.Item>
-
-          <Form.Item
-            name="hours"
-            label={t("teacherCourses.courseHours")}
-          >
-            <Input type="number" min={0} placeholder={t("teacherCourses.courseHoursPlaceholder")} />
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block>
-              {t("teacherCourses.confirmAdd")}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <h3>{t("teacherCourses.myCourses")}</h3>
       <List
+        className="mycourses-list"
         grid={{ gutter: 16, column: 1 }}
-        dataSource={paginatedCourses}
-        className="mycourses-grid list-view"
+        dataSource={paginated}
+        loading={loading}
         renderItem={(course) => (
-          <List.Item key={course.id} className="course-card">
-            <Card
-              hoverable
-              style={{ width: "100%", padding: "10px 0" }}
-              title={
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <Avatar className="course-icon orange">
-                    {course.title ? course.title[0].toUpperCase() : "C"}
-                  </Avatar>
-                  <span className="course-info">{course.title}</span>
+          <List.Item key={course.id}>
+            <Card className="course-card">
+              <div className="card-left">
+                <Avatar className={`course-avatar ${getAvatarColor(course.id)}`}>
+                  {course.title ? course.title[0].toUpperCase() : "C"}
+                </Avatar>
+                <div className="course-main">
+                  <div className="course-header">
+                    <div className="course-title-row">
+                      <div className="course-name">{course.title}</div>
+                      <Tag className={`course-tag ${tagClassByStatus(course.status)}`}>
+                        {labelByStatus(course.status)}
+                      </Tag>
+                    </div>
+                    <div className="course-sub">{course.description || ""}</div>
+                    <div className="course-meta">
+                      <span>{course.teacher_name || ""}</span>
+                      <span>{course.lessons ? `${course.lessons} ${t("enrolledCoursesHome.lessons", "buổi")}` : "-"}</span>
+                      <span>{course.hours ? `${course.hours} ${t("enrolledCoursesHome.hours", "giờ")}` : "-"}</span>
+                    </div>
+                  </div>
+
+                  <div className="course-bottom">
+                    <div className="progress-wrap">
+                      <Progress percent={course.progress || 0} showInfo={false} />
+                      <div className="progress-text">{course.progress || 0}%</div>
+                    </div>
+
+                    <div className="action-buttons">
+                      <Button
+                        icon={<PlusOutlined />}
+                        onClick={() => openVideoModal(course)}
+                        disabled={course.status !== "approved"}
+                      >
+                        {t("videos")}
+                      </Button>
+
+                      <Button
+                        icon={<FileTextOutlined />}
+                        onClick={() => openAssignmentView(course)}
+                        disabled={course.status !== "approved"}
+                      >
+                        {t("assign.assignments")}
+                      </Button>
+
+                      <Button
+                        icon={<EyeOutlined />}
+                        onClick={() => openDetailView(course)}
+                        disabled={course.status !== "approved"}
+                        type="default"
+                      >
+                        {t("teacherCourses.viewDetails")}
+                      </Button>
+
+                      <Button
+                        icon={<EditOutlined />}
+                        onClick={() => openEditCourseModal(course)}
+                      >
+                        {t("commons.edit")}
+                      </Button>
+
+                      <Popconfirm
+                        title={t("courseadminManagement.confirm.deleteDescription")}
+                        onConfirm={() => handleDeleteCourse(course.id)}
+                        okText={t("commons.delete")}
+                        cancelText={t("commons.cancel")}
+                      >
+                        <Button danger icon={<DeleteOutlined />}>
+                          {t("commons.delete")}
+                        </Button>
+                      </Popconfirm>
+                    </div>
+                  </div>
                 </div>
-              }
-              extra={
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <Button
-                    type={
-                      videosByCourse[course.id]?.length > 0
-                        ? "default"
-                        : "dashed"
-                    }
-                    icon={<PlusOutlined />}
-                    onClick={() => {
-                      setSelectedCourse(course);
-                      fetchVideos(course.id);
-                      setIsVideoModalOpen(true);
-                    }}
-                  >
-                    {videosByCourse[course.id]?.length > 0
-                      ? t("teacherCourses.videoAdded")
-                      : t("teacherCourses.addVideo")}
-                  </Button>
-                  <Button 
-                    type="primary"
-                    icon={<EyeOutlined />}
-                    onClick={() => handleViewDetail(course)}
-                  >
-                    {t("teacherCourses.viewDetails")}
-                  </Button>
-                </div>
-              }
-            >
-              <div className="course-meta">
-                <span>{course.teacher_name}</span>
-                <span>{new Date(course.created_at).toLocaleDateString()}</span>
-              </div>
-              <div className="course-progress">
-                <Progress percent={course.progress || 0} showInfo={false} />
-                <span>{course.progress || 0}%</span>
               </div>
             </Card>
           </List.Item>
         )}
       />
 
-      <Pagination
-        current={currentPage}
-        pageSize={pageSize}
-        className="pagination-wrapper"
-        total={courses.length}
-        onChange={(page) => setCurrentPage(page)}
-      />
+      <div className="pagination-area">
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={filtered.length}
+          onChange={(page) => setCurrentPage(page)}
+        />
+      </div>
 
       <Modal
-        title={`${t("teacherCourses.manageVideos")} - ${selectedCourse?.title || ""}`}
+        title={editingCourse ? t("courseadminManagement.modals.editTitle") : t("courseadminManagement.modals.addTitle")}
+        open={isCourseModalOpen}
+        onCancel={() => {
+          setIsCourseModalOpen(false);
+          setEditingCourse(null);
+          courseForm.resetFields();
+        }}
+        footer={null}
+        destroyOnClose
+      >
+        <Form form={courseForm} layout="vertical" onFinish={handleCourseSubmit}>
+          <Form.Item
+            name="title"
+            label={t("createcourses.name")}
+            rules={[{ required: true, message: t("createcourses.name_required") }]}
+          >
+            <Input placeholder={t("createcourses.name_placeholder")} />
+          </Form.Item>
+
+          <Form.Item 
+            name="description" 
+            label={t("createcourses.description")}
+          >
+            <TextArea 
+              rows={3} 
+              placeholder={t("createcourses.description_placeholder")} 
+            />
+          </Form.Item>
+
+          <Form.Item 
+            name="lessons" 
+            label={t("teacherCourses.courseLessons")}
+          >
+            <Input 
+              type="number" 
+              min={0} 
+              placeholder={t("teacherCourses.courseLessonsPlaceholder")} 
+            />
+          </Form.Item>
+
+          <Form.Item 
+            name="hours" 
+            label={t("teacherCourses.courseHours")}
+          >
+            <Input 
+              type="number" 
+              min={0} 
+              placeholder={t("teacherCourses.courseHoursPlaceholder")} 
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+              <Button
+                onClick={() => {
+                  setIsCourseModalOpen(false);
+                  setEditingCourse(null);
+                  courseForm.resetFields();
+                }}
+              >
+                {t("commons.cancel")}
+              </Button>
+              <Button type="primary" htmlType="submit">
+                {t("commons.save")}
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <Modal
+        title={`${t("teacherCourses.manageVideos")}${selectedCourse ? " - " + selectedCourse.title : ""}`}
         open={isVideoModalOpen}
         onCancel={() => {
           setIsVideoModalOpen(false);
+          setSelectedCourse(null);
           setEditingVideo(null);
           videoForm.resetFields();
         }}
         footer={null}
+        width={720}
+        destroyOnClose
       >
         <Form
           form={videoForm}
           layout="vertical"
-          onFinish={handleAddVideo}
+          onFinish={handleVideoSubmit}
           initialValues={editingVideo || {}}
         >
           <Form.Item
@@ -277,8 +494,9 @@ export default function MyCourse() {
             label={t("teacherCourses.videoTitle")}
             rules={[{ required: true, message: t("teacherCourses.videoTitleRequired") }]}
           >
-            <Input />
+            <Input placeholder={t("teacherCourses.videoTitlePlaceholder")} />
           </Form.Item>
+
           <Form.Item
             name="url"
             label={t("teacherCourses.videoUrl")}
@@ -286,43 +504,78 @@ export default function MyCourse() {
           >
             <Input placeholder={t("teacherCourses.videoUrlPlaceholder")} />
           </Form.Item>
-          <Form.Item
-            name="duration"
+
+          <Form.Item 
+            name="duration" 
             label={t("teacherCourses.videoDuration")}
           >
-            <Input />
+            <Input placeholder={t("teacherCourses.videoDurationPlaceholder")} />
           </Form.Item>
-          <Button type="primary" htmlType="submit" block>
-            {editingVideo ? t("teacherCourses.updateVideo") : t("teacherCourses.saveVideo")}
-          </Button>
+
+          <Form.Item>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+              <Button
+                onClick={() => {
+                  setEditingVideo(null);
+                  videoForm.resetFields();
+                }}
+              >
+                {t("commons.cancel")}
+              </Button>
+              <Button type="primary" htmlType="submit">
+                {editingVideo ? t("commonAdmin.update") : t("teacherCourses.addVideo")}
+              </Button>
+            </Space>
+          </Form.Item>
         </Form>
 
-        <List
-          header={t("teacherCourses.videoList")}
-          dataSource={videosByCourse[selectedCourse?.id] || []}
-          renderItem={(v) => (
-            <List.Item
-              actions={[
-                <Button
-                  icon={<EditOutlined />}
-                  onClick={() => {
-                    setEditingVideo(v);
-                    videoForm.setFieldsValue(v);
-                  }}
-                />,
-                <Button
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => handleDeleteVideo(v.id)}
-                />,
-              ]}
-            >
-              <PlayCircleOutlined style={{ color: "#1677ff", marginRight: 8 }} />
-              {v.title} ({v.duration})
-            </List.Item>
-          )}
-        />
+        <div style={{ marginTop: 12 }}>
+          <List
+            header={<div style={{ fontWeight: 600 }}>{t("teacherCourses.videoList")}</div>}
+            dataSource={videosByCourse[selectedCourse?.id] || []}
+            renderItem={(v) => (
+              <List.Item
+                actions={[
+                  <Button
+                    icon={<PlayCircleOutlined />}
+                    onClick={() => {
+                      if (v.url) window.open(v.url, "_blank");
+                    }}
+                    title={t("view")}
+                  />,
+                  <Button
+                    icon={<EditOutlined />}
+                    onClick={() => {
+                      setEditingVideo(v);
+                      videoForm.setFieldsValue(v);
+                    }}
+                    title={t("commons.edit")}
+                  />,
+                  <Popconfirm
+                    title={t("courseadminManagement.confirm.deleteDescription")}
+                    onConfirm={() => handleDeleteVideo(v.id)}
+                    okText={t("commons.delete")}
+                    cancelText={t("commons.cancel")}
+                  >
+                    <Button 
+                      danger 
+                      icon={<DeleteOutlined />} 
+                      title={t("commons.delete")}
+                    />
+                  </Popconfirm>,
+                ]}
+              >
+                <div>
+                  <div style={{ fontWeight: 600 }}>{v.title}</div>
+                  <div style={{ color: "#666", fontSize: 13 }}>{v.duration || ""}</div>
+                </div>
+              </List.Item>
+            )}
+          />
+        </div>
       </Modal>
     </div>
   );
 }
+
+export default MyCourse;

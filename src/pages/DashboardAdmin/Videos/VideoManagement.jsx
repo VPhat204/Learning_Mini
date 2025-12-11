@@ -23,12 +23,14 @@ import {
   PlayCircleOutlined,
   LinkOutlined
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './VideoManagement.css';
-import DetailVideo from './DetailVideo'
+import DetailVideo from './Detail/DetailVideo';
 
 const { Option } = Select;
 
 const VideoManagement = () => {
+  const { t } = useTranslation();
   const [videos, setVideos] = useState([]);
   const [courses, setCourses] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,9 +55,9 @@ const VideoManagement = () => {
       const data = await response.json();
       setCourses(data);
     } catch (error) {
-      messageApi.error('Lỗi khi tải danh sách khóa học');
+      messageApi.error(t('teacherCourses.fetchCoursesFailed'));
     }
-  }, [token, messageApi]);
+  }, [token, messageApi, t]);
 
   const fetchVideos = useCallback(async (courseId = '') => {
     try {
@@ -72,9 +74,9 @@ const VideoManagement = () => {
       const data = await response.json();
       setVideos(Array.isArray(data) ? data : []);
     } catch (error) {
-      messageApi.error('Lỗi khi tải danh sách video');
+      messageApi.error(t('teacherCourses.fetchVideosFailed'));
     }
-  }, [token, messageApi]);
+  }, [token, messageApi, t]);
 
   useEffect(() => {
     fetchCourses();
@@ -108,14 +110,14 @@ const VideoManagement = () => {
       });
 
       if (response.ok) {
-        messageApi.success('Xóa video thành công');
+        messageApi.success(t('teacherCourses.deleteVideoSuccess'));
         fetchVideos(selectedCourse);
       } else {
         const errorData = await response.json();
-        messageApi.error(errorData.message || 'Lỗi khi xóa video');
+        messageApi.error(errorData.message || t('teacherCourses.deleteVideoFailed'));
       }
     } catch (error) {
-      messageApi.error('Lỗi kết nối đến server');
+      messageApi.error(t('teacherCourses.deleteVideoFailed'));
     }
   };
 
@@ -126,8 +128,6 @@ const VideoManagement = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
-      console.log('User from localStorage:', user);
 
       let url = 'https://learning-mini-be.onrender.com/videos/add';
       let method = 'POST';
@@ -141,8 +141,6 @@ const VideoManagement = () => {
         ...values,
         duration: values.duration ? values.duration.toString() : "0"
       };
-
-      console.log('Data to submit:', submitData);
 
       const response = await fetch(url, {
         method,
@@ -159,27 +157,23 @@ const VideoManagement = () => {
       if (contentType && contentType.includes('application/json')) {
         result = await response.json();
       } else {
-        const text = await response.text();
-        console.log('Non-JSON response:', text);
+         const text = await response.text();
+        console.error('Non-JSON response:', text); 
         throw new Error(`Server returned non-JSON: ${response.status} ${response.statusText}`);
       }
 
-      console.log('Server response status:', response.status);
-      console.log('Server response data:', result);
-
       if (response.ok) {
-        messageApi.success(editingVideo ? 'Cập nhật video thành công' : 'Thêm video thành công');
+        messageApi.success(editingVideo ? t('teacherCourses.updateVideoSuccess') : t('teacherCourses.addVideoSuccess'));
         setModalVisible(false);
         fetchVideos(selectedCourse);
       } else {
-        messageApi.error(result.message || `Lỗi ${response.status} khi lưu video`);
+        messageApi.error(result.message || `${t('commonAdmin.update')} ${response.status}`);
       }
     } catch (error) {
-      console.error('Lỗi kết nối:', error);
       if (error.message.includes('non-JSON')) {
-        messageApi.error('Lỗi server: Phản hồi không hợp lệ');
+        messageApi.error(t('teacherCourses.saveVideoFailed'));
       } else {
-        messageApi.error('Lỗi kết nối đến server');
+        messageApi.error(t('teacherCourses.saveVideoFailed'));
       }
     }
   };
@@ -204,7 +198,7 @@ const VideoManagement = () => {
 
   const getCourseName = (courseId) => {
     const course = courses.find(c => c.id === courseId);
-    return course ? course.title : 'Không xác định';
+    return course ? course.title : t('courseDetail.notAvailable');
   };
 
   const getVideoCourse = (videoId) => {
@@ -214,13 +208,13 @@ const VideoManagement = () => {
 
   const columns = [
     {
-      title: 'Tên video',
+      title: t('teacherCourses.videoTitle'),
       dataIndex: 'title',
       key: 'title',
       width: 200
     },
     {
-      title: 'Khóa học',
+      title: t('teachercourses'),
       dataIndex: 'course_id',
       key: 'course_id',
       render: (courseId) => <Tag color="blue" className="video-tag">{getCourseName(courseId)}</Tag>
@@ -238,19 +232,19 @@ const VideoManagement = () => {
       )
     },
     {
-      title: 'Thời lượng',
+      title: t('teacherCourses.videoDuration'),
       dataIndex: 'duration',
       key: 'duration',
       render: (duration) => <Tag color="green" className="video-tag">{formatDuration(duration)}</Tag>
     },
     {
-      title: 'Ngày tạo',
+      title: t('courseadminManagement.columns.createdAt'),
       dataIndex: 'created_at',
       key: 'created_at',
-      render: (date) => date ? new Date(date).toLocaleDateString('vi-VN') : 'Chưa cập nhật'
+      render: (date) => date ? new Date(date).toLocaleDateString() : t('courseadminManagement.text.notUpdated')
     },
     {
-      title: 'Thao tác',
+      title: t('courseadminManagement.columns.actions'),
       key: 'actions',
       render: (_, record) => (
         <Space>
@@ -258,20 +252,27 @@ const VideoManagement = () => {
             icon={<PlayCircleOutlined />} 
             onClick={() => handleViewDetail(record)}
             className="video-action-btn"
+            title={t('teacherCourses.viewDetails')}
           />
           <Button 
             icon={<EditOutlined />} 
             onClick={() => handleEdit(record)}
             className="video-action-btn"
+            title={t('commons.edit')}
           />
           <Popconfirm
-            title="Xóa video"
-            description="Bạn có chắc chắn muốn xóa video này?"
+            title={t('courseadminManagement.confirm.deleteTitle')}
+            description={t('courseadminManagement.confirm.deleteDescription')}
             onConfirm={() => handleDelete(record.id)}
-            okText="Xóa"
-            cancelText="Hủy"
+            okText={t('commons.yes')}
+            cancelText={t('commons.no')}
           >
-            <Button icon={<DeleteOutlined />} danger className="video-action-btn" />
+            <Button 
+              icon={<DeleteOutlined />} 
+              danger 
+              className="video-action-btn" 
+              title={t('commons.delete')}
+            />
           </Popconfirm>
         </Space>
       )
@@ -290,17 +291,17 @@ const VideoManagement = () => {
       <Card className="video-management-card">
         <div className="video-header">
           <div className="video-title-section">
-            <h2 className="video-title">Quản lý Video</h2>
-            <p className="video-subtitle">Quản lý video bài giảng cho các khóa học</p>
+            <h2 className="video-title">{t('videoManagement')}</h2>
+            <p className="video-subtitle">{t('teacherCourses.manageVideos')}</p>
           </div>
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} className="add-video-btn">
-            Thêm Video
+            {t('teacherCourses.addVideo')}
           </Button>
         </div>
 
         <div className="course-selector">
           <Select
-            placeholder="Chọn khóa học"
+            placeholder={t('studentlist.chooseCourse')}
             value={selectedCourse}
             onChange={handleCourseChange}
             className="course-select"
@@ -317,14 +318,18 @@ const VideoManagement = () => {
         <Row gutter={16} className="stats-row">
           <Col span={6}>
             <Card className="stat-card">
-              <Statistic title="Tổng số video" value={videos.length} className="video-statistic" />
+              <Statistic 
+                title={t('courseadminManagement.stats.totalCourses')} 
+                value={videos.length} 
+                className="video-statistic" 
+              />
             </Card>
           </Col>
           <Col span={6}>
             <Card className="stat-card">
               <Statistic 
-                title="Khóa học đã chọn" 
-                value={selectedCourse ? getCourseName(parseInt(selectedCourse)) : 'Tất cả'} 
+                title={t('studentlist.chooseCourse')} 
+                value={selectedCourse ? getCourseName(parseInt(selectedCourse)) : t('courseDetail.notAvailable')} 
                 className="video-statistic"
               />
             </Card>
@@ -339,14 +344,14 @@ const VideoManagement = () => {
           className="video-table"
           locale={{ 
             emptyText: selectedCourse ? 
-              'Chưa có video nào cho khóa học này' : 
-              'Chưa có video nào. Hãy chọn khóa học để xem video hoặc thêm video mới.'
+              t('courseDetail.noVideos') : 
+              t('teacherCourses.noVideos')
           }}
         />
       </Card>
       )}
       <Modal
-        title={editingVideo ? 'Chỉnh sửa Video' : 'Thêm Video Mới'}
+        title={editingVideo ? t('courseadminManagement.modals.editTitle') : t('courseadminManagement.modals.addTitle')}
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
@@ -361,10 +366,13 @@ const VideoManagement = () => {
         >
           <Form.Item
             name="course_id"
-            label="Khóa học"
-            rules={[{ required: true, message: 'Vui lòng chọn khóa học' }]}
+            label={t('assign.course')}
+            rules={[{ required: true, message: t('studentlist.chooseCourse') }]}
           >
-            <Select placeholder="Chọn khóa học" className="form-select">
+            <Select 
+              placeholder={t('studentlist.chooseCourse')} 
+              className="form-select"
+            >
               {courses.map(course => (
                 <Option key={course.id} value={course.id}>
                   {course.title}
@@ -375,38 +383,44 @@ const VideoManagement = () => {
 
           <Form.Item
             name="title"
-            label="Tiêu đề video"
-            rules={[{ required: true, message: 'Vui lòng nhập tiêu đề video' }]}
+            label={t('teacherCourses.videoTitle')}
+            rules={[{ required: true, message: t('teacherCourses.videoTitleRequired') }]}
           >
-            <Input className="form-input" />
+            <Input 
+              className="form-input" 
+              placeholder={t('teacherCourses.videoTitlePlaceholder')}
+            />
           </Form.Item>
 
           <Form.Item
             name="url"
-            label="URL video"
-            rules={[{ required: true, message: 'Vui lòng nhập URL video' }]}
+            label={t('teacherCourses.videoUrl')}
+            rules={[{ required: true, message: t('teacherCourses.videoUrlRequired') }]}
           >
-            <Input placeholder="https://www.youtube.com/watch?v=..." className="form-input" />
+            <Input 
+              placeholder={t('teacherCourses.videoUrlPlaceholder')} 
+              className="form-input" 
+            />
           </Form.Item>
 
           <Form.Item
             name="duration"
-            label="Thời lượng (giây)"
+            label={t('teacherCourses.videoDuration')}
           >
             <InputNumber 
               min={1} 
               className="duration-input" 
-              placeholder="Ví dụ: 3600 cho video 1 giờ"
+              placeholder={t('teacherCourses.videoDurationPlaceholder')}
             />
           </Form.Item>
 
           <Form.Item>
             <div className="form-actions">
               <Button onClick={() => setModalVisible(false)} className="cancel-btn">
-                Hủy
+                {t('commons.cancel')}
               </Button>
               <Button type="primary" htmlType="submit" className="submit-btn">
-                {editingVideo ? 'Cập nhật' : 'Thêm'}
+                {editingVideo ? t('commonAdmin.update') : t('commonAdmin.add')}
               </Button>
             </div>
           </Form.Item>

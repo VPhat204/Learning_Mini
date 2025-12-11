@@ -36,7 +36,7 @@ function DashboardOverview({ setSelectedKey }) {
       if (!userId) return;
       
       const res = await axios.get(
-        `http://localhost:5000/users/${userId}/courses`,
+        `https://learning-mini-be.onrender.com/users/${userId}/courses`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -76,7 +76,7 @@ function DashboardOverview({ setSelectedKey }) {
         const dateString = weekDate.toISOString().split('T')[0];
         weeklyPromises.push(
           axios.get(
-            `http://localhost:5000/api/schedule/week?date=${dateString}`,
+            `https://learning-mini-be.onrender.com/api/schedule/week?date=${dateString}`,
             { headers: { Authorization: `Bearer ${token}` } }
           )
         );

@@ -6,6 +6,7 @@ import {
   VideoCameraOutlined,
   DashboardOutlined,
   WechatWorkOutlined,
+  ScheduleOutlined,
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -65,7 +66,7 @@ function AdminDashboard() {
           <Menu.Item key="courses" icon={<BookOutlined />}>
             {t("courseManagement")}
           </Menu.Item>
-          <Menu.Item key="schedules" icon={<BookOutlined />}>
+          <Menu.Item key="schedules" icon={<ScheduleOutlined />}>
             {t("scheduleManagement")}
           </Menu.Item>
           <Menu.Item key="videos" icon={<VideoCameraOutlined />}>

@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
 import { message } from "antd";
+import { useTranslation } from "react-i18next";
 import "./TeacherList.css";
 
 export default function TeacherList({ onCourseEnrolled }) {
+  const { t } = useTranslation();
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [enrolling, setEnrolling] = useState({});
@@ -15,54 +17,65 @@ export default function TeacherList({ onCourseEnrolled }) {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
   const [messageApi, contextHolder] = message.useMessage();
+  const hasFetchedEnrolled = useRef(false);
 
   useEffect(() => {
     const fetchTeachers = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:5001/teachers-courses", {
+        const res = await axios.get("https://learning-mini-be.onrender.com/teachers-courses", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setTeachers(res.data);
+        
+        const filteredTeachers = res.data.filter(teacher => 
+          teacher.courses && teacher.courses.length > 0
+        );
+        
+        setTeachers(filteredTeachers);
       } catch (err) {
         console.error(err);
-        messageApi.error("Lỗi khi tải danh sách giảng viên");
+        messageApi.error(t("teacherlist.messages.loadError"));
       } finally {
         setLoading(false);
       }
     };
     fetchTeachers();
-  }, [token, messageApi]);
+  }, [token, messageApi, t]);
+
+  const fetchEnrolledData = useCallback(async () => {
+    if (user && user.roles === "student") {
+      try {
+        const enrolledRes = await axios.get(
+          `https://learning-mini-be.onrender.com/users/${user.id}/courses`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const enrolledIds = new Set(enrolledRes.data.map(course => course.id));
+        setEnrolledCourses(enrolledIds);
+        
+        const pendingRes = await axios.get(
+          `https://learning-mini-be.onrender.com/users/${user.id}/pending-courses`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const pendingIds = new Set(pendingRes.data.map(course => course.id));
+        setPendingCourses(pendingIds);
+        
+      } catch (err) {
+        console.error("Lỗi khi lấy khóa học:", err);
+        messageApi.error(t("teacherlist.messages.enrolledCoursesError"));
+      }
+    }
+  }, [token, user, t, messageApi]);
 
   useEffect(() => {
-    const fetchEnrolledCourses = async () => {
-      if (user && user.roles === "student") {
-        try {
-          const enrolledRes = await axios.get(
-            `http://localhost:5001/users/${user.id}/courses`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          const enrolledIds = new Set(enrolledRes.data.map(course => course.id));
-          setEnrolledCourses(enrolledIds);
-          
-          const pendingRes = await axios.get(
-            `http://localhost:5001/users/${user.id}/pending-courses`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          const pendingIds = new Set(pendingRes.data.map(course => course.id));
-          setPendingCourses(pendingIds);
-          
-        } catch (err) {
-          console.error("Lỗi khi lấy khóa học:", err);
-        }
-      }
-    };
-    fetchEnrolledCourses();
-  }, [token, user]);
+    if (!hasFetchedEnrolled.current) {
+      fetchEnrolledData();
+      hasFetchedEnrolled.current = true;
+    }
+  }, [fetchEnrolledData]);
 
   const getCourseStatus = (courseId) => {
     if (enrolledCourses.has(courseId)) {
@@ -88,24 +101,29 @@ export default function TeacherList({ onCourseEnrolled }) {
     try {
       setEnrolling(prev => ({ ...prev, [courseId]: true }));
       
+      if (!user) {
+        messageApi.error(t("teacherlist.messages.loginRequired"));
+        return;
+      }
+      
       if (user.roles !== "student") {
-        messageApi.error("Chỉ sinh viên mới có thể đăng ký khóa học");
+        messageApi.error(t("teacherlist.messages.studentsOnly"));
         return;
       }
 
       const status = getCourseStatus(courseId);
       if (status === "enrolled") {
-        messageApi.warning("Bạn đã đăng ký khóa học này rồi");
+        messageApi.warning(t("teacherlist.messages.alreadyEnrolled"));
         return;
       }
       
       if (status === "pending") {
-        messageApi.info("Khóa học này đang chờ xác nhận. Vui lòng kiên nhẫn!");
+        messageApi.info(t("enrolledCourses.status.pending"));
         return;
       }
 
       await axios.post(
-        `http://localhost:5001/courses/${courseId}/enroll`,
+        `https://learning-mini-be.onrender.com/courses/${courseId}/enroll`,
         { status: "pending" },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -115,12 +133,12 @@ export default function TeacherList({ onCourseEnrolled }) {
       setPendingCourses(prev => new Set([...prev, courseId]));
       
       messageApi.success({
-        content: `Đã gửi yêu cầu đăng ký khóa học: ${courseTitle}`,
+        content: t("teacherlist.messages.enrollSuccess", { courseTitle }),
         duration: 3,
       });
       
       messageApi.info({
-        content: "Khóa học của bạn đang chờ xác nhận.",
+        content: t("enrolledCourses.status.pending"),
         duration: 5,
       });
       
@@ -131,12 +149,12 @@ export default function TeacherList({ onCourseEnrolled }) {
     } catch (error) {
       console.error("Lỗi khi đăng ký:", error);
       if (error.response?.status === 403) {
-        messageApi.error("Bạn không có quyền đăng ký khóa học");
+        messageApi.error(t("teacherlist.messages.noPermission"));
       } else if (error.response?.status === 409) {
-        messageApi.warning("Bạn đã gửi yêu cầu đăng ký cho khóa học này rồi");
+        messageApi.warning(t("teacherlist.messages.alreadyEnrolled"));
         setPendingCourses(prev => new Set([...prev, courseId]));
       } else {
-        messageApi.error("Có lỗi xảy ra khi gửi yêu cầu đăng ký khóa học");
+        messageApi.error(t("teacherlist.messages.enrollError"));
       }
     } finally {
       setEnrolling(prev => ({ ...prev, [courseId]: false }));
@@ -150,7 +168,7 @@ export default function TeacherList({ onCourseEnrolled }) {
           <div className="teacher-main-info">
             <div className="teacher-avatar">
               <img 
-                src={`http://localhost:5001${teacher.avatar}`} 
+                src={`https://learning-mini-be.onrender.com${teacher.avatar}`} 
                 alt={teacher.name}
                 onError={(e) => e.target.src = require("../../../assets/default.jpg")}
               />
@@ -158,13 +176,13 @@ export default function TeacherList({ onCourseEnrolled }) {
             <div className="teacher-details">
               <div className="detail-row">
                 <span className="teacher-name">{teacher.name}</span>
-                <span className="teacher-gender">{teacher.gender || "-"}</span>
+                <span className="teacher-gender">{teacher.gender || t("teacherlist.notAvailable")}</span>
               </div>
               <div className="detail-row">
                 <span className="teacher-date">
-                  {teacher.birthdate ? new Date(teacher.birthdate).toLocaleDateString() : "Chưa cập nhật"}
+                  {teacher.birthdate ? new Date(teacher.birthdate).toLocaleDateString() : t("teacherlist.notUpdated")}
                 </span>
-                <span className="teacher-phone">{teacher.phone || "Chưa cập nhật"}</span>
+                <span className="teacher-phone">{teacher.phone || t("teacherlist.notUpdated")}</span>
               </div>
               <div className="detail-row">
                 <span className="teacher-email">{teacher.email}</span>
@@ -176,8 +194,11 @@ export default function TeacherList({ onCourseEnrolled }) {
             <button 
               className="view-courses-btn"
               onClick={() => handleViewCourses(teacher)}
+              disabled={!teacher.courses || teacher.courses.length === 0}
             >
-              Xem tất cả khóa học
+              {teacher.courses && teacher.courses.length > 0 
+                ? t("teacherlist.actions.viewAllCourses") 
+                : t("teacherlist.noCourses")}
             </button>
           </div>
         </div>
@@ -189,7 +210,7 @@ export default function TeacherList({ onCourseEnrolled }) {
     <div className="teacher-detail-view">
       <div className="breadcrumb">
         <span className="breadcrumb-item" onClick={handleBackToList}>
-          Thông tin giảng viên
+          {t("teacherlist.title")}
         </span>
         <span className="breadcrumb-separator">›</span>
         <span className="breadcrumb-current">{selectedTeacher.name}</span>
@@ -197,7 +218,7 @@ export default function TeacherList({ onCourseEnrolled }) {
 
       <div className="back-button-container">
         <button className="back-button" onClick={handleBackToList}>
-          Quay lại danh sách
+          {t("teacherlist.actions.back")}
         </button>
       </div>
 
@@ -205,7 +226,7 @@ export default function TeacherList({ onCourseEnrolled }) {
         <div className="teacher-detail-header">
           <div className="teacher-detail-avatar">
             <img 
-              src={`http://localhost:5001${selectedTeacher.avatar}`} 
+              src={`https://learning-mini-be.onrender.com${selectedTeacher.avatar}`} 
               alt={selectedTeacher.name}
               onError={(e) => e.target.src = "."}
             />
@@ -213,11 +234,11 @@ export default function TeacherList({ onCourseEnrolled }) {
           <div className="teacher-detail-main">
             <h2 className="teacher-detail-name">{selectedTeacher.name}</h2>
             <div className="teacher-detail-meta">
-              <span className="teacher-detail-gender">{selectedTeacher.gender || "Chưa cập nhật"}</span>
+              <span className="teacher-detail-gender">{selectedTeacher.gender || t("teacherlist.notAvailable")}</span>
               <span className="teacher-detail-birthdate">
-                {selectedTeacher.birthdate ? new Date(selectedTeacher.birthdate).toLocaleDateString() : "Chưa cập nhật"}
+                {selectedTeacher.birthdate ? new Date(selectedTeacher.birthdate).toLocaleDateString() : t("teacherlist.notUpdated")}
               </span>
-              <span className="teacher-detail-phone">{selectedTeacher.phone || "Chưa cập nhật"}</span>
+              <span className="teacher-detail-phone">{selectedTeacher.phone || t("teacherlist.notUpdated")}</span>
             </div>
             <div className="teacher-detail-email">{selectedTeacher.email}</div>
           </div>
@@ -225,9 +246,9 @@ export default function TeacherList({ onCourseEnrolled }) {
       </div>
 
       <div className="teacher-courses-section">
-        <h3 className="courses-section-title">Khóa học giảng dạy</h3>
+        <h3 className="courses-section-title">{t("teacherlist.teachingCourses")}</h3>
         {selectedTeacher.courses.length === 0 ? (
-          <p className="no-courses">Giảng viên chưa có khóa học nào</p>
+          <p className="no-courses">{t("teacherlist.noCourses")}</p>
         ) : (
           <div className="courses-list">
             {selectedTeacher.courses.map((course) => {
@@ -243,7 +264,7 @@ export default function TeacherList({ onCourseEnrolled }) {
                       <p className="course-list-description">{course.description}</p>
                       {isPending && (
                         <div className="course-status-badge pending">
-                          ⏳ Đang chờ xác nhận
+                          ⏳ {t("enrolledCourses.status.pending")}
                         </div>
                       )}
                     </div>
@@ -253,10 +274,10 @@ export default function TeacherList({ onCourseEnrolled }) {
                         onClick={() => handleEnroll(course.id, course.title)}
                         disabled={isEnrolled || isPending || enrolling[course.id]}
                       >
-                        {enrolling[course.id] ? "Đang xử lý..." : 
-                         isEnrolled ? "Đã đăng ký" : 
-                         isPending ? "Chờ xác nhận" : 
-                         "Đăng ký học"}
+                        {enrolling[course.id] ? t("teacherlist.actions.enrolling") : 
+                         isEnrolled ? t("teacherlist.actions.enrolled") : 
+                         isPending ? t("enrolledCourses.status.pending") : 
+                         t("teacherlist.actions.enroll")}
                       </button>
                     </div>
                   </div>
@@ -272,9 +293,11 @@ export default function TeacherList({ onCourseEnrolled }) {
   return (
     <div className="teacher-list-container">
       {contextHolder}
-      <h1>Danh sách giảng viên</h1>
+      <h1>{t("teacherlist.title")}</h1>
       {loading ? (
-        <p>Đang tải danh sách giảng viên...</p>
+        <p>{t("teacherlist.loading")}</p>
+      ) : teachers.length === 0 ? (
+        <p>{t("teacherlist.noTeachers")}</p>
       ) : (
         viewMode === "grid" ? renderGridView() : renderDetailView()
       )}

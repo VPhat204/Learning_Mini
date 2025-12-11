@@ -4,7 +4,7 @@ import {
   DashboardOutlined,
   BookOutlined,
   TeamOutlined,
-  ReadOutlined,
+  // ReadOutlined, // Đã bị comment và không sử dụng, nên xóa
   ScheduleOutlined,
   WechatWorkOutlined,
 } from "@ant-design/icons";
@@ -14,7 +14,7 @@ import "./DashboardTeacher.css";
 import MyCourses from "../Courses/MyCourse";
 import StudentsList from "../Students/StudentList";
 import CreateCourse from "../Courses/CreateCourse";
-import MyAssignments from "../Assignments/MyAssignments";
+//import MyAssignments from "../Assignments/MyAssignments";
 import ScheduleTeacher from "../Schedules/ScheduleTeacher"
 import TeacherOverview from "./Overview/TeacherOverview";
 import TeacherChatInterface from "../Chat/TeacherChatInterface";
@@ -62,17 +62,21 @@ function DashboardTeacher() {
       case "dashboard":
         return <TeacherOverview setSelectedKey={setSelectedKey} />;
       case "mycourses":
-        return <MyCourses courses={courses} onViewStudents={(id) => {
-          setSelectedCourse(id);
-          fetchStudents(id);
-          setSelectedKey("students");
-        }} />;
+        return <MyCourses 
+          courses={courses} 
+          onViewStudents={(id) => {
+            setSelectedCourse(id);
+            fetchStudents(id);
+            setSelectedKey("students");
+          }} 
+          teacherId={teacherId} 
+        />;
       case "students":
         return <StudentsList students={students} courseId={selectedCourse} />;
       case "createcourse":
         return <CreateCourse courseForm={courseForm} onCreateCourse={handleCreateCourse} />;
-      case "myassignments":
-        return <MyAssignments teacherId={teacherId} />;
+      /*case "myassignments":
+        return <MyAssignments teacherId={teacherId} />;*/
       case "schedules":
         return <ScheduleTeacher />;
       case "chats":
@@ -98,11 +102,11 @@ function DashboardTeacher() {
       icon: <TeamOutlined />,
       label: t('teacherstudents')
     },
-    {
+    /*{
       key: "myassignments",
-      icon: <ReadOutlined />,
+      icon: <ReadOutlined />, // Icon này đã bị xóa khỏi import
       label: t('courseManagements.myAssignments')
-    },
+    },*/
     {
       key: "chats",
       icon: <WechatWorkOutlined />,

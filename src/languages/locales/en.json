@@ -430,7 +430,7 @@
       "teachers": "Teachers",
       "enrolledCourses": "Enrolled Courses",
       "myCourses": "My Courses",
-      "assignments": "Assignments",
+      "scores": "Courses overall score",
       "schedules": "Schedules"
     }
   },
@@ -679,6 +679,13 @@
     "errorAssignmentNotFound": "Assignment not found."
   },
   "teacherCourses": {
+    "courseId": "Course ID",
+    "noAssignments": "No assignments yet. Create your first assignment!",
+    "createFirstAssignment": "Create First Assignment",
+    "description": "Description",
+    "deadline": "Deadline",
+    "points": "points",
+    "assignment": "Assignment",
     "title": "Teacher - Course Management",
     "addCourseBtn": "+ Add Course",
     "addCourseModalTitle": "Add New Course",
@@ -918,5 +925,592 @@
     "error_message": "An error occurred while creating the course. Please try again.",
     "instruction": "After creation, the course will be submitted for administrator approval before being publicly displayed.",
     "success_title": "Course Created Successfully!"
+  },
+  "gradeTable": {
+    "title": "Personal Grade Report",
+    "studentId": "Student ID",
+    "summaryCards": {
+      "totalCourses": "Total Courses",
+      "gradedAssignments": "Graded Assignments",
+      "overallGPA": "Overall GPA",
+      "totalCredits": "Total Credits"
+    },
+    "tabs": {
+      "overview": "Course Overview",
+      "details": "Assignment Details"
+    },
+    "coursesOverview": {
+      "header": "Grades by Course",
+      "showingPerPage": "Showing courses per page",
+      "courseCard": {
+        "teacher": "Teacher",
+        "overallGrade": "Overall Grade",
+        "assignments": "Assignments",
+        "totalScore": "Total Score",
+        "completionRate": "Completion Rate"
+      }
+    },
+    "assignmentsDetails": {
+      "header": "Assignment Details",
+      "expandControls": {
+        "expandAll": "View All Details",
+        "collapseAll": "Collapse All"
+      },
+      "instructions": "Instructions: Click on course name to view assignment details or click \"View All Details\" to expand all.",
+      "courseDetail": {
+        "averageScore": "Average Score",
+        "grade": "Grade",
+        "assignmentsCount": "Assignments",
+        "viewDetails": "View Details",
+        "teacher":"Teacher",
+        "collapse": "Collapse ▲"
+      },
+      "assignmentsTable": {
+        "headers": {
+          "stt": "No.",
+          "assignment": "Assignment",
+          "maxScore": "Max Score",
+          "obtainedScore": "Obtained Score",
+          "percentage": "Percentage",
+          "grade": "Grade",
+          "submissionDate": "Submission Date",
+          "status": "Status"
+        },
+        "notGraded": "Not Graded",
+        "notSubmitted": "Not Submitted",
+        "statuses": {
+          "graded": "Graded",
+          "pending": "Pending"
+        },
+        "noAssignments": "No assignments in this course yet"
+      }
+    },
+    "modal": {
+      "summary": "Summary Grade",
+      "grade": "Grade",
+      "totalAssignments": "Total Assignments",
+      "completed": "Completed",
+      "graded": "Graded",
+      "assignmentList": "Assignment List",
+      "close": "Close"
+    },
+    "loading": {
+      "message": "Loading grade data...",
+      "error": "Unable to load grade data",
+      "tryAgain": "Try Again",
+      "noData": "No grade data available",
+      "noDataMessage": "You haven't enrolled in any courses or no assignments have been graded yet."
+    },
+    "pagination": {
+      "showTotal": "{{start}}-{{end}} of {{total}} courses",
+      "pageSizeOptions": ["3", "6", "9", "12", "15"]
+    }
+  },
+  "teacherlist": {
+    "title": "Teacher List",
+    "loading": "Loading teachers list...",
+    "noTeachers": "No teachers found",
+    "noCourses": "No courses yet",
+    "notAvailable": "Not available",
+    "notUpdated": "Not updated",
+    "teachingCourses": "Teaching Courses",
+    "search": {
+      "placeholder": "Search by name or email..."
+    },
+    "sort": {
+      "aToZ": "Name A-Z",
+      "zToA": "Name Z-A"
+    },
+    "actions": {
+      "viewAllCourses": "View All Courses",
+      "hideCourses": "Hide Courses",
+      "enroll": "Enroll",
+      "enrolling": "Enrolling...",
+      "enrolled": "Enrolled",
+      "cannotEnroll": "Cannot enroll",
+      "back": "Back"
+    },
+    "messages": {
+      "loadError": "Error loading teachers list",
+      "enrolledCoursesError": "Error loading enrolled courses",
+      "loginRequired": "Please login to enroll in courses",
+      "studentsOnly": "Only students can enroll in courses",
+      "alreadyEnrolled": "You have already enrolled in this course",
+      "enrollSuccess": "Successfully enrolled in course: {{courseTitle}}",
+      "noPermission": "You don't have permission to enroll in courses",
+      "enrollError": "An error occurred while enrolling in the course",
+      "loginPrompt": "Please"
+    }
+  },
+  "studentChat": {
+    "notAuthorized": {
+      "title": "You don't have permission to access chat feature",
+      "description": "Only students can use this feature"
+    },
+    "tabs": {
+      "support": "Support",
+      "teachers": "Teachers"
+    },
+    "select": {
+      "support": "Select administrator to contact for support",
+      "teachers": "Select teacher to contact for learning",
+      "instructions": {
+        "admin": "Select an administrator from the list to contact for support",
+        "teacher": "Select a teacher from the list to contact for learning"
+      },
+      "supportMessage": "We are always ready to support you!",
+      "teacherSupportMessage": "Teachers will support you during your learning process"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "teacher": "Teacher"
+    },
+    "empty": {
+      "noAdmins": "No administrators online",
+      "noTeachers": "You haven't enrolled in any courses yet"
+    },
+    "messages": {
+      "noMessages": "No messages yet",
+      "startConversation": "Start a conversation with {{name}}!",
+      "read": "✓ Read"
+    },
+    "input": {
+      "placeholder": "Message {{name}}..."
+    },
+    "buttons": {
+      "send": "Send"
+    },
+    "errors": {
+      "unreadCountAdmin": "Error getting unread count for admin",
+      "unreadCountTeacher": "Error getting unread count for teacher",
+      "loadAdmins": "Error loading admin list:",
+      "cannotLoadAdmins": "Cannot load admin list",
+      "loadTeachers": "Error loading teacher list:",
+      "cannotLoadTeachers": "Cannot load teacher list",
+      "loadMessages": "Error loading messages:",
+      "cannotLoadMessages": "Cannot load messages",
+      "sendMessage": "Error sending message:",
+      "cannotSendMessage": "Cannot send message"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{{minutes}} minutes ago",
+      "hoursAgo": "{{hours}} hours ago",
+      "yesterday": "Yesterday",
+      "daysAgo": "{{days}} days ago",
+      "today": "Today"
+    }
+  },
+  "adminChat": {
+    "notAuthorized": {
+      "title": "You don't have permission to access chat feature",
+      "description": "Only administrators can use this feature"
+    },
+    "tabs": {
+      "messages": "Messages",
+      "search": "Search"
+    },
+    "roles": {
+      "student": "Student",
+      "teacher": "Teacher",
+      "user": "User"
+    },
+    "stats": {
+      "conversations": "{{count}} conversations",
+      "unreadMessages": "• {{count}} unread messages"
+    },
+    "messages": {
+      "noMessages": "No messages yet",
+      "startConversation": "Start a conversation with {{name}}!",
+      "read": "Read"
+    },
+    "search": {
+      "placeholder": "Search by name or email..."
+    },
+    "input": {
+      "placeholder": "Message {{name}}..."
+    },
+    "buttons": {
+      "send": "Send"
+    },
+    "select": {
+      "startConversation": "Select a conversation to start",
+      "instructions": "Select a user from the list to start chatting",
+      "useSearchTab": "Or use the \"Search\" tab to find new users"
+    },
+    "empty": {
+      "noConversations": "No conversations yet",
+      "noUsersFound": "No users found",
+      "enterKeyword": "Enter a keyword to search"
+    },
+    "errors": {
+      "loadChatUsers": "Error loading chat users:",
+      "cannotLoadChats": "Cannot load chat list",
+      "searchUsers": "Error searching users:",
+      "cannotSearchUsers": "Cannot search users",
+      "loadMessages": "Error loading messages:",
+      "cannotLoadMessages": "Cannot load messages",
+      "sendMessage": "Error sending message:",
+      "cannotSendMessage": "Cannot send message"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{{minutes}} minutes ago",
+      "hoursAgo": "{{hours}} hours ago",
+      "yesterday": "Yesterday",
+      "daysAgo": "{{days}} days ago",
+      "today": "Today"
+    }
+  },
+  "teacherChat": {
+    "notAuthorized": {
+      "title": "You don't have permission to access chat feature",
+      "description": "Only teachers can use this feature"
+    },
+    "tabs": {
+      "students": "Students",
+      "admin": "Admin",
+      "search": "Search"
+    },
+    "roles": {
+      "student": "Student",
+      "admin": "Administrator"
+    },
+    "stats": {
+      "chattedStudents": "{{count}} students have chatted",
+      "unreadMessages": "• {{count}} unread messages",
+      "admins": "{{count}} administrators"
+    },
+    "messages": {
+      "noMessages": "No messages yet",
+      "startConversation": "Start a conversation with {{name}}!",
+      "read": "Read"
+    },
+    "search": {
+      "placeholder": "Search students by name or email..."
+    },
+    "input": {
+      "placeholder": "Message {{name}}..."
+    },
+    "buttons": {
+      "send": "Send"
+    },
+    "select": {
+      "startConversation": "Select student or admin to start conversation",
+      "instructions": "Select student or administrator to start chatting",
+      "contactMessage": "Keep in touch with students and admins through chat!"
+    },
+    "empty": {
+      "noStudentConversations": "No conversations with students yet",
+      "noAdminsOnline": "No administrators online",
+      "noStudentsFound": "No students found",
+      "enterKeyword": "Enter a keyword to search students"
+    },
+    "errors": {
+      "loadStudents": "Error loading student list:",
+      "cannotLoadStudents": "Cannot load student list",
+      "loadAdmins": "Error loading admin list:",
+      "cannotLoadAdmins": "Cannot load admin list",
+      "searchStudents": "Error searching students:",
+      "cannotSearchStudents": "Cannot search students",
+      "loadMessages": "Error loading messages:",
+      "cannotLoadMessages": "Cannot load messages",
+      "sendMessage": "Error sending message:",
+      "cannotSendMessage": "Cannot send message"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{{minutes}} minutes ago",
+      "hoursAgo": "{{hours}} hours ago",
+      "yesterday": "Yesterday",
+      "daysAgo": "{{days}} days ago",
+      "today": "Today"
+    }
+  },
+  "courseadminManagement": {
+    "title": "Course Management",
+    "headers": {
+      "management": "Manage and approve courses",
+      "myCourses": "Manage your courses",
+      "viewCourses": "View course list"
+    },
+    "stats": {
+      "totalCourses": "Total Courses",
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    },
+    "tabs": {
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    },
+    "columns": {
+      "title": "Course Name",
+      "description": "Description",
+      "teacher": "Teacher",
+      "duration": "Duration",
+      "createdAt": "Created Date",
+      "actions": "Actions",
+      "studentName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "enrollmentDate": "Enrollment Date"
+    },
+    "status": {
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "unknown": "Unknown"
+    },
+    "text": {
+      "noDescription": "No description",
+      "unknown": "Unknown",
+      "lessons": "lessons",
+      "hours": "hours",
+      "notAvailable": "N/A",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "notUpdated": "Not updated"
+    },
+    "actions": {
+      "viewMore": "View more"
+    },
+    "tooltips": {
+      "viewStudents": "View students",
+      "edit": "Edit",
+      "delete": "Delete",
+      "approve": "Approve course",
+      "reject": "Reject",
+      "reApprove": "Re-approve"
+    },
+    "confirm": {
+      "deleteTitle": "Delete Course",
+      "deleteDescription": "Are you sure you want to delete this course?"
+    },
+    "empty": {
+      "noApprovedCourses": "No approved courses",
+      "noPendingCourses": "No pending courses",
+      "noRejectedCourses": "No rejected courses",
+      "noStudents": "No students enrolled in this course"
+    },
+    "modals": {
+      "editTitle": "Edit Course",
+      "addTitle": "Add New Course",
+      "approveTitle": "Approve Course: {{title}}",
+      "approve": "Approve Course",
+      "studentsTitle": "Student List - {{title}}",
+      "teacher": "Teacher",
+      "teacherEmail": "Teacher Email",
+      "description": "Description",
+      "createdAt": "Created Date",
+      "currentStatus": "Current Status",
+      "action": "Action",
+      "approveOption": "Approve Course",
+      "rejectOption": "Reject Course",
+      "approveDescription": "Course will be visible to students",
+      "rejectDescription": "Course will not be visible",
+      "reason": "Reason",
+      "totalStudents": "Total Students"
+    },
+    "form": {
+      "courseName": "Course Name",
+      "description": "Description",
+      "lessons": "Number of Lessons",
+      "hours": "Total Hours"
+    },
+    "validation": {
+      "courseNameRequired": "Please enter course name",
+      "descriptionRequired": "Please enter description",
+      "actionRequired": "Please select action",
+      "reasonRequired": "Please enter reason"
+    },
+    "placeholder": {
+      "courseName": "Enter course name",
+      "description": "Enter detailed description about the course",
+      "reason": "Enter reason for approval/rejection..."
+    },
+    "buttons": {
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "messages": {
+      "deleteSuccess": "Course deleted successfully",
+      "approveSuccess": "Course approved successfully",
+      "rejectSuccess": "Course rejected successfully",
+      "updateSuccess": "Update successful",
+      "addSuccess": "Course added successfully"
+    },
+    "errors": {
+      "parseToken": "Error parsing token:",
+      "fetchCourses": "Error fetching courses:",
+      "loadCoursesFailed": "Failed to load course list",
+      "loadStudentsFailed": "Failed to load student list",
+      "deleteFailed": "Error deleting course",
+      "connectionError": "Connection error to server",
+      "processFailed": "Error processing course",
+      "saveFailed": "Error saving course"
+    }
+  },
+  "commonAdmin": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "update": "Update",
+    "add": "Add",
+    "delete": "Delete"
+  },
+  "translation": {
+    "videoManagement": "Video Management",
+    "loading": "Loading...",
+    "loadingVideoDetails": "Loading video details...",
+    "tryAgain": "Try Again",
+    "back": "Back",
+    "view": "View",
+    "save": "Save",
+    "reply": "Reply",
+    "edited": "(edited)",
+    "sendReply": "Send Reply",
+    "sendComment": "Send Comment",
+    "videoInfo": "Video Information",
+    "openLink": "Open Link",
+    "noURL": "No URL",
+    "orderInCourse": "Order in Course",
+    "otherVideosInCourse": "Other Videos in Course",
+    "featureInDevelopment": "Feature in development",
+    "teacherMode": "Teacher Mode",
+    "adminMode": "Admin Mode",
+    "replyingTo": "Replying to",
+    "writeReplyTo": "Write reply to",
+    "noStudents": "No students",
+    "noEmail": "No email",
+    "enrolled": "Enrolled",
+    "totalVideos": "Total",
+    "videos": "videos",
+    "inCourse": "in course",
+    "noVideosInCourse": "No videos in the course",
+    "selectVideo": "Select video",
+    "lesson": "Lesson",
+    "watchingNow": "Watching now",
+    "noVideoSelected": "No video selected",
+    "browserNotSupportVideo": "Your browser does not support the video tag.",
+    "noTitleVideo": "Video has no title",
+    "allVideos": "All Videos",
+    "confirmDeleteComment": "Confirm Delete Comment",
+    "confirmDeleteCommentMessage": "Are you sure you want to delete this comment?",
+    "warning": "Warning",
+    "commentHasReplies": "This comment has",
+    "replies": "replies",
+    "cannotDeleteWithReplies": "You cannot delete a comment that has replies.",
+    "adminWillDeleteAllReplies": "With admin rights, all replies will be deleted.",
+    "anonymousUser": "Anonymous user",
+    "commentDeleted": "This comment has been deleted",
+    "published": "Published",
+    "draft": "Draft",
+    "status": "Status",
+    
+    "commons": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "yes": "Yes",
+      "no": "No",
+      "close": "Close"
+    },
+    
+    "commonAdmin": {
+      "update": "Update",
+      "add": "Add"
+    },
+    
+    "courseDetail": {
+      "tabs": {
+        "overview": "Overview",
+        "comments": "Comments"
+      },
+      "noComments": "No comments yet.",
+      "noDescription": "No detailed description available",
+      "notAvailable": "N/A",
+      "placeholder": {
+        "writeComment": "Write a comment..."
+      },
+      "messages": {
+        "videosLoadError": "Unable to load videos list",
+        "commentsLoadError": "Unable to load comments",
+        "studentCountError": "Unable to load student count",
+        "commentRequired": "Please enter comment content",
+        "commentSuccess": "Comment sent successfully!",
+        "commentError": "Failed to send comment"
+      }
+    },
+    
+    "teacherCourses": {
+      "fetchCoursesFailed": "Failed to fetch courses",
+      "fetchVideosFailed": "Failed to fetch videos",
+      "deleteVideoSuccess": "Video deleted successfully!",
+      "deleteVideoFailed": "Failed to delete video",
+      "updateVideoSuccess": "Video updated successfully!",
+      "addVideoSuccess": "Video added successfully!",
+      "saveVideoFailed": "Failed to save video",
+      "manageVideos": "Manage Videos",
+      "addVideo": "Add Video",
+      "viewDetails": "View Details",
+      "videoTitle": "Video Title",
+      "videoTitleRequired": "Enter video title",
+      "videoTitlePlaceholder": "Enter video title",
+      "videoUrl": "Video URL",
+      "videoUrlRequired": "Enter video URL",
+      "videoUrlPlaceholder": "Ex: https://youtu.be/...",
+      "videoDuration": "Duration",
+      "videoDurationPlaceholder": "e.g., 15 min",
+      "noVideos": "No videos yet. Select a course to view videos or add a new video."
+    },
+    
+    "userManagements": {
+      "messages": {
+        "deleteSuccess": "User deleted",
+        "deleteError": "Unable to delete user"
+      }
+    },
+    
+    "updateNameSuccess": "Name updated successfully!",
+    "updateNameFail": "Failed to update name!",
+    
+    "assign": {
+      "course": "Course"
+    },
+    
+    "studentlist": {
+      "chooseCourse": "Select course"
+    },
+    
+    "courseadminManagement": {
+      "stats": {
+        "totalCourses": "Total Courses"
+      },
+      "columns": {
+        "createdAt": "Created Date",
+        "actions": "Actions"
+      },
+      "text": {
+        "notUpdated": "Not updated"
+      },
+      "confirm": {
+        "deleteTitle": "Delete Course",
+        "deleteDescription": "Are you sure you want to delete this course?"
+      },
+      "modals": {
+        "editTitle": "Edit Course",
+        "addTitle": "Add New Course"
+      }
+    },
+    "teacher": "Teacher",
+    "teachercourses": "Courses",
+    "admins": "Administrators",
+    "students": "Students",
+    "student": "Student",
+    "date": "Date"
   }
 }
