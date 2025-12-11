@@ -51,7 +51,7 @@ const ScheduleWithCourses = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5001/api/schedule/week?date=${dateString}`,
+        `https://learning-mini-be.onrender.com/api/schedule/week?date=${dateString}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -72,7 +72,7 @@ const ScheduleWithCourses = () => {
   const fetchCourses = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5001/courses", {
+      const res = await axios.get("https://learning-mini-be.onrender.com/courses", {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -97,7 +97,7 @@ const ScheduleWithCourses = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:5001/api/schedules/${slot.schedule_id}`,
+        `https://learning-mini-be.onrender.com/api/schedules/${slot.schedule_id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -136,7 +136,7 @@ const ScheduleWithCourses = () => {
       setLoading(true);
 
       await axios.put(
-        `http://localhost:5001/api/schedules/${scheduleId}`,
+        `https://learning-mini-be.onrender.com/api/schedules/${scheduleId}`,
         {
           url: editForm.url,
           lesson: editForm.lesson,
@@ -180,7 +180,7 @@ const ScheduleWithCourses = () => {
       setLoading(true);
 
       await axios.delete(
-        `http://localhost:5001/api/schedules/${scheduleId}`,
+        `https://learning-mini-be.onrender.com/api/schedules/${scheduleId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -214,7 +214,7 @@ const ScheduleWithCourses = () => {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:5001/api/schedule/assign",
+        "https://learning-mini-be.onrender.com/api/schedule/assign",
         {
           course_id: course.id,
           date: dateString,

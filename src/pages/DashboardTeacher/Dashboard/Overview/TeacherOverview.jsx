@@ -35,7 +35,7 @@ function TeacherOverview({ setSelectedKey }) {
   const fetchTeacherInfo = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5001/users/${teacherId}`,
+        `https://learning-mini-be.onrender.com/users/${teacherId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setTeacherInfo(res.data);
@@ -47,7 +47,7 @@ function TeacherOverview({ setSelectedKey }) {
   const fetchTeacherCourses = useCallback(async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5001/courses/mine",
+        "https://learning-mini-be.onrender.com/courses/mine",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setTeacherCourses(res.data);
@@ -63,7 +63,7 @@ function TeacherOverview({ setSelectedKey }) {
 
       for (const courseId of teacherCourseIds) {
         const res = await axios.get(
-          `http://localhost:5001/course-students?courseId=${courseId}`,
+          `https://learning-mini-be.onrender.com/course-students?courseId=${courseId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (res.data.students && res.data.students.length > 0) {
@@ -88,7 +88,7 @@ function TeacherOverview({ setSelectedKey }) {
 
       for (const courseId of teacherCourseIds) {
         const res = await axios.get(
-          `http://localhost:5001/videos/${courseId}`,
+          `https://learning-mini-be.onrender.com/videos/${courseId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (res.data && Array.isArray(res.data)) {
@@ -124,7 +124,7 @@ function TeacherOverview({ setSelectedKey }) {
       const weeklyPromises = weeks.map(weekDate => {
         const dateString = weekDate.toISOString().split('T')[0];
         return axios.get(
-          `http://localhost:5001/api/schedule/week?date=${dateString}`,
+          `https://learning-mini-be.onrender.com/api/schedule/week?date=${dateString}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
       });
@@ -191,7 +191,7 @@ function TeacherOverview({ setSelectedKey }) {
       for (const courseId of teacherCourseIds) {
         try {
           const res = await axios.get(
-            `http://localhost:5001/assignments/course/${courseId}`,
+            `https://learning-mini-be.onrender.com/assignments/course/${courseId}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           

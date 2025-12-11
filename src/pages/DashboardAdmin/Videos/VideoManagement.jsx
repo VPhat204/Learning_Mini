@@ -45,7 +45,7 @@ const VideoManagement = () => {
 
   const fetchCourses = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5001/courses', {
+      const response = await fetch('https://learning-mini-be.onrender.com/courses', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -59,9 +59,9 @@ const VideoManagement = () => {
 
   const fetchVideos = useCallback(async (courseId = '') => {
     try {
-      let url = 'http://localhost:5001/videos';
+      let url = 'https://learning-mini-be.onrender.com/videos';
       if (courseId) {
-        url = `http://localhost:5001/videos/${courseId}`;
+        url = `https://learning-mini-be.onrender.com/videos/${courseId}`;
       }
       
       const response = await fetch(url, {
@@ -100,7 +100,7 @@ const VideoManagement = () => {
 
   const handleDelete = async (videoId) => {
     try {
-      const response = await fetch(`http://localhost:5001/videos/${videoId}`, {
+      const response = await fetch(`https://learning-mini-be.onrender.com/videos/${videoId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -129,11 +129,11 @@ const VideoManagement = () => {
       const user = JSON.parse(localStorage.getItem('user'));
       console.log('User from localStorage:', user);
 
-      let url = 'http://localhost:5001/videos/add';
+      let url = 'https://learning-mini-be.onrender.com/videos/add';
       let method = 'POST';
       
       if (editingVideo) {
-        url = `http://localhost:5001/videos/${editingVideo.id}`;
+        url = `https://learning-mini-be.onrender.com/videos/${editingVideo.id}`;
         method = 'PUT';
       }
       

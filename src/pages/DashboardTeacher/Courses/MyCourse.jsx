@@ -36,13 +36,13 @@ export default function MyCourse() {
   const fetchCourses = useCallback(async () => {
     if (!token) return;
     try {
-      const res = await axios.get("http://localhost:5001/courses", {
+      const res = await axios.get("https://learning-mini-be.onrender.com/courses", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourses(res.data);
 
       for (const c of res.data) {
-        const videosRes = await axios.get(`http://localhost:5001/videos/${c.id}`);
+        const videosRes = await axios.get(`https://learning-mini-be.onrender.com/videos/${c.id}`);
         setVideosByCourse((prev) => ({ ...prev, [c.id]: videosRes.data }));
       }
     } catch {
@@ -53,7 +53,7 @@ export default function MyCourse() {
   const handleAddCourse = async (values) => {
     try {
       await axios.post(
-        "http://localhost:5001/courses",
+        "https://learning-mini-be.onrender.com/courses",
         { ...values },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -68,7 +68,7 @@ export default function MyCourse() {
 
   const fetchVideos = async (courseId) => {
     try {
-      const res = await axios.get(`http://localhost:5001/videos/${courseId}`);
+      const res = await axios.get(`https://learning-mini-be.onrender.com/videos/${courseId}`);
       setVideosByCourse((prev) => ({ ...prev, [courseId]: res.data }));
     } catch {
       message.error(t("teacherCourses.fetchVideosFailed"));
@@ -79,14 +79,14 @@ export default function MyCourse() {
     try {
       if (editingVideo) {
         await axios.put(
-          `http://localhost:5001/videos/${editingVideo.id}`,
+          `https://learning-mini-be.onrender.com/videos/${editingVideo.id}`,
           { ...values },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         message.success(t("teacherCourses.updateVideoSuccess"));
       } else {
         await axios.post(
-          "http://localhost:5001/videos/add",
+          "https://learning-mini-be.onrender.com/videos/add",
           { course_id: selectedCourse.id, ...values },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -102,7 +102,7 @@ export default function MyCourse() {
 
   const handleDeleteVideo = async (videoId) => {
     try {
-      await axios.delete(`http://localhost:5001/videos/${videoId}`, {
+      await axios.delete(`https://learning-mini-be.onrender.com/videos/${videoId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success(t("teacherCourses.deleteVideoSuccess"));

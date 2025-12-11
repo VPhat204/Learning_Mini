@@ -16,7 +16,7 @@ function ProfileModal({ visible, onClose, user, updateUser }) {
   const [proofFileList, setProofFileList] = useState([]);
   const [editing, setEditing] = useState(false);
   const token = localStorage.getItem("token");
-  const BASE_URL = "http://localhost:5001";
+  const BASE_URL = "https://learning-mini-be.onrender.com";
 
   useEffect(() => {
     if (visible && user) {

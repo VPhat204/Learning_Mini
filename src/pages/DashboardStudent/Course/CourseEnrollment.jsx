@@ -23,7 +23,7 @@ function EnrolledCourses() {
     const fetchCourses = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5001/enrolled-courses/${user.id}`,
+          `https://learning-mini-be.onrender.com/enrolled-courses/${user.id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setCourses(res.data);
@@ -53,7 +53,7 @@ function EnrolledCourses() {
 
     try {
       await axios.post(
-        "http://localhost:5001/courses/confirm-all",
+        "https://learning-mini-be.onrender.com/courses/confirm-all",
         { userId: user.id, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -71,7 +71,7 @@ function EnrolledCourses() {
   const handleCancel = async (course_id) => {
     try {
       await axios.delete(
-        `http://localhost:5001/courses/${course_id}/unenroll`,
+        `https://learning-mini-be.onrender.com/courses/${course_id}/unenroll`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       messageApi.success(t('enrolledCourses.messages.cancelSuccess'));

@@ -63,7 +63,7 @@ const DetailVideo = ({
       
       if (!course && video.course_id) {
         promises.push(
-          axios.get(`http://localhost:5001/courses/${video.course_id}`, {
+          axios.get(`https://learning-mini-be.onrender.com/courses/${video.course_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => setCourse(res.data))
           .catch(err => {
@@ -75,7 +75,7 @@ const DetailVideo = ({
       
       if (comments.length === 0 && video.course_id) {
         promises.push(
-          axios.get(`http://localhost:5001/comments/${video.course_id}`, {
+          axios.get(`https://learning-mini-be.onrender.com/comments/${video.course_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => setComments(Array.isArray(res.data) ? res.data : []))
           .catch(err => {
@@ -87,7 +87,7 @@ const DetailVideo = ({
       
       if (students.length === 0 && video.course_id) {
         promises.push(
-          axios.get(`http://localhost:5001/course-students`, {
+          axios.get(`https://learning-mini-be.onrender.com/course-students`, {
             params: { courseId: video.course_id }
           }).then(res => setStudents(res.data.students || []))
           .catch(err => {
@@ -99,7 +99,7 @@ const DetailVideo = ({
       
       if (allVideos.length === 0 && video.course_id) {
         promises.push(
-          axios.get(`http://localhost:5001/videos/${video.course_id}`, {
+          axios.get(`https://learning-mini-be.onrender.com/videos/${video.course_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => setAllVideos(Array.isArray(res.data) ? res.data : []))
           .catch(err => {

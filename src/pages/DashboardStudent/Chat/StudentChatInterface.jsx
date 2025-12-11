@@ -47,7 +47,7 @@ const StudentChatInterface = () => {
     if (!token || !user) return;
     
     try {
-      const response = await axios.get('http://localhost:5001/chat/admins', {
+      const response = await axios.get('https://learning-mini-be.onrender.com/chat/admins', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -58,7 +58,7 @@ const StudentChatInterface = () => {
         const counts = { ...unreadCounts };
         for (const admin of adminList) {
           try {
-            const unreadResponse = await axios.get(`http://localhost:5001/chat/unread/count/${admin.id}`, {
+            const unreadResponse = await axios.get(`https://learning-mini-be.onrender.com/chat/unread/count/${admin.id}`, {
               headers: { Authorization: `Bearer ${token}` }
             });
             
@@ -82,7 +82,7 @@ const StudentChatInterface = () => {
     if (!token || !user) return;
     
     try {
-      const response = await axios.get('http://localhost:5001/chat/student/teachers', {
+      const response = await axios.get('https://learning-mini-be.onrender.com/chat/student/teachers', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -93,7 +93,7 @@ const StudentChatInterface = () => {
         const counts = { ...unreadCounts };
         for (const teacher of teacherList) {
           try {
-            const unreadResponse = await axios.get(`http://localhost:5001/chat/unread/teacher/${teacher.id}`, {
+            const unreadResponse = await axios.get(`https://learning-mini-be.onrender.com/chat/unread/teacher/${teacher.id}`, {
               headers: { Authorization: `Bearer ${token}` }
             });
             
@@ -123,7 +123,7 @@ const StudentChatInterface = () => {
     
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5001/chat/${userId}`, {
+      const response = await axios.get(`https://learning-mini-be.onrender.com/chat/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -146,7 +146,7 @@ const StudentChatInterface = () => {
     if (!newMessage.trim() || !selectedUser) return;
     
     try {
-      const response = await axios.post('http://localhost:5001/chat/send', {
+      const response = await axios.post('https://learning-mini-be.onrender.com/chat/send', {
         receiver_id: selectedUser.id,
         message: newMessage
       }, {

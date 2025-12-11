@@ -21,7 +21,7 @@ export const ThemeProvider = ({ children }) => {
     
     if (token && user?.id) {
       try {
-        await fetch(`http://localhost:5001/users/${user.id}/theme`, {
+        await fetch(`https://learning-mini-be.onrender.com/users/${user.id}/theme`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const ThemeProvider = ({ children }) => {
     
     if (token && user?.id) {
       try {
-        const response = await fetch(`http://localhost:5001/users/${user.id}/theme`, {
+        const response = await fetch(`https://learning-mini-be.onrender.com/users/${user.id}/theme`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

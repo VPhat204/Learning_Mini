@@ -14,7 +14,7 @@ function StudentList() {
     const fetchCourses = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5001/courses/mine", {
+        const res = await axios.get("https://learning-mini-be.onrender.com/courses/mine", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCourses(res.data);
@@ -32,7 +32,7 @@ function StudentList() {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5001/course-students", {
+        const res = await axios.get("https://learning-mini-be.onrender.com/course-students", {
           headers: { Authorization: `Bearer ${token}` },
           params: { courseId: selectedCourse.id },
         });

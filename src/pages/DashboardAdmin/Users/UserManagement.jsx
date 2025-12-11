@@ -35,7 +35,7 @@ function UserManagement() {
 
   const fetchUsers = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5001/users", {
+      const res = await axios.get("https://learning-mini-be.onrender.com/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -58,7 +58,7 @@ function UserManagement() {
         if (values.proofInfo !== undefined) formData.append("proof_info", values.proofInfo);
         file.forEach(f => formData.append("proof_file", f));
 
-        await axios.put(`http://localhost:5001/users/${editingUser.id}`, formData, {
+        await axios.put(`https://learning-mini-be.onrender.com/users/${editingUser.id}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
@@ -75,13 +75,13 @@ function UserManagement() {
           formData.append("proof_info", values.proofInfo || "");
           file.forEach(f => formData.append("proof_file", f));
 
-          await axios.post("http://localhost:5001/register", formData, {
+          await axios.post("https://learning-mini-be.onrender.com/register", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
           messageApi.success(t('userManagements.messages.teacherRegisterSuccess'));
         } else {
           await axios.post(
-            "http://localhost:5001/users",
+            "https://learning-mini-be.onrender.com/users",
             {
               name: values.name,
               email: values.email,
@@ -105,7 +105,7 @@ function UserManagement() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/users/${id}`, {
+      await axios.delete(`https://learning-mini-be.onrender.com/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       messageApi.success(t('userManagements.messages.deleteSuccess'));
@@ -118,7 +118,7 @@ function UserManagement() {
   const handleApprove = async (id, approved) => {
     try {
       const res = await axios.put(
-        `http://localhost:5001/users/${id}/approve-teacher`,
+        `https://learning-mini-be.onrender.com/users/${id}/approve-teacher`,
         { approve: !approved },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -132,7 +132,7 @@ function UserManagement() {
   const handleLock = async (id, locked) => {
     try {
       const res = await axios.put(
-        `http://localhost:5001/users/${id}/lock`,
+        `https://learning-mini-be.onrender.com/users/${id}/lock`,
         { lock: !Number(locked) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -146,7 +146,7 @@ function UserManagement() {
   const handleResetPassword = async (values) => {
     try {
       await axios.put(
-        `http://localhost:5001/users/${resetUserId}/reset-password`,
+        `https://learning-mini-be.onrender.com/users/${resetUserId}/reset-password`,
         { newPassword: values.newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -384,7 +384,7 @@ function UserManagement() {
                       ? editingUser.proof_file.map((f, idx) => (
                           <li key={idx}>
                             <a
-                              href={`http://localhost:5001/uploads/${f}`}
+                              href={`https://learning-mini-be.onrender.com/uploads/${f}`}
                               target="_blank"
                               rel="noreferrer"
                             >
@@ -395,7 +395,7 @@ function UserManagement() {
                       : (
                           <li>
                             <a
-                              href={`http://localhost:5001/uploads/${editingUser.proof_file}`}
+                              href={`https://learning-mini-be.onrender.com/uploads/${editingUser.proof_file}`}
                               target="_blank"
                               rel="noreferrer"
                             >
@@ -451,21 +451,21 @@ function UserManagement() {
               <div className="verification-file-section">
                 {/\.(jpg|jpeg|png|gif)$/i.test(viewUser.proof_file) && (
                   <img
-                    src={`http://localhost:5001/uploads/${viewUser.proof_file}`}
+                    src={`https://learning-mini-be.onrender.com/uploads/${viewUser.proof_file}`}
                     alt="proof"
                     className="verification-image"
                   />
                 )}
                 {viewUser.proof_file.toLowerCase().endsWith(".pdf") && (
                   <iframe
-                    src={`http://localhost:5001/uploads/${viewUser.proof_file}`}
+                    src={`https://learning-mini-be.onrender.com/uploads/${viewUser.proof_file}`}
                     title="proof-pdf"
                     className="verification-iframe"
                   />
                 )}
                 <p>
                   <a 
-                    href={`http://localhost:5001/uploads/${viewUser.proof_file}`} 
+                    href={`https://learning-mini-be.onrender.com/uploads/${viewUser.proof_file}`} 
                     target="_blank" 
                     rel="noreferrer"
                     className="download-link"

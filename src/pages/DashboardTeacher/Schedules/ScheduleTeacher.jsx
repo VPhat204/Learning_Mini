@@ -35,7 +35,7 @@ const TeacherSchedule = () => {
   const fetchTeacherCourses = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5001/courses/mine", {
+      const res = await axios.get("https://learning-mini-be.onrender.com/courses/mine", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTeacherCourses(res.data);
@@ -84,7 +84,7 @@ const TeacherSchedule = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5001/api/schedule/week?date=${dateString}`,
+        `https://learning-mini-be.onrender.com/api/schedule/week?date=${dateString}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const filteredSchedule = filterScheduleByTeacherCourses(res.data);

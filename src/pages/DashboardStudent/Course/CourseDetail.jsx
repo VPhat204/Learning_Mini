@@ -35,7 +35,7 @@ export default function CourseDetail({ course }) {
   const fetchVideos = useCallback(async () => {
     if (!course?.id) return;
     try {
-      const res = await axios.get(`http://localhost:5001/videos/${course.id}`);
+      const res = await axios.get(`https://learning-mini-be.onrender.com/videos/${course.id}`);
       setVideos(res.data);
     } catch {
       message.error(t('courseDetail.messages.videosLoadError'));
@@ -46,7 +46,7 @@ export default function CourseDetail({ course }) {
     if (!course?.id) return;
     try {
       const res = await axios.get(
-        `http://localhost:5001/comments/${course.id}`,
+        `https://learning-mini-be.onrender.com/comments/${course.id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setComments(res.data);
@@ -58,7 +58,7 @@ export default function CourseDetail({ course }) {
   const fetchStudentCount = useCallback(async () => {
     if (!course?.id) return;
     try {
-        const res = await axios.get(`http://localhost:5001/courses/${course.id}/students-count`);
+        const res = await axios.get(`https://learning-mini-be.onrender.com/courses/${course.id}/students-count`);
         setStudentCount(res.data.total_students);
     } catch {
         message.error(t('courseDetail.messages.studentCountError'));
@@ -69,7 +69,7 @@ export default function CourseDetail({ course }) {
     if (!newComment.trim()) return message.warning(t('courseDetail.messages.commentRequired'));
     try {
       await axios.post(
-        "http://localhost:5001/comments/add",
+        "https://learning-mini-be.onrender.com/comments/add",
         { course_id: course.id, content: newComment },
         { headers: { Authorization: `Bearer ${token}` } }
       );

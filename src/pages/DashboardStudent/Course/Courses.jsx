@@ -21,14 +21,14 @@ export default function Courses({ refreshTrigger }) {
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user"));
       const res = await axios.get(
-        `http://localhost:5001/users/${user.id}/courses`,
+        `https://learning-mini-be.onrender.com/users/${user.id}/courses`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setCourses(res.data);
       const progressPromises = res.data.map(async (course) => {
         try {
           const progressRes = await axios.get(
-            `http://localhost:5001/courses/${course.id}/progress`,
+            `https://learning-mini-be.onrender.com/courses/${course.id}/progress`,
             {
               headers: { Authorization: `Bearer ${token}` },
               params: { studentId: user.id }
@@ -55,7 +55,7 @@ export default function Courses({ refreshTrigger }) {
       setUnenrolling(prev => ({ ...prev, [courseId]: true }));
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:5001/courses/${courseId}/unenroll`,
+        `https://learning-mini-be.onrender.com/courses/${courseId}/unenroll`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       message.success(t('mycourses.messages.unenrollSuccess', { courseTitle }));
