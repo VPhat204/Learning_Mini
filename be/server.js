@@ -344,7 +344,8 @@ app.get("/", (req, res) => {
 app.get("/health", async (req, res) => {
   try {
     const [result] = await db.execute("SELECT 1 as status, NOW() as db_time");
-      res.json({
+    
+    res.json({
       status: "healthy",
       database: "connected",
       dbTimestamp: result[0].db_time,
