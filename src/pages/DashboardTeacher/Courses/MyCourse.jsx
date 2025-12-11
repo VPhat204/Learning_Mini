@@ -26,7 +26,7 @@ import {
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import CourseDetail from "./Video/DetailVideo";
-import Assignment from "./Assignments/Assignments";
+import Assignment from "./Assignments/MyAssignments";
 import "./MyCourse.css";
 
 const { TextArea } = Input;
