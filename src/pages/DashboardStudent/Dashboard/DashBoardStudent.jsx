@@ -8,7 +8,7 @@ import Courses from "../Course/Courses";
 import EnrolledCourse from "../Course/Enrolled/CourseEnrollment";
 import TeacherList from "../Teachers/TeacherList";
 import StudentScores from "../Score/TableScore";
-import './DashBoardStudent.css';
+import './DashboardStudent.css';
 import StudentChatInterface from "../Chat/StudentChatInterface";
 
 const { Sider, Content } = Layout;
