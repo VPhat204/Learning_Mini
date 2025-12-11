@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Card, Button, Modal, Form, Input, message, Table, Popconfirm } from "antd";
 import { useTranslation } from "react-i18next";
 import api from "../../../../api";
-import "./Assignments.css";
+import "./MyAssignments.css";
 
 export default function Assignments({ course }) {
   const { t } = useTranslation();

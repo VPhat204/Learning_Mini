@@ -4,7 +4,6 @@ import {
   DashboardOutlined,
   BookOutlined,
   TeamOutlined,
-  // ReadOutlined, // Đã bị comment và không sử dụng, nên xóa
   ScheduleOutlined,
   WechatWorkOutlined,
 } from "@ant-design/icons";
@@ -14,7 +13,6 @@ import "./DashboardTeacher.css";
 import MyCourses from "../Courses/MyCourse";
 import StudentsList from "../Students/StudentList";
 import CreateCourse from "../Courses/CreateCourse";
-//import MyAssignments from "../Assignments/MyAssignments";
 import ScheduleTeacher from "../Schedules/ScheduleTeacher"
 import TeacherOverview from "./Overview/TeacherOverview";
 import TeacherChatInterface from "../Chat/TeacherChatInterface";
@@ -75,8 +73,6 @@ function DashboardTeacher() {
         return <StudentsList students={students} courseId={selectedCourse} />;
       case "createcourse":
         return <CreateCourse courseForm={courseForm} onCreateCourse={handleCreateCourse} />;
-      /*case "myassignments":
-        return <MyAssignments teacherId={teacherId} />;*/
       case "schedules":
         return <ScheduleTeacher />;
       case "chats":
@@ -102,11 +98,6 @@ function DashboardTeacher() {
       icon: <TeamOutlined />,
       label: t('teacherstudents')
     },
-    /*{
-      key: "myassignments",
-      icon: <ReadOutlined />, // Icon này đã bị xóa khỏi import
-      label: t('courseManagements.myAssignments')
-    },*/
     {
       key: "chats",
       icon: <WechatWorkOutlined />,

@@ -16,7 +16,7 @@ import {
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import api from "../../../../api";
-import "./Assignments.css";
+import "./Assignment.css";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
